@@ -1,0 +1,9 @@
+.tmp/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Packet captures can contain browsing/private DNS data. Review before adding.
+*.pcap
+*.pcapng
+
