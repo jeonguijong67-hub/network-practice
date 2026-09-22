@@ -1,90 +1,47 @@
-# 데스크톱에서 이어서 진행하기
+# 남은 작업
 
-현재 원격 세션에서 코드 구현과 자동 실행은 끝났습니다. 실제 장비가 필요한 두 항목만
-의도적으로 남겨 두었습니다.
+3주차·4주차 모두 코드와 분석은 끝났습니다. 남은 것은 **한 가지**입니다.
 
-## 현재 완료 상태
+## 남은 것 · 야간 throughput 재측정 (w04 Task 2 Part B)
 
-- Task 1 반복적 resolver: 5개 도메인 **5/5 통과**
-- Task 2 첫 번째 vantage point: 12개 사이트 × system/Google/Quad9 수집 완료
-- Task 2 현재 결과: CDN-hosted 비교 대상 **11개 중 4개**가 다른 주소 집합 반환
-- Task 3: baseline 325회/266 stale → 개선 캐시 **275회/0 stale**
-- 제출 형식 검사: 통과
-- 전체 자동 테스트: 11 pass, 1 fail, 3 human-check skip
-- 유일한 fail: 본인 장비의 `out/dns.pcapng`가 아직 없음
-
-## 1. 저장소 받기와 환경 확인
+쓸 수 있는 네트워크가 유선 이더넷 하나뿐이라 `task2.md`의 path (B)
+"두 개의 매우 다른 시간대에 측정한다"를 택했습니다.
+낮 측정(`ethernet-afternoon`, 2026-09-22 13:18)은 이미 들어가 있으므로,
+**밤(22시 이후 권장)에 아래 한 줄만** 실행하면 됩니다.
 
 ```powershell
-git clone https://github.com/jeonguijong67-hub/network-practice.git
-cd network-practice
-docker compose build
+cd C:\Users\정의종\Documents\2026-2\컴퓨터네트워크\my-repo\w04-tcp
+python task2_measure.py --label "ethernet-night"
 ```
 
-이미 clone한 폴더라면 `git pull`만 실행하면 됩니다. Docker Desktop과 Wireshark를 먼저
-실행하세요.
+그 다음 `w04-tcp/out/observation.md`의 Part B 표에서 `ethernet-night` 행
+(측정 시각 / median / min·max / spread / handshake median)을 채우고,
+낮과 밤의 차이를 B4·B5 문단에 한두 줄 반영하면 끝입니다.
+숫자는 실행 직후 터미널에 그대로 출력되고 `out/throughput.json`에도 누적됩니다.
 
-## 2. 본인 DNS 패킷 캡처
-
-1. 개인정보 노출을 줄이기 위해 브라우저와 불필요한 백그라운드 앱을 닫습니다.
-2. Wireshark에서 현재 인터넷을 사용하는 인터페이스를 선택합니다.
-3. capture filter를 `port 53`으로 입력하고 캡처를 시작합니다.
-4. 별도 PowerShell에서 아래 명령을 한 번 실행합니다.
+검사:
 
 ```powershell
-docker compose run --rm lab bash -lc "cd w03-dns && python3 task1_resolve.py www.korea.ac.kr"
+python test_tasks.py
+python ..\check.py w04
 ```
 
-5. 바로 캡처를 중지하고, 무관한 도메인이나 개인 정보가 없는지 직접 확인합니다.
-6. 안전할 때만 `w03-dns/out/dns.pcapng`로 저장합니다.
-7. Wireshark display filter에 `dns`를 적용해 다음 값을 찾습니다.
+## 참고 · 이미 끝난 것
 
-   - delegation 응답: answer count 0, authority 영역에 NS가 있는 패킷 번호
-   - 최종 answer 응답: answer 영역에 A가 있는 패킷 번호
-   - 가장 큰 DNS response의 frame length와 커진 이유
+- w03: iterative resolver 5/5, steering report, 캐시 275회/stale 0,
+  `out/dns.pcapng` 캡처(6패킷, 배경 트래픽 없음)와 report.md의 packet 필드까지 완료
+- w04 Task 1: 슬라이딩 윈도우, seed 246·999 포함 10개 seed 전부 IDENTICAL
+- w04 Task 2 Part A: handshake 캡처 완료, A2~A5 전부 실측값으로 작성
+- w04 Task 3: window가 BDP(20)로 수렴, goodput 98.7% / 손실 2.4% / 큐 0.7 → **strong**
 
-8. 위 세 값을 `w03-dns/out/report.md`의 **Packet-capture fields to complete** 절에 적습니다.
+## 알려진 환경 차이
 
-> `.pcapng`는 방문 도메인을 포함할 수 있어 기본적으로 Git에서 제외됩니다. 강의 제출
-> 시스템이 별도 파일 업로드를 요구할 때만, 내용을 검토한 후 그곳에 직접 제출하세요.
+호스트 tshark는 4.6.6이라 boolean 필드를 `True/False`로 출력하는데,
+`w03-dns/test_tasks.py`는 `0/1`을 기대합니다. 그래서 캡처가 정상인데도
+"0 queries, 0 responses"로 FAIL이 뜹니다. 컨테이너(Ubuntu 24.04, tshark 4.2)에서는
+`0/1`이라 통과합니다. 캡처 자체는 질의 3 · 응답 3으로 정상입니다.
 
-## 3. 두 번째 네트워크 측정
+## 캡처 파일
 
-현재 원격 세션의 첫 결과는 `chains-remote-session.json`에 보존되어 있습니다. 데스크톱을
-휴대전화 테더링처럼 본인이 사용할 권한이 있는 다른 네트워크에 연결한 뒤 실행합니다.
-
-```powershell
-docker compose run --rm lab bash -lc "cd w03-dns && python3 task2_steering.py --collect --network-label phone-tethering"
-docker compose run --rm lab bash -lc "cd w03-dns && python3 task2_steering.py --report"
-```
-
-`--network-label`을 쓰면 canonical `chains.json`과 별도로
-`chains-phone-tethering.json`이 자동 보존됩니다. 보고서 생성기는 모든 `chains*.json`을
-읽어 네트워크와 resolver 조합을 함께 비교합니다. 실제 사용한 네트워크 이름에 맞게 label을
-바꿔도 됩니다.
-
-## 4. 최종 검사
-
-```powershell
-docker compose run --rm lab bash -lc "cd w03-dns && python3 bench.py --yours"
-docker compose run --rm lab bash -lc "cd w03-dns && python3 test_tasks.py"
-docker compose run --rm lab bash -lc "python3 check.py w03"
-```
-
-기대 결과:
-
-- `test_tasks.py`: pcap을 저장했다면 자동 검사 항목이 모두 PASS 또는 human-check SKIP
-- `check.py w03`: `Format check passed`
-- cache: `upstream 275`, `stale 0`
-
-## 5. GitHub 반영
-
-텍스트·코드 변경만 올립니다. pcap은 개인정보 검토 전에는 강제로 추가하지 마세요.
-
-```powershell
-git add .
-git status
-git commit -m "Complete week 3 DNS lab"
-git push origin main
-```
-
+`.pcapng`는 `.gitignore`로 커밋되지 않습니다(개인정보 보호). `check.py`도 optional로
+처리하므로 제출에는 문제가 없습니다. 분석 결과는 report.md와 observation.md에 들어가 있습니다.

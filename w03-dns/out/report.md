@@ -34,6 +34,23 @@ DNS records alone do not prove corporate ownership; the reviewed column is there
 
 This run used one network and three resolvers. That tests resolver-dependent answers but not the stronger location claim. To satisfy B3 strictly, switch to a second authorised network (for example, phone tethering), then run `python3 task2_steering.py --collect --network-label phone-tethering` and regenerate the report. No second-network result was invented here.
 
-## Packet-capture fields to complete
+## Packet-capture fields
 
-A personal `out/dns.pcapng` was not generated automatically because it may contain private background DNS traffic. After a short Wireshark capture, record the delegation packet number, answer packet number, and largest DNS response byte size here.
+Captured on the host with dumpcap, filter `port 53 and not host 8.8.8.8 and not host 8.8.4.4`.
+The system resolver is 8.8.8.8/8.8.4.4, so excluding it removes every background
+application's DNS and leaves only this resolver's direct-to-authoritative queries.
+The file is exactly 6 packets - three queries and three responses, no third-party traffic.
+
+| Field | Value |
+|---|---|
+| Delegation response (answers 0, NS in authority) | **packet 2**, from the root server 198.41.0.4 - 0 answers, 6 authority NS, 10 additional glue |
+| Second delegation | packet 4, from the `.kr` server 210.101.61.1 - 0 answers, 2 authority NS, 2 glue |
+| Final answer response (A in answer) | **packet 6**, from `korea.ac.kr`'s server 163.152.1.1 - 1 answer, type A, `163.152.6.10` |
+| Largest DNS response | **packet 2, 383 bytes on the wire** |
+
+The largest response is the root's referral and not the answer. It is big because a
+referral has to hand back the whole next zone: 6 NS records for `.kr` plus 10 glue
+records (A and AAAA for those name servers), 16 resource records in one datagram. The
+response that actually answers the question carries a single A record and is 91 bytes -
+about a quarter the size. The referral pays for the glue so the resolver does not have
+to stop and resolve each name server's own name first.
