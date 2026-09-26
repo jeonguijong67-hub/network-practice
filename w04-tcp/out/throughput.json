@@ -1,6 +1,6 @@
 [
   {
-    "label": "ethernet-afternoon",
+    "label": "ethernet-weekday",
     "when": "2026-09-22 13:18:19",
     "target": "https://speed.cloudflare.com/__down?bytes=5000000",
     "runs": [
@@ -49,5 +49,56 @@
     "mbps_min": 113.99161591664932,
     "mbps_max": 355.8497246612755,
     "handshake_ms_median": 6.117999999999999
+  },
+  {
+    "label": "ethernet-weekend",
+    "when": "2026-09-26 16:38:05",
+    "target": "https://speed.cloudflare.com/__down?bytes=5000000",
+    "runs": [
+      {
+        "dns_s": 0.043646,
+        "connect_s": 0.005133000000000006,
+        "ttfb_s": 0.07135999999999999,
+        "total_s": 0.174548,
+        "bytes": 5000000,
+        "mbps": 229.16332470151474
+      },
+      {
+        "dns_s": 0.002773,
+        "connect_s": 0.005078000000000001,
+        "ttfb_s": 0.043755,
+        "total_s": 0.105953,
+        "bytes": 5000000,
+        "mbps": 377.5258841184298
+      },
+      {
+        "dns_s": 0.003148,
+        "connect_s": 0.004007,
+        "ttfb_s": 0.040730999999999996,
+        "total_s": 0.099168,
+        "bytes": 5000000,
+        "mbps": 403.3559212649242
+      },
+      {
+        "dns_s": 0.003944,
+        "connect_s": 0.0055130000000000005,
+        "ttfb_s": 0.042156,
+        "total_s": 0.108897,
+        "bytes": 5000000,
+        "mbps": 367.31957721516665
+      },
+      {
+        "dns_s": 0.002931,
+        "connect_s": 0.005679,
+        "ttfb_s": 0.049489,
+        "total_s": 0.115596,
+        "bytes": 5000000,
+        "mbps": 346.0327346967023
+      }
+    ],
+    "mbps_median": 367.31957721516665,
+    "mbps_min": 229.16332470151474,
+    "mbps_max": 403.3559212649242,
+    "handshake_ms_median": 5.133000000000005
   }
 ]
