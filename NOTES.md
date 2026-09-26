@@ -32,14 +32,29 @@ w03 Task 1의 "resolver vs dig"는 호스트에 `dig`가 없어 skip됩니다. �
 
 ## 캡처 파일
 
-`.pcapng`는 `.gitignore`로 커밋되지 않습니다(개인정보 보호). `check.py`도 optional로
-처리하므로 제출에 영향 없습니다. 분석 결과는 report.md와 observation.md에 들어가 있습니다.
+`.gitignore`는 `*.pcapng`를 기본으로 제외하지만, 아래 두 개는 **예외로 커밋**했습니다.
+둘 다 캡처 필터를 좁혀서 잡았고, 커밋 전에 내용을 확인했습니다.
 
-두 캡처 모두 필터를 좁혀서 본인이 만든 트래픽만 담았습니다.
+**`w03-dns/out/dns.pcapng`** (1.6 KB, 6패킷)
+필터 `port 53 and not host 8.8.8.8 and not host 8.8.4.4`. 이 기계의 시스템 resolver를
+제외했으므로 배경 앱의 DNS는 한 건도 들어가지 않습니다. 확인 결과 등장하는 주소는
+이 기계 · 루트(198.41.0.4) · `.kr`(210.101.61.1) · `korea.ac.kr`(163.152.1.1) 넷뿐이고,
+질의된 이름은 `www.korea.ac.kr` 하나뿐입니다.
 
-- `w04-tcp/out/tcp.pcapng` — `tcp port 443 and host <speed.cloudflare.com>`
-- `w03-dns/out/dns.pcapng` — `port 53 and not host 8.8.8.8 and not host 8.8.4.4`
-  (시스템 resolver를 제외해 배경 앱의 DNS가 들어가지 않음, 총 6패킷)
+**`w04-tcp/out/tcp.pcapng`** (502 KB, 4,117패킷)
+필터 `tcp port 443 and host <speed.cloudflare.com>`. 등장하는 주소는 이 기계와
+172.66.0.218 둘뿐입니다. 원본은 10.7 MB였고 저장소에 넣기 위해 두 번 줄였습니다.
+
+- `tshark -Y "tcp.stream==0"` — 분석 대상인 첫 연결만 남김
+- `editcap -s 96` — 각 패킷을 96바이트로 잘라 **payload를 버리고 헤더만** 남김
+
+**payload가 없는 것은 의도된 것입니다.** 원래 프레임 길이는 파일에 기록되므로
+A2~A5에 필요한 값은 전부 그대로 읽힙니다 — 확인했습니다: ISN 2851709068 / 2408489946,
+MSS 1460 / 1400, window scale 8 / 13, SACK permitted, 스케일 적용 광고 윈도우
+12,678,400바이트, 최대 bytes in flight 16,060, TCP payload 합계 5,015,780바이트.
+
+`check.py`는 캡처를 optional로 처리하므로 이 파일들이 없어도 제출 형식에는 문제가
+없지만, 넣어 두면 A1("본인 기계에서 잡은 본인 트래픽")을 직접 보일 수 있습니다.
 
 ## Task 2 측정 경로에 대한 메모
 

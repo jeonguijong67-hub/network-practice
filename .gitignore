@@ -7,3 +7,10 @@ __pycache__/
 *.pcap
 *.pcapng
 
+
+# Exceptions: these two captures are committed on purpose. Both were taken with
+# a narrow capture filter and audited before committing - see NOTES.md.
+#   dns.pcapng  6 packets, one name, four DNS servers
+#   tcp.pcapng  one TCP stream, headers only (editcap -s 96), no payload
+!w03-dns/out/dns.pcapng
+!w04-tcp/out/tcp.pcapng
