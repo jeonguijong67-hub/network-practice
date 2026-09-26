@@ -43,8 +43,16 @@ w03 Task 1의 "resolver vs dig"는 호스트에 `dig`가 없어 skip됩니다. �
 
 ## Task 2 측정 경로에 대한 메모
 
-쓸 수 있는 네트워크가 유선 이더넷 하나뿐이라 `task2.md`의 path (B)를 썼습니다.
-평일(화 13:18)과 주말(토 16:38) 두 번 측정했고, 그것이 무엇을 약화시키는지는
-`w04-tcp/out/observation.md` Part B 마지막 문단에 적었습니다.
-RTT가 실제로 다른 두 번째 링크(폰 테더링 등)를 쓸 수 있게 되면
-`python task2_measure.py --label "tethering"` 한 줄로 더 강한 근거를 추가할 수 있습니다.
+**공통** — 쓸 수 있는 네트워크가 유선 이더넷 하나뿐이라 두 주차 모두 `task2.md`의
+path (B)를 썼습니다. 폰 테더링이 가능해지면 두 주차 모두 한 줄씩으로 더 강한 근거를
+추가할 수 있고, 기존 결과를 지우지 않고 덧붙는 구조입니다.
+
+**w03** — path (B)가 지정한 "거리가 크게 다른 resolver 비교"를 택했습니다.
+`kt-kr`(168.126.63.1, KT) 대 `google`/`quad9`(미국 anycast). 이 기계의 설정 resolver가
+8.8.8.8이라 `system`과 `google`은 같은 서버여서 정의상 일치하므로, 그 둘만으로는
+비교가 성립하지 않았습니다. 추가하려면:
+`python task2_steering.py --collect --network-label tethering` 후 `--report`.
+
+**w04** — 평일(화 13:18)과 주말(토 16:38) 두 시점. 추가하려면:
+`python task2_measure.py --label "tethering"`.
+
