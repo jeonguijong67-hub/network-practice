@@ -2,15 +2,22 @@
 
 ## Task 1
 
-루트 서버는 `www.korea.ac.kr`의 A 레코드에 대한 권한이 없으므로 주소 대신 `.kr` 쪽 NS delegation을 반환했다. 일반 노트북은 재귀 resolver에 한 번 묻지만, 직접 구현한 resolver는 이 이름에 루트→TLD→권한 서버의 3개 서버를 질의했다.
-이번 5개 검증 이름에서는 glue 없는 delegation이 관측되지 않아 추가 lookup은 0회였다. 구현은 glue가 전혀 없을 때 NS 이름을 루트부터 별도 반복 해석하고 그 보조 질의도 `path`에 기록하며, 5개 이름 검증은 5/5 통과했다.
+루트 서버는 `www.korea.ac.kr`의 A 레코드에 대한 권한이 없으므로 주소 대신 `.kr` 쪽 NS delegation을 반환했다. 일반 노트북은 재귀 resolver에 한 번 묻지만, 직접 구현한 resolver는 이 이름에 루트(198.41.0.4) → `.kr`(210.101.61.1) → 권한 서버(163.152.1.1)의 3개 서버를 차례로 질의했다. 검증 5개 이름 모두 시스템 resolver와 주소가 일치해 **5/5 통과**다.
+
+흥미로운 건 이름마다 질의 수가 3~10회로 크게 갈린 점이다. `www.microsoft.com`은 10회였는데, 로그를 보면 루트(198.41.0.4)에서 **세 번** 다시 시작한다. glue가 없어서가 아니라 CNAME 때문이다 — `www.microsoft.com` → `...edgekey.net` → `...akamaiedge.net`으로 체인이 매번 다른 존으로 넘어가고, 새 존은 위임 계층을 공유하지 않으므로 루트부터 다시 내려가야 한다. `en.wikipedia.org`(→ `dyna.wikimedia.org`)와 `www.stanford.edu`(→ `stanford.netlifyglobalcdn.com`)도 같은 이유로 6회씩 걸렸다. 즉 CDN 뒤에 있는 이름의 조회 비용은 위임 깊이가 아니라 **CNAME이 존 경계를 몇 번 넘느냐**로 정해지고, 이것이 재귀 resolver의 캐시가 실제로 아끼는 비용이다.
 
 ## Task 2
 
-규칙은 CNAME의 최종 조직 도메인이 원래 사이트와 다르면 third-party로 분류하는 것이다. `www.wikipedia.org`가 `wikimedia.org`로 끝나는 경우는 서로 다른 도메인이지만 같은 Wikimedia 조직이므로 이 규칙의 구체적인 false positive였다.
-원격 세션의 한 네트워크에서 system/Google/Quad9을 비교했을 때 CDN-hosted 비교 대상 11개 중 4개가 resolver에 따라 다른 주소 집합을 반환했다. 이는 resolver별 steering 증거이지만 두 번째 네트워크를 쓰지 않았으므로 위치 기반 steering 자체를 강하게 입증하지는 못한다.
+**delegation과 answer의 차이.** 캡처에서 두 응답은 같은 패킷 형식이고 채워진 섹션만 다르다. 2번 패킷(루트)은 answer 0개에 authority NS 6개 + additional glue 10개이고, 6번 패킷(권한 서버)은 answer 1개(A)에 authority·additional 0개다. "모른다"와 "안다"가 별도의 메시지 타입이 아니라 **같은 봉투의 다른 칸**이라는 게 슬라이드보다 패킷에서 훨씬 분명했다.
+
+**third-party 판정 규칙과 그 오류.** CNAME 체인의 최종 조직 도메인이 원래 사이트와 다르면 third-party로 분류했다. 이 규칙이 틀린 사례는 `www.wikipedia.org`다 — `wikimedia.org`로 끝나므로 규칙은 third-party라 하지만, 둘 다 Wikimedia 재단 소유라 실제로는 first-party다. DNS 레코드만으로는 소유 관계를 알 수 없다는 게 이 규칙의 근본 한계이고, 반대 방향의 구멍도 있다: CNAME 없이 anycast A 레코드만으로 CDN에 올라간 사이트는 규칙이 'no'라고 한다.
+
+**steering 수치와 그 해석.** 네트워크가 하나뿐이라 path (B)를 택해 거리가 크게 다른 resolver를 비교했다 — `kt-kr`(168.126.63.1, KT)이 가까운 쪽, `google`/`quad9`가 미국 anycast다. 이 기계의 설정 resolver가 8.8.8.8이라 `system`과 `google`은 같은 서버이고 정의상 일치하므로, 실질 비교는 KT 대 미국이다. 결과는 **CDN 사이트 11개 중 8개가 resolver에 따라 다른 주소 집합**을 돌려줬다. 가장 선명한 건 Fastly 4개 사이트인데, `cnn` 151.101.131.**5** / 146.75.51.**5**, `bbc` 151.101.0.**81** / 146.75.48.**81**, `spotify` 151.101.131.**42** / 146.75.51.**42**, `nytimes` 151.101.1.**164** / 146.75.49.**164** — **마지막 옥텟(서비스 식별자)은 그대로이고 /16 접두사만 151.101에서 146.75로 바뀐다.** 같은 서비스를 다른 지역 PoP로 보내고 있다는 뜻이다. 반대로 `netflix`(자체 CDN), `korea.ac.kr`(CDN 없음), `wikipedia`(anycast)는 모든 resolver에서 동일했다.
+
+이 수치가 뒷받침하는 건 claim (a)와 **resolver 기반 steering**까지다. claim (b)("네가 있는 곳 근처로 보낸다")는 입증하지 못한다 — 모든 질의가 같은 기계, 같은 위치에서 나갔으므로 바뀐 변수는 내 위치가 아니라 내가 물어본 resolver의 위치다. 위치 자체를 변수로 만들려면 실제로 다른 곳의 네트워크가 필요하고, 없는 결과를 지어내지 않았다.
 
 ## Task 3
 
-baseline은 리스트 선형 탐색으로 느리고, 모든 레코드에 고정 60초를 써서 실제 TTL을 무시하므로 만료 응답을 반환한다. 특히 TTL 20초인 `www.microsoft.com`은 각 조회 후 최대 40초 동안 stale 상태가 될 수 있어 가장 나쁘다.
-개선 캐시는 dict와 권한 서버 TTL을 사용해 stale 0, upstream 275회를 기록했다. 275회가 이 workload의 정확한 캐시 하한인 이유는 각 이름의 최초 요청과 이전 조회의 TTL 만료 후 첫 요청은 어떤 올바른 캐시도 upstream에서 새 레코드를 받지 않고 답할 수 없기 때문이다.
+baseline은 리스트 선형 탐색으로 느리고, 모든 레코드에 고정 60초를 써서 실제 TTL을 무시하므로 만료된 응답을 반환한다. 특히 TTL 20초인 `www.microsoft.com`은 각 조회 후 최대 40초 동안 stale 상태가 될 수 있어 가장 나쁘다. TTL은 캐시가 고를 수 있는 값이 아니라 권한 서버가 정한 유효기간이라는 걸 무시한 결과다.
+
+개선 캐시는 dict와 권한 서버가 준 TTL을 그대로 써서 **stale 0, upstream 275회**(baseline 325회)를 기록했다. 275가 이 workload의 하한인 이유는 이렇다 — 어떤 올바른 캐시도 (1) 각 이름의 최초 요청과 (2) 직전 조회의 TTL이 만료된 뒤의 첫 요청은 upstream에서 새 레코드를 받지 않고는 답할 수 없다. 이 두 종류의 요청을 독립적으로 세어 보면(캐시 구현과 무관하게 workload와 TTL 표만으로 계산) 정확히 275가 나오고, 내 캐시의 275와 일치한다. 자료구조를 아무리 개선해도 이 아래로는 못 간다. 275의 분포도 TTL이 전부 설명한다 — TTL 20초인 `www.microsoft.com` 하나가 118회로 **43%**를 차지하고, TTL 3600초 이상인 4개 이름은 합쳐서 4회뿐이다. 캐시 성능을 정하는 것은 조회 횟수가 아니라 TTL 대비 조회 간격이다. 더 줄이려면 만료된 레코드를 계속 쓰는 수밖에 없는데 그건 stale을 0에서 올리는 것, 즉 R3을 깨는 것이다.

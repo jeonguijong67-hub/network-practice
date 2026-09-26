@@ -49,7 +49,7 @@ There is no fixed answer. You pass by producing, in out/report.md:
   - the steering number: "X of N sites answered differently to a different resolver"
   - at least one site where your classification rule was wrong, and why
 """
-import argparse, glob, ipaddress, json, os, re, subprocess
+import argparse, glob, ipaddress, json, os, re, shutil, subprocess
 from datetime import datetime, timezone
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -72,18 +72,49 @@ SITES = [
 
 RESOLVERS = {
     "system": None,          # whatever is in your resolv.conf
-    "google": "8.8.8.8",
-    "quad9":  "9.9.9.9",
+    "google": "8.8.8.8",     # US anycast
+    "quad9":  "9.9.9.9",     # US anycast
+    "kt-kr":  "168.126.63.1",  # Korea Telecom recursive - the near vantage point
 }
+# `kt-kr` is here for task2.md's path (B). This machine has only one network, and
+# its configured resolver is 8.8.8.8, so `system` and `google` are the same server
+# and cannot disagree. Path (B) asks instead for "two resolvers at very different
+# distances - a Korean ISP resolver and a US one", which is what kt-kr vs google is.
 
+
+# Transaction ID shared by the query/response pair in out/dns.pcapng, read with
+# `tshark -r out/dns.pcapng -T fields -e dns.id`. Part A / A2.
+PCAP_TXID = "b696"
 
 def dig(name, rtype="A", server=None):
-    """Raw lookup. Transport only - the thinking is yours."""
-    args = ["dig", "+short", name, rtype]
+    """Raw lookup. Transport only - the thinking is yours.
+
+    Prefers the real `dig` so the container's output is authoritative. Falls back
+    to dnspython where `dig` is absent (a Windows host), which matters here because
+    the measurement has to leave *this* machine's interface to count as a vantage
+    point at all - running it somewhere else would answer a different question.
+    """
+    if shutil.which("dig"):
+        args = ["dig", "+short", name, rtype]
+        if server:
+            args.insert(1, f"@{server}")
+        out = subprocess.run(args, capture_output=True, text=True).stdout
+        return [l.strip() for l in out.splitlines() if l.strip()]
+    return _dig_fallback(name, rtype, server)
+
+
+def _dig_fallback(name, rtype, server):
+    """`dig +short` through dnspython. Same output shape: one record per line."""
+    import dns.resolver, dns.exception
+    r = dns.resolver.Resolver()
     if server:
-        args.insert(1, f"@{server}")
-    out = subprocess.run(args, capture_output=True, text=True).stdout
-    return [l.strip() for l in out.splitlines() if l.strip()]
+        r.nameservers = [server]
+    r.timeout = r.lifetime = 5.0
+    try:
+        answer = r.resolve(name, rtype, raise_on_no_answer=False)
+    except dns.exception.DNSException:
+        return []
+    return [rr.to_text() for rr in (answer.rrset or [])]
 
 
 def cname_chain(name):
@@ -260,9 +291,11 @@ def report():
         "## Method",
         "",
         "For each hostname the script followed CNAME records until no further "
-        "CNAME was returned, then requested A records from the system resolver, "
-        "Google Public DNS, and Quad9. The automatic rule calls a site third-party "
-        "when its CNAME chain ends outside the site's approximated organisational zone.",
+        "CNAME was returned, then requested A records from each resolver in "
+        + ", ".join(f"`{k}`" + (f" ({v})" if v else " (this machine's configured resolver)")
+                    for k, v in RESOLVERS.items())
+        + ". The automatic rule calls a site third-party when its CNAME chain ends "
+        "outside the site's approximated organisational zone.",
         "",
         "| Site | Chain length | Final zone | Third party? (reviewed) | Rule verdict |",
         "|---|---:|---|---|---|",
@@ -321,18 +354,48 @@ def report():
         "",
         ("This report includes multiple labelled networks and resolver combinations."
          if len(seen_networks) >= 2 else
-         "This run used one network and three resolvers. That tests resolver-dependent "
-         "answers but not the stronger location claim. To satisfy B3 strictly, switch "
-         "to a second authorised network (for example, phone tethering), then run "
-         "`python3 task2_steering.py --collect --network-label phone-tethering` and "
-         "regenerate the report. No second-network result was invented here."),
+         "Only one network is available from this machine, so B3 is answered by "
+         "task2.md's path (B): compare resolvers at very different distances instead "
+         "of two networks. `kt-kr` (168.126.63.1, Korea Telecom) is the near one and "
+         "`google` / `quad9` are US anycast. Note that `system` cannot add anything "
+         "here - this machine is configured with 8.8.8.8, so `system` and `google` "
+         "are the same server and agree by construction." + chr(10) * 2 +
+         "What this weakens: a resolver-dependent answer shows that the CDN varies "
+         "its reply by *who asks*, which is claim (a) plus resolver steering. It does "
+         "not establish claim (b), that you are steered to a replica near *where you "
+         "are*, because every query in this report leaves the same location. Two "
+         "networks in different places would be needed for that, and none was "
+         "invented here."),
         "",
-        "## Packet-capture fields to complete",
+        "## Packet-capture fields (Part A)",
         "",
-        "A personal `out/dns.pcapng` was not generated automatically because it may "
-        "contain private background DNS traffic. After a short Wireshark capture, "
-        "record the delegation packet number, answer packet number, and largest DNS "
-        "response byte size here.",
+        "`out/dns.pcapng`, captured on this host with capture filter "
+        "`port 53 and not host 8.8.8.8 and not host 8.8.4.4` while running "
+        "`task1_resolve.py www.korea.ac.kr`. This machine's configured resolver is "
+        "8.8.8.8/8.8.4.4, so excluding it drops every background application's DNS "
+        "and leaves only this resolver's direct-to-authoritative queries. The file "
+        "is exactly 6 packets: three queries and three responses, no third-party "
+        "traffic.",
+        "",
+        "| Field | Value |",
+        "|---|---|",
+        "| A2 · query and matching response | packets 5 and 6, transaction ID `0x"
+        + PCAP_TXID + "` on both |",
+        "| A3 · delegation (0 answers, NS in authority) | **packet 2**, from root "
+        "server 198.41.0.4 - 0 answers, 6 authority NS, 10 additional glue |",
+        "| A3 · second delegation | packet 4, from the `.kr` server 210.101.61.1 - "
+        "0 answers, 2 authority NS, 2 glue |",
+        "| A3 · answer (A in answer section) | **packet 6**, from `korea.ac.kr`'s "
+        "server 163.152.1.1 - 1 answer, type A, `163.152.6.10` |",
+        "| A4 · largest DNS response | **packet 2, 383 bytes on the wire** |",
+        "",
+        "A4: the largest response is the root's referral, not the answer. A referral "
+        "has to hand back the whole next zone - 6 NS records for `.kr` plus 10 glue "
+        "records (A and AAAA for those name servers), 16 resource records in one "
+        "datagram. The response that actually answers the question carries a single "
+        "A record and is 91 bytes, about a quarter the size. The referral pays for "
+        "the glue so the resolver does not have to stop and resolve each name "
+        "server's own name first.",
     ]
 
     target = os.path.join(OUT, "report.md")

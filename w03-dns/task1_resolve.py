@@ -21,7 +21,7 @@ addresses must agree. A name behind a CDN may legitimately return a different
 address each time; the harness compares the *set of authoritative nameservers*
 you ended at for those, not the address.
 """
-import argparse, ipaddress, subprocess, sys
+import argparse, ipaddress, shutil, subprocess, sys
 
 import dns.exception
 import dns.flags
@@ -212,10 +212,23 @@ class Resolver:
 
 # ------------------------------------------------------------------- harness
 def dig_answer(name):
-    """What the system resolver says, for comparison."""
-    out = subprocess.run(["dig", "+short", name, "A"],
-                         capture_output=True, text=True).stdout
-    return [l for l in out.split() if l and l[0].isdigit()]
+    """What the system resolver says, for comparison.
+
+    Uses the real `dig` when it is there, so the container's answer is the
+    authoritative one. Falls back to dnspython on a host without BIND tools -
+    the comparison is against the *system resolver*, and both routes ask it.
+    """
+    if shutil.which("dig"):
+        out = subprocess.run(["dig", "+short", name, "A"],
+                             capture_output=True, text=True).stdout
+        return [l for l in out.split() if l and l[0].isdigit()]
+    import dns.resolver
+    try:
+        answer = dns.resolver.resolve(name, "A", raise_on_no_answer=False)
+    except dns.exception.DNSException:
+        return []
+    return [rr.to_text() for rr in (answer.rrset or [])
+            if rr.to_text()[0].isdigit()]
 
 
 def verify():
