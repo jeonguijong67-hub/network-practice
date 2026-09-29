@@ -1,6 +1,6 @@
-# 실습 노트 (3주차 · 4주차)
+# 실습 노트 (3주차 · 4주차 · 5주차)
 
-두 주차 모두 제출 가능한 상태입니다. 남은 작업 없음.
+세 주차 모두 제출 가능한 상태입니다. 남은 작업 없음.
 
 ## 상태
 
@@ -8,13 +8,15 @@
 |---|---|---|---|
 | w03 DNS | resolver 5/5 | 캡처 6패킷 · steering report | upstream 275 · stale 0 → good |
 | w04 TCP | 10개 seed 전부 IDENTICAL | 2개 라벨 × 5회 · handshake 캡처 | goodput 98.7% · 큐 0.7 → **strong** |
+| w05 IP/NAT | 10/10 | 2개 라벨(캠퍼스 유선 · KT Wi-Fi) · DORA 캡처 | 오답 0 · 약 3000배 → **strong** |
 
-`test_tasks.py`: w04는 8 pass / 0 fail. w03은 아래 "알려진 환경 차이" 항목 하나만 FAIL로 뜹니다.
+`test_tasks.py`: w04 · w05는 8 pass / 0 fail. w03은 아래 "알려진 환경 차이" 항목 하나만 FAIL로 뜹니다.
 
 ## 제출 URL (주차별)
 
 - 3주차 <https://github.com/jeonguijong67-hub/network-practice/tree/main/w03-dns>
 - 4주차 <https://github.com/jeonguijong67-hub/network-practice/tree/main/w04-tcp>
+- 5주차 <https://github.com/jeonguijong67-hub/network-practice/tree/main/w05-ip-nat>
 
 ## 알려진 환경 차이
 
@@ -32,8 +34,8 @@ w03 Task 1의 "resolver vs dig"는 호스트에 `dig`가 없어 skip됩니다. �
 
 ## 캡처 파일
 
-`.gitignore`는 `*.pcapng`를 기본으로 제외하지만, 아래 두 개는 **예외로 커밋**했습니다.
-둘 다 캡처 필터를 좁혀서 잡았고, 커밋 전에 내용을 확인했습니다.
+`.gitignore`는 `*.pcapng`를 기본으로 제외하지만, 아래 세 개는 **예외로 커밋**했습니다.
+모두 캡처 필터를 좁혀서 잡았고, 커밋 전에 내용을 확인했습니다.
 
 **`w03-dns/out/dns.pcapng`** (1.6 KB, 6패킷)
 필터 `port 53 and not host 8.8.8.8 and not host 8.8.4.4`. 이 기계의 시스템 resolver를
@@ -52,6 +54,13 @@ w03 Task 1의 "resolver vs dig"는 호스트에 `dig`가 없어 skip됩니다. �
 A2~A5에 필요한 값은 전부 그대로 읽힙니다 — 확인했습니다: ISN 2851709068 / 2408489946,
 MSS 1460 / 1400, window scale 8 / 13, SACK permitted, 스케일 적용 광고 윈도우
 12,678,400바이트, 최대 bytes in flight 16,060, TCP payload 합계 5,015,780바이트.
+
+**`w05-ip-nat/out/dhcp.pcapng`** (2.9 KB, 5패킷)
+노트북 Wi-Fi(KT 공유기, WPA2-Personal)에서 필터 `port 67 or port 68`로 받으면서
+`ipconfig /release` → `/renew`를 실행했습니다. Release 1개와 DORA 4개이고, 5개 모두 DHCP
+`chaddr`이 이 노트북의 MAC이라 다른 기기의 DHCP는 없습니다. 식별 정보는 이 노트북의
+호스트 이름과 MAC뿐입니다. 캠퍼스 유선(데스크톱)은 고정 주소라 DHCP가 일어나지 않아
+노트북에서 잡았습니다.
 
 `check.py`는 캡처를 optional로 처리하므로 이 파일들이 없어도 제출 형식에는 문제가
 없지만, 넣어 두면 A1("본인 기계에서 잡은 본인 트래픽")을 직접 보일 수 있습니다.
