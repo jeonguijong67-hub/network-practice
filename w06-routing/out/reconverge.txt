@@ -1,0 +1,104 @@
+# Week 6 Part B/C - measured reconvergence
+# 2026-10-06 · Docker Desktop 29.7.2 (WSL2) on this desktop · FRR 9.1 ×3
+# OSPF timers (show ip ospf interface, every interface):
+#   Hello 10s, Dead 40s, Wait 40s, Retransmit 5
+# FRR defaults (show ip ospf): SPF initial delay 0 ms, hold 50-5000 ms,
+#   LSA minimum interval 5000 ms, LSA minimum arrival 1000 ms
+
+== scenario.sh cut, as shipped ==========================================
+재수렴 감지: 2 초
+(full output: measure/scenario-cut.txt)
+
+That number cannot resolve anything below about 2 s. It reads `date +%s` (whole
+seconds), polls once a second through `docker compose exec` (~0.3 s per call), and
+compares `show ip route ospf` as text - which carries a per-route uptime column
+(00:02:10) that changes every second, so "the table changed" fires after one poll
+even when no route moved. It is an upper bound, not a measurement.
+
+== how these were measured (measure.sh) ==================================
+`ip -ts monitor route` runs in all three routers and logs every kernel FIB change
+with a µs timestamp - the moment zebra actually installed the new route. The three
+containers share one kernel clock, so the logs compare directly. T0 is a marker
+route (blackhole 192.0.2.x) that r1 adds immediately before the action.
+"Converged" = the last FIB change on any router. Raw logs: measure/NAME.log.txt,
+tables either side: measure/NAME.{before,after}.txt.
+
+== B4 · failure =========================================================
+                                     run 1     run 2     run 3
+link down   r1: ip link set eth1 down  0.012 s   0.014 s   0.012 s
+  (scenario.sh's cut; r1 sees its own interface go down)
+silent      r1: iptables DROP in+out   34.739 s  32.551 s  35.686 s
+  on eth1 - the link stays up, packets stop. Nothing announces it; each side
+  must notice the other's Hellos have stopped.
+
+Silent failure vs the timers: a neighbour is declared dead 40 s (Dead) after
+its last Hello was heard. Hellos come every 10 s, so the failure lands somewhere
+in a 10 s Hello cycle and detection must fall in 30-40 s, plus milliseconds of
+flooding and SPF. All three runs (32.6-35.7 s) are inside that window.
+
+Link down never waits for the timers: r1 learns of the failure from its own
+interface, re-originates its router-LSA at once and floods it via r3; r2 and r3
+had their FIBs right within 2 ms of r1 (cut-link.log.txt):
+  +0.010s r1  172.20.0.0/16 via 172.22.0.3 (lost the ECMP path via r2)
+  +0.010s r1  172.23.0.0/16 via 172.22.0.3 metric 20 (net_b now via r3)
+  +0.012s r3  172.23.0.0/16 via 172.20.0.3
+  +0.012s r2  172.22.0.0/16 via 172.20.0.2
+(r2 itself still lists r1 as a Full neighbour until its own dead timer runs out,
+but SPF's two-way check already ignores the link because r1's new LSA no longer
+lists net_b as transit.)
+
+== B5 · restore =========================================================
+                                     run 1     run 2     run 3     debug run
+link up     r1: ip link set eth1 up   13.370 s   6.114 s   9.224 s   10.486 s
+silent      iptables rules removed    18.092 s  17.035 s  14.182 s
+
+Per router (link up):          r1        r2       r2 - r1
+  run 1                       8.420     13.370    4.950
+  run 2                       1.133      6.114    4.981
+  run 3                       4.228      9.224    4.996
+  debug                       5.535     10.486    4.951
+
+Debug run, from the FRR logs (measure/restore-link-debug.r{1,2}.frr.log):
+  +0.000  r1 eth1 Down -> Waiting; router-LSA lists net_b as a stub
+  +0.003  r2 hears r1's Hello without itself in it: NSM Full -> Init (1-Way)
+  +5.471  r2's next periodic Hello reaches r1. Within 1 ms:
+          r1 Init -> 2-Way, ISM Waiting -> Backup, ExStart -> Exchange -> Full
+          r1 originates router-LSA (stub), then 1 ms later again (transit)
+  +5.535  r1's FIB has the path via r2
+  +5.472  neither r2 nor r3 acknowledges the second copy. It arrived < 1 s
+          after the first, and RFC 2328 §13 has a router discard an instance
+          that arrives within MinLSArrival (1000 ms) of the previous one, so r1
+          keeps it on both neighbours' retransmit lists
+  +10.472 r1 retransmits it (RxmtInterval 5 s); r3 acks at +10.475, r2 at +10.596
+  +10.486 r2's FIB has the path via r1
+
+So restore = wait for the neighbour's next Hello (0-10 s, it decides how much
+of the spread there is) + adjacency (~1 ms here, three routers, tiny LSDB) +
+one retransmit interval (5 s) because the LSA describing the new link was the
+second instance in a millisecond. The constant 4.95-5.0 s gap is that retransmit.
+
+== C · cost change, no link goes down ===================================
+r1: interface eth0 (net_a) `ip ospf cost 100`, then back to 10
+
+                                     r1        r2        r3        converged
+cost 10 -> 100                       0.044 s   0.044 s   -         0.044 s
+cost 100 -> 10                       0.044 s   0.045 s   -         0.045 s
+
+before (measure/cost-up.before.txt)
+  r1  172.20.0.0/16 [110/20] via 172.22.0.3 (r3) and via 172.23.0.2 (r2)  ECMP
+  r2  172.22.0.0/16 [110/20] via 172.20.0.2 (r3) and via 172.23.0.3 (r1)  ECMP
+after cost 100 (measure/cost-up.after.txt)
+  r1  172.20.0.0/16 [110/20] via 172.23.0.2 (r2) only   - via r3 would be 110
+  r1  172.22.0.0/16 [110/30] via 172.23.0.2   (OSPF's best is now r2->r3, cost
+      30 < 100, but the connected route wins on admin distance, so not selected)
+  r2  172.22.0.0/16 [110/20] via 172.20.0.2 (r3) only   - via r1 would be 110
+  r3  unchanged - its own costs toward r1 are still 10; cost is per outgoing
+      interface, so this change is one-directional
+cost back to 10: tables identical to the original again (diff empty)
+
+== summary ==============================================================
+  cost change                       0.044 s
+  link down, seen locally           0.012 s
+  link up                           6.1 - 13.4 s
+  silent failure                    32.6 - 35.7 s   (Dead 40 s)
+  silent failure ends               14.2 - 18.1 s

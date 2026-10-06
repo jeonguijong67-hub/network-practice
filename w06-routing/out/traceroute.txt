@@ -1,0 +1,246 @@
+# Week 6 Part A - traceroute from this machine
+# 2026-10-06 13:47-13:52 KST · desktop on Korea Univ. (Sejong) campus wired ethernet
+#   interface 163.152.219.214/24, gateway 163.152.219.1, no NAT (see w05)
+#   Windows tracert (ICMP echo probes), default name lookup on, -w 1500 -h 30
+#
+# Targets
+#   domestic  www.korea.ac.kr  163.152.6.10    (KU Seoul campus - same AS as this host)
+#   domestic  www.snu.ac.kr    147.46.10.129   (outside KU, added for A2)
+#   overseas  stanford.edu     171.67.215.200  (Stanford's own network, Palo Alto)
+#   anycast   www.stanford.edu 3.33.186.135    (CNAME stanford.netlifyglobalcdn.com -
+#                                               AWS Global Accelerator anycast, NOT overseas)
+#   anycast   1.1.1.1                          (Cloudflare)
+#
+# The campus border drops ICMP: `ping 1.1.1.1` and `ping 163.152.6.10` get 0 replies
+# from here, and time-exceeded from the hops just past the border never comes back.
+# So the ICMP traces go dark after hop 4. The TCP TTL sweep at the bottom gives the
+# hop count to every target anyway (see its header).
+
+######## tracert www.korea.ac.kr
+최대 30홉 이상의 
+www.korea.ac.kr [163.152.6.10](으)로 가는 경로 추적:
+
+  1    <1 ms    <1 ms    <1 ms  163.152.219.1 
+  2     1 ms    <1 ms    <1 ms  163.152.205.45 
+  3    <1 ms    <1 ms    <1 ms  163.152.205.212 
+  4    <1 ms    <1 ms     *     163.152.205.254 
+  5     *        *        *     요청 시간이 만료되었습니다.
+  6     *        *        *     요청 시간이 만료되었습니다.
+  7     *        *        *     요청 시간이 만료되었습니다.
+  8     *        *        *     요청 시간이 만료되었습니다.
+  9     *        *        *     요청 시간이 만료되었습니다.
+ 10     *        *        *     요청 시간이 만료되었습니다.
+ 11     *        *        *     요청 시간이 만료되었습니다.
+ 12     *        *        *     요청 시간이 만료되었습니다.
+ 13     *        *        *     요청 시간이 만료되었습니다.
+ 14     *        *        *     요청 시간이 만료되었습니다.
+ 15     *        *        *     요청 시간이 만료되었습니다.
+ 16     *        *        *     요청 시간이 만료되었습니다.
+ 17     *        *        *     요청 시간이 만료되었습니다.
+ 18     *        *        *     요청 시간이 만료되었습니다.
+ 19     *        *        *     요청 시간이 만료되었습니다.
+ 20     *        *        *     요청 시간이 만료되었습니다.
+ 21     *        *        *     요청 시간이 만료되었습니다.
+ 22     *        *        *     요청 시간이 만료되었습니다.
+ 23     *        *        *     요청 시간이 만료되었습니다.
+ 24     *        *        *     요청 시간이 만료되었습니다.
+ 25     *        *        *     요청 시간이 만료되었습니다.
+ 26     *        *        *     요청 시간이 만료되었습니다.
+ 27     *        *        *     요청 시간이 만료되었습니다.
+ 28     *        *        *     요청 시간이 만료되었습니다.
+ 29     *        *        *     요청 시간이 만료되었습니다.
+ 30     *        *        *     요청 시간이 만료되었습니다.
+
+추적을 완료했습니다.
+
+######## tracert www.snu.ac.kr
+최대 30홉 이상의 
+new.snu.ac.kr [147.46.10.129](으)로 가는 경로 추적:
+
+  1    <1 ms    <1 ms    <1 ms  163.152.219.1 
+  2    <1 ms    <1 ms    <1 ms  163.152.205.45 
+  3     *       <1 ms     *     163.152.205.212 
+  4     *        *        *     요청 시간이 만료되었습니다.
+  5     *        *        *     요청 시간이 만료되었습니다.
+  6     *        *        *     요청 시간이 만료되었습니다.
+  7     *        *        *     요청 시간이 만료되었습니다.
+  8     *        *        *     요청 시간이 만료되었습니다.
+  9     *        *        *     요청 시간이 만료되었습니다.
+ 10     *        *        *     요청 시간이 만료되었습니다.
+ 11     *        *        *     요청 시간이 만료되었습니다.
+ 12     *        *        *     요청 시간이 만료되었습니다.
+ 13     *        *        *     요청 시간이 만료되었습니다.
+ 14     *        *        *     요청 시간이 만료되었습니다.
+ 15     *        *        *     요청 시간이 만료되었습니다.
+ 16     *        *        *     요청 시간이 만료되었습니다.
+ 17     *        *        *     요청 시간이 만료되었습니다.
+ 18     *        *        *     요청 시간이 만료되었습니다.
+ 19     *        *        *     요청 시간이 만료되었습니다.
+ 20     *        *        *     요청 시간이 만료되었습니다.
+ 21     *        *        *     요청 시간이 만료되었습니다.
+ 22     *        *        *     요청 시간이 만료되었습니다.
+ 23     *        *        *     요청 시간이 만료되었습니다.
+ 24     *        *        *     요청 시간이 만료되었습니다.
+ 25     *        *        *     요청 시간이 만료되었습니다.
+ 26     *        *        *     요청 시간이 만료되었습니다.
+ 27     *        *        *     요청 시간이 만료되었습니다.
+ 28     *        *        *     요청 시간이 만료되었습니다.
+ 29     *        *        *     요청 시간이 만료되었습니다.
+ 30     *        *        *     요청 시간이 만료되었습니다.
+
+추적을 완료했습니다.
+
+######## tracert stanford.edu
+최대 30홉 이상의 
+stanford.edu [171.67.215.200](으)로 가는 경로 추적:
+
+  1    <1 ms    <1 ms    <1 ms  163.152.219.1 
+  2    <1 ms    <1 ms    <1 ms  163.152.205.9 
+  3     *        *       <1 ms  163.152.205.212 
+  4     *        *        *     요청 시간이 만료되었습니다.
+  5     *        *        *     요청 시간이 만료되었습니다.
+  6     *        *        *     요청 시간이 만료되었습니다.
+  7     *        *        *     요청 시간이 만료되었습니다.
+  8     *        *        *     요청 시간이 만료되었습니다.
+  9     *        *        *     요청 시간이 만료되었습니다.
+ 10     *        *        *     요청 시간이 만료되었습니다.
+ 11     *        *        *     요청 시간이 만료되었습니다.
+ 12     *        *        *     요청 시간이 만료되었습니다.
+ 13     *        *        *     요청 시간이 만료되었습니다.
+ 14     *        *        *     요청 시간이 만료되었습니다.
+ 15     *        *        *     요청 시간이 만료되었습니다.
+ 16     *        *        *     요청 시간이 만료되었습니다.
+ 17   163 ms     *      167 ms  be7.core1.pao1.he.net [184.104.189.142] 
+ 18   169 ms   164 ms   169 ms  stanford-university.e0-62.core2.pao1.he.net [184.105.177.238] 
+ 19   163 ms   164 ms   168 ms  campus-ial-nets-a-vl1002.SUNet [171.64.255.196] 
+ 20     *        *        *     요청 시간이 만료되었습니다.
+ 21     *        *        *     요청 시간이 만료되었습니다.
+ 22     *        *        *     요청 시간이 만료되었습니다.
+ 23     *        *        *     요청 시간이 만료되었습니다.
+ 24     *        *        *     요청 시간이 만료되었습니다.
+ 25     *        *        *     요청 시간이 만료되었습니다.
+ 26     *        *        *     요청 시간이 만료되었습니다.
+ 27     *        *        *     요청 시간이 만료되었습니다.
+ 28     *        *        *     요청 시간이 만료되었습니다.
+ 29     *        *        *     요청 시간이 만료되었습니다.
+ 30     *        *        *     요청 시간이 만료되었습니다.
+
+추적을 완료했습니다.
+
+######## tracert www.stanford.edu
+최대 30홉 이상의 
+stanford.netlifyglobalcdn.com [3.33.186.135](으)로 가는 경로 추적:
+
+  1    <1 ms    <1 ms    <1 ms  163.152.219.1 
+  2    <1 ms    <1 ms    <1 ms  163.152.205.45 
+  3     2 ms    <1 ms    <1 ms  163.152.205.212 
+  4    <1 ms    <1 ms     *     163.152.205.254 
+  5     *        *        *     요청 시간이 만료되었습니다.
+  6     *        *        *     요청 시간이 만료되었습니다.
+  7     *        *        *     요청 시간이 만료되었습니다.
+  8     *        *        *     요청 시간이 만료되었습니다.
+  9     *        *        *     요청 시간이 만료되었습니다.
+ 10     *        *        *     요청 시간이 만료되었습니다.
+ 11     *        *        *     요청 시간이 만료되었습니다.
+ 12     *        *        *     요청 시간이 만료되었습니다.
+ 13     *        *        *     요청 시간이 만료되었습니다.
+ 14     *        *        *     요청 시간이 만료되었습니다.
+ 15     *        *        *     요청 시간이 만료되었습니다.
+ 16     *        *        *     요청 시간이 만료되었습니다.
+ 17     *        *        *     요청 시간이 만료되었습니다.
+ 18     *        *        *     요청 시간이 만료되었습니다.
+ 19     *        *        *     요청 시간이 만료되었습니다.
+ 20     *        *        *     요청 시간이 만료되었습니다.
+ 21     *        *        *     요청 시간이 만료되었습니다.
+ 22     *        *        *     요청 시간이 만료되었습니다.
+ 23     *        *        *     요청 시간이 만료되었습니다.
+ 24     *        *        *     요청 시간이 만료되었습니다.
+ 25     *        *        *     요청 시간이 만료되었습니다.
+ 26     *        *        *     요청 시간이 만료되었습니다.
+ 27     *        *        *     요청 시간이 만료되었습니다.
+ 28     *        *        *     요청 시간이 만료되었습니다.
+ 29     *        *        *     요청 시간이 만료되었습니다.
+ 30     *        *        *     요청 시간이 만료되었습니다.
+
+추적을 완료했습니다.
+
+######## tracert 1.1.1.1
+최대 30홉 이상의 
+one.one.one.one [1.1.1.1](으)로 가는 경로 추적:
+
+  1    <1 ms    <1 ms    <1 ms  163.152.219.1 
+  2    <1 ms    <1 ms    <1 ms  163.152.205.9 
+  3     *        *       <1 ms  163.152.205.212 
+  4     *        *        *     요청 시간이 만료되었습니다.
+  5     *        *        *     요청 시간이 만료되었습니다.
+  6     *        *        *     요청 시간이 만료되었습니다.
+  7     *        *        *     요청 시간이 만료되었습니다.
+  8     *        *        *     요청 시간이 만료되었습니다.
+  9     *        *        *     요청 시간이 만료되었습니다.
+ 10     *        *        *     요청 시간이 만료되었습니다.
+ 11     *        *        *     요청 시간이 만료되었습니다.
+ 12     *        *        *     요청 시간이 만료되었습니다.
+ 13     *        *        *     요청 시간이 만료되었습니다.
+ 14     *        *        *     요청 시간이 만료되었습니다.
+ 15     *        *        *     요청 시간이 만료되었습니다.
+ 16     *        *        *     요청 시간이 만료되었습니다.
+ 17     *        *        *     요청 시간이 만료되었습니다.
+ 18     *        *        *     요청 시간이 만료되었습니다.
+ 19     *        *        *     요청 시간이 만료되었습니다.
+ 20     *        *        *     요청 시간이 만료되었습니다.
+ 21     *        *        *     요청 시간이 만료되었습니다.
+ 22     *        *        *     요청 시간이 만료되었습니다.
+ 23     *        *        *     요청 시간이 만료되었습니다.
+ 24     *        *        *     요청 시간이 만료되었습니다.
+ 25     *        *        *     요청 시간이 만료되었습니다.
+ 26     *        *        *     요청 시간이 만료되었습니다.
+ 27     *        *        *     요청 시간이 만료되었습니다.
+ 28     *        *        *     요청 시간이 만료되었습니다.
+ 29     *        *        *     요청 시간이 만료되었습니다.
+ 30     *        *        *     요청 시간이 만료되었습니다.
+
+추적을 완료했습니다.
+
+######## tracert -d -w 1000 -h 20 1.1.1.1   (run again alone, to rule out the five
+######## parallel runs above tripping an ICMP rate limit - same result)
+Tracing route to 1.1.1.1 over a maximum of 20 hops
+
+  1    <1 ms    <1 ms    <1 ms  163.152.219.1 
+  2    <1 ms    <1 ms    <1 ms  163.152.205.9 
+  3     1 ms    <1 ms    <1 ms  163.152.205.212 
+  4    <1 ms    <1 ms    <1 ms  163.152.205.254 
+  5     *        *        *     Request timed out.
+  6     *        *        *     Request timed out.
+  7     *        *        *     Request timed out.
+  8     *        *        *     Request timed out.
+  9     *        *        *     Request timed out.
+ 10     *        *        *     Request timed out.
+ 11     *        *        *     Request timed out.
+ 12     *        *        *     Request timed out.
+ 13     *        *        *     Request timed out.
+ 14     *        *        *     Request timed out.
+ 15     *        *        *     Request timed out.
+ 16     *        *        *     Request timed out.
+ 17     *        *        *     Request timed out.
+ 18     *        *        *     Request timed out.
+ 19     *        *        *     Request timed out.
+ 20     *        *        *     Request timed out.
+
+Trace complete.
+
+######## TCP TTL sweep  (ttl_probe.py, no admin rights needed)
+# For TTL = 1..30, open a TCP connection to port 443 with IP_TTL set on the socket.
+# A SYN that expires in transit never gets a SYN-ACK, so connect() times out; the
+# smallest TTL that connects is the number of router hops to the target, and the
+# connect() time at that TTL is one round trip. TCP/443 passes the campus firewall
+# where ICMP does not. It cannot name intermediate routers (the time-exceeded goes
+# to the kernel, not to the socket), only count them.
+#
+#   target            address          hops   RTT at that TTL   5 more connects (min / median)
+#   www.korea.ac.kr   163.152.6.10        8        32.9 ms            6.6 /   7.7 ms
+#   www.snu.ac.kr     147.46.10.129      15        11.3 ms            9.9 /  20.1 ms
+#   www.stanford.edu  15.197.167.90      16         4.1 ms            3.5 /  15.9 ms  (3.33.186.135)
+#   stanford.edu      171.67.215.200     19       141.2 ms          142.0 / 147.1 ms
+#   1.1.1.1           1.1.1.1            14         3.3 ms            4.6 /   5.4 ms
+#
+# Single connects are noisy (korea.ac.kr 32.9 vs 6.6 min); read the min column.

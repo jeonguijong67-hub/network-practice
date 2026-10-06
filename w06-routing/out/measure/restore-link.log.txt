@@ -1,0 +1,13 @@
+r1 [2026-10-06T05:01:11.331648] blackhole 192.0.2.199 
+r1 [2026-10-06T05:01:11.332227] broadcast 172.23.255.255 dev eth1 table local proto kernel scope link src 172.23.0.3 
+r1 [2026-10-06T05:01:11.332286] 172.23.0.0/16 dev eth1 proto kernel scope link src 172.23.0.3 
+r1 [2026-10-06T05:01:11.341819] Deleted 172.23.0.0/16 nhid 19 via 172.22.0.3 dev eth0 proto ospf metric 20 
+r1 [2026-10-06T05:01:19.751549] 172.20.0.0/16 nhid 18 proto ospf metric 20 
+r1 	nexthop via 172.23.0.2 dev eth1 weight 1 
+r1 	nexthop via 172.22.0.3 dev eth0 weight 1 
+r2 [2026-10-06T05:01:24.701705] 172.22.0.0/16 nhid 16 proto ospf metric 20 
+r2 	nexthop via 172.20.0.2 dev eth1 weight 1 
+r2 	nexthop via 172.23.0.3 dev eth0 weight 1 
+r3 [2026-10-06T05:01:11.343595] 172.23.0.0/16 nhid 16 proto ospf metric 20 
+r3 	nexthop via 172.22.0.2 dev eth1 weight 1 
+r3 	nexthop via 172.20.0.3 dev eth0 weight 1 

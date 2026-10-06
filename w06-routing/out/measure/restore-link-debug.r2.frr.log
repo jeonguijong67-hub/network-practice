@@ -1,0 +1,877 @@
+2026/10/06 05:14:14.199 OSPF: [NVWQG-0MJEV] LSA[Type1:1.1.1.1]: 0x7598715ce640 new LSA created with Link State Update
+2026/10/06 05:14:14.199 OSPF: [N0X8S-XBM60] LSA Type-1 from 3.3.3.3, ID: 1.1.1.1, ADV: 1.1.1.1
+2026/10/06 05:14:14.199 OSPF: [GAG1P-PT9JG] default:LSA[Flooding]: start, NBR 3.3.3.3 (Full), cur(0x7598715ce5b0), New-LSA[Type1,id(1.1.1.1),ar(1.1.1.1)]
+2026/10/06 05:14:14.199 OSPF: [PVPND-T24T8] ospf_flood_through_interface: considering int eth0:172.23.0.2 (default), INBR(3.3.3.3), LSA[Type1,id(1.1.1.1),ar(1.1.1.1)] AGE 2
+2026/10/06 05:14:14.199 OSPF: [RRFCS-M7Y2A] ospf_flood_through_interface: considering nbr 2.2.2.2 via eth0:172.23.0.2 (default), state: 2-Way
+2026/10/06 05:14:14.199 OSPF: [RRFCS-M7Y2A] ospf_flood_through_interface: considering nbr 1.1.1.1 via eth0:172.23.0.2 (default), state: Full
+2026/10/06 05:14:14.199 OSPF: [QPT3G-B8GVC] RXmtL(1)--, NBR(1.1.1.1(default)), LSA[Type1,id(1.1.1.1),ar(1.1.1.1)]
+2026/10/06 05:14:14.199 OSPF: [Z7T7A-E24GB] RXmtL(0)++, NBR(1.1.1.1(default)), LSA[Type1,id(1.1.1.1),ar(1.1.1.1)]
+2026/10/06 05:14:14.199 OSPF: [QW268-ZG2QB] ospf_flood_through_interface: DR/BDR sending upd to int eth0:172.23.0.2 (default)
+2026/10/06 05:14:14.199 OSPF: [PVPND-T24T8] ospf_flood_through_interface: considering int eth1:172.20.0.3 (default), INBR(3.3.3.3), LSA[Type1,id(1.1.1.1),ar(1.1.1.1)] AGE 2
+2026/10/06 05:14:14.199 OSPF: [RRFCS-M7Y2A] ospf_flood_through_interface: considering nbr 3.3.3.3 via eth1:172.20.0.3 (default), state: Full
+2026/10/06 05:14:14.199 OSPF: [JKBKX-KWN0N] ospf_flood_through_interface: Skipping neighbor eth1:172.20.0.3 via 3.3.3.3 -- inbr == onbr.
+2026/10/06 05:14:14.199 OSPF: [RRFCS-M7Y2A] ospf_flood_through_interface: considering nbr 2.2.2.2 via eth1:172.20.0.3 (default), state: 2-Way
+2026/10/06 05:14:14.199 OSPF: [T49CC-ZS33K] ospf_lsa_maxage_delete: lsa Type1,id(1.1.1.1),ar(1.1.1.1) is not found in maxage db.
+2026/10/06 05:14:14.199 OSPF: [XM6NG-0FZTQ] LSA: freed 0x7598715ce5b0
+2026/10/06 05:14:14.199 OSPF: [WYBB1-D7XFR] LSA[Type1:1.1.1.1]: data freed 0x7598715e5df0
+2026/10/06 05:14:14.199 OSPF: [PX5CC-Z46XW] SPF: calculation timer scheduled
+2026/10/06 05:14:14.199 OSPF: [WGFTV-3KM3B] SPF: calculation timer delay = 0 msec
+2026/10/06 05:14:14.199 OSPF: [GYY50-X1B8K] ospf_ls_upd_send_queue_event start
+2026/10/06 05:14:14.199 OSPF: [K6178-QCVRR] listcount = 1, [eth0:172.23.0.2]dst 224.0.0.5
+2026/10/06 05:14:14.199 OSPF: [ND8AK-4ZR1N] ospf_make_ls_upd: Start
+2026/10/06 05:14:14.199 OSPF: [ZX14J-XCW80] ospf_make_ls_upd: List Iteration 0 LSA[Type1,id(1.1.1.1),ar(1.1.1.1)]
+2026/10/06 05:14:14.199 OSPF: [T65F2-7KT5F] ospf_make_ls_upd: Stop
+2026/10/06 05:14:14.199 OSPF: [SYCHD-MANYV] ospf_ls_upd_send_queue_event stop
+2026/10/06 05:14:14.199 OSPF: [P43T9-HM2M6] SPF: Timer (SPF calculation expire)
+2026/10/06 05:14:14.199 OSPF: [S1FG7-WJ415] ospf_spf_calculate: Start: running Dijkstra for area 0.0.0.0
+2026/10/06 05:14:14.199 OSPF: [GBQRT-FSAQE] ospf_vertex_new: Created Router vertex 2.2.2.2
+2026/10/06 05:14:14.199 OSPF: [HGJH4-ZNTR6] ospf_spf_next: Next vertex of Router vertex 2.2.2.2
+2026/10/06 05:14:14.199 OSPF: [XV2ZE-KSNW9] Looking up Network LSA, ID: 172.23.0.2
+2026/10/06 05:14:14.199 OSPF: [S551W-V5G8F] found the LSA
+2026/10/06 05:14:14.199 OSPF: [GBQRT-FSAQE] ospf_vertex_new: Created Network vertex 172.23.0.2
+2026/10/06 05:14:14.199 OSPF: [KJPGV-JXJF5] ospf_nexthop_calculation: Start
+2026/10/06 05:14:14.199 OSPF: [N0B64-84ZHN] V (parent): Router vertex 2.2.2.2  distance 0 flags 0
+2026/10/06 05:14:14.199 OSPF: [N0B64-84ZHN] W (dest)  : Network vertex 172.23.0.2  distance 0 flags 0
+2026/10/06 05:14:14.199 OSPF: [NXXE4-PQP43] V->W distance: 10
+2026/10/06 05:14:14.199 OSPF: [ZYVWC-X5FEN] ospf_nexthop_calculation: considering link type:2 link_id:172.23.0.2 link_data:172.23.0.2
+2026/10/06 05:14:14.199 OSPF: [Q2T6B-4TNP1] ospf_spf_add_parent: Adding 2.2.2.2 as parent of 172.23.0.2
+2026/10/06 05:14:14.199 OSPF: [XV2ZE-KSNW9] Looking up Network LSA, ID: 172.20.0.2
+2026/10/06 05:14:14.199 OSPF: [S551W-V5G8F] found the LSA
+2026/10/06 05:14:14.199 OSPF: [GBQRT-FSAQE] ospf_vertex_new: Created Network vertex 172.20.0.2
+2026/10/06 05:14:14.199 OSPF: [KJPGV-JXJF5] ospf_nexthop_calculation: Start
+2026/10/06 05:14:14.199 OSPF: [N0B64-84ZHN] V (parent): Router vertex 2.2.2.2  distance 0 flags 0
+2026/10/06 05:14:14.199 OSPF: [N0B64-84ZHN] W (dest)  : Network vertex 172.20.0.2  distance 0 flags 0
+2026/10/06 05:14:14.199 OSPF: [NXXE4-PQP43] V->W distance: 10
+2026/10/06 05:14:14.199 OSPF: [ZYVWC-X5FEN] ospf_nexthop_calculation: considering link type:2 link_id:172.20.0.2 link_data:172.20.0.3
+2026/10/06 05:14:14.199 OSPF: [Q2T6B-4TNP1] ospf_spf_add_parent: Adding 2.2.2.2 as parent of 172.20.0.2
+2026/10/06 05:14:14.199 OSPF: [HGJH4-ZNTR6] ospf_spf_next: Next vertex of Network vertex 172.23.0.2
+2026/10/06 05:14:14.199 OSPF: [VE2RF-67E8G] found Router LSA 2.2.2.2
+2026/10/06 05:14:14.199 OSPF: [P4ZB3-JNNHZ] The LSA is already in SPF
+2026/10/06 05:14:14.199 OSPF: [VE2RF-67E8G] found Router LSA 1.1.1.1
+2026/10/06 05:14:14.199 OSPF: [R9BAP-F0K17] The LSA doesn't have a link back
+2026/10/06 05:14:14.199 OSPF: [HGJH4-ZNTR6] ospf_spf_next: Next vertex of Network vertex 172.20.0.2
+2026/10/06 05:14:14.199 OSPF: [VE2RF-67E8G] found Router LSA 3.3.3.3
+2026/10/06 05:14:14.199 OSPF: [GBQRT-FSAQE] ospf_vertex_new: Created Router vertex 3.3.3.3
+2026/10/06 05:14:14.199 OSPF: [KJPGV-JXJF5] ospf_nexthop_calculation: Start
+2026/10/06 05:14:14.199 OSPF: [N0B64-84ZHN] V (parent): Network vertex 172.20.0.2  distance 10 flags 0
+2026/10/06 05:14:14.199 OSPF: [NVPG7-N50C8] parent 2.2.2.2 backlink 1 nexthop 0.0.0.0 lsa pos 1
+2026/10/06 05:14:14.199 OSPF: [N0B64-84ZHN] W (dest)  : Router vertex 3.3.3.3  distance 0 flags 0
+2026/10/06 05:14:14.199 OSPF: [NXXE4-PQP43] V->W distance: 10
+2026/10/06 05:14:14.199 OSPF: [Q2T6B-4TNP1] ospf_spf_add_parent: Adding 172.20.0.2 as parent of 3.3.3.3
+2026/10/06 05:14:14.199 OSPF: [VE2RF-67E8G] found Router LSA 2.2.2.2
+2026/10/06 05:14:14.199 OSPF: [P4ZB3-JNNHZ] The LSA is already in SPF
+2026/10/06 05:14:14.199 OSPF: [RMYP3-T3NWD] ospf_intra_add_router: Start
+2026/10/06 05:14:14.199 OSPF: [KDTKZ-EVJMW] ospf_intra_add_router: LS ID: 3.3.3.3
+2026/10/06 05:14:14.199 OSPF: [KPCNN-DPESJ] ospf_intra_add_router: this router is neither ASBR nor ABR, skipping it
+2026/10/06 05:14:14.199 OSPF: [HGJH4-ZNTR6] ospf_spf_next: Next vertex of Router vertex 3.3.3.3
+2026/10/06 05:14:14.199 OSPF: [XV2ZE-KSNW9] Looking up Network LSA, ID: 172.20.0.2
+2026/10/06 05:14:14.199 OSPF: [S551W-V5G8F] found the LSA
+2026/10/06 05:14:14.199 OSPF: [P4ZB3-JNNHZ] The LSA is already in SPF
+2026/10/06 05:14:14.199 OSPF: [XV2ZE-KSNW9] Looking up Network LSA, ID: 172.22.0.3
+2026/10/06 05:14:14.199 OSPF: [S551W-V5G8F] found the LSA
+2026/10/06 05:14:14.199 OSPF: [GBQRT-FSAQE] ospf_vertex_new: Created Network vertex 172.22.0.3
+2026/10/06 05:14:14.199 OSPF: [KJPGV-JXJF5] ospf_nexthop_calculation: Start
+2026/10/06 05:14:14.199 OSPF: [N0B64-84ZHN] V (parent): Router vertex 3.3.3.3  distance 10 flags 0
+2026/10/06 05:14:14.199 OSPF: [NVPG7-N50C8] parent 172.20.0.2 backlink 0 nexthop 172.20.0.2 lsa pos 1
+2026/10/06 05:14:14.199 OSPF: [N0B64-84ZHN] W (dest)  : Network vertex 172.22.0.3  distance 0 flags 0
+2026/10/06 05:14:14.199 OSPF: [NXXE4-PQP43] V->W distance: 20
+2026/10/06 05:14:14.199 OSPF: [T1KGD-7A4V9] ospf_nexthop_calculation: Intervening routers, adding parent(s)
+2026/10/06 05:14:14.199 OSPF: [Q2T6B-4TNP1] ospf_spf_add_parent: Adding 3.3.3.3 as parent of 172.22.0.3
+2026/10/06 05:14:14.199 OSPF: [HGJH4-ZNTR6] ospf_spf_next: Next vertex of Network vertex 172.22.0.3
+2026/10/06 05:14:14.199 OSPF: [VE2RF-67E8G] found Router LSA 1.1.1.1
+2026/10/06 05:14:14.199 OSPF: [GBQRT-FSAQE] ospf_vertex_new: Created Router vertex 1.1.1.1
+2026/10/06 05:14:14.200 OSPF: [KJPGV-JXJF5] ospf_nexthop_calculation: Start
+2026/10/06 05:14:14.200 OSPF: [N0B64-84ZHN] V (parent): Network vertex 172.22.0.3  distance 20 flags 0
+2026/10/06 05:14:14.200 OSPF: [NVPG7-N50C8] parent 3.3.3.3 backlink 1 nexthop 172.20.0.2 lsa pos 1
+2026/10/06 05:14:14.200 OSPF: [N0B64-84ZHN] W (dest)  : Router vertex 1.1.1.1  distance 0 flags 0
+2026/10/06 05:14:14.200 OSPF: [NXXE4-PQP43] V->W distance: 20
+2026/10/06 05:14:14.200 OSPF: [T1KGD-7A4V9] ospf_nexthop_calculation: Intervening routers, adding parent(s)
+2026/10/06 05:14:14.200 OSPF: [Q2T6B-4TNP1] ospf_spf_add_parent: Adding 172.22.0.3 as parent of 1.1.1.1
+2026/10/06 05:14:14.200 OSPF: [VE2RF-67E8G] found Router LSA 3.3.3.3
+2026/10/06 05:14:14.200 OSPF: [P4ZB3-JNNHZ] The LSA is already in SPF
+2026/10/06 05:14:14.200 OSPF: [RMYP3-T3NWD] ospf_intra_add_router: Start
+2026/10/06 05:14:14.200 OSPF: [KDTKZ-EVJMW] ospf_intra_add_router: LS ID: 1.1.1.1
+2026/10/06 05:14:14.200 OSPF: [KPCNN-DPESJ] ospf_intra_add_router: this router is neither ASBR nor ABR, skipping it
+2026/10/06 05:14:14.200 OSPF: [HGJH4-ZNTR6] ospf_spf_next: Next vertex of Router vertex 1.1.1.1
+2026/10/06 05:14:14.200 OSPF: [XV2ZE-KSNW9] Looking up Network LSA, ID: 172.22.0.3
+2026/10/06 05:14:14.200 OSPF: [S551W-V5G8F] found the LSA
+2026/10/06 05:14:14.200 OSPF: [P4ZB3-JNNHZ] The LSA is already in SPF
+2026/10/06 05:14:14.200 OSPF: [SK0YS-JEEHQ] SPF Result: 0 [R] 2.2.2.2
+2026/10/06 05:14:14.200 OSPF: [PC8JR-2QBKA] SPF Result: 1 [N] 172.23.0.2/16
+2026/10/06 05:14:14.200 OSPF: [G5AK8-66BHD]  nexthop 0x759871602d10 0.0.0.0 0
+2026/10/06 05:14:14.200 OSPF: [PC8JR-2QBKA] SPF Result: 1 [N] 172.20.0.2/16
+2026/10/06 05:14:14.200 OSPF: [G5AK8-66BHD]  nexthop 0x759871602d30 0.0.0.0 1
+2026/10/06 05:14:14.200 OSPF: [SK0YS-JEEHQ] SPF Result: 2 [R] 3.3.3.3
+2026/10/06 05:14:14.200 OSPF: [G5AK8-66BHD]  nexthop 0x759871602d50 172.20.0.2 1
+2026/10/06 05:14:14.200 OSPF: [PC8JR-2QBKA] SPF Result: 3 [N] 172.22.0.3/16
+2026/10/06 05:14:14.200 OSPF: [G5AK8-66BHD]  nexthop 0x759871602df0 172.20.0.2 1
+2026/10/06 05:14:14.200 OSPF: [SK0YS-JEEHQ] SPF Result: 4 [R] 1.1.1.1
+2026/10/06 05:14:14.200 OSPF: [G5AK8-66BHD]  nexthop 0x7598715cf210 172.20.0.2 1
+2026/10/06 05:14:14.200 OSPF: [WS1E3-63QTY] ========== OSPF routing table ==========
+2026/10/06 05:14:14.200 OSPF: [PKAC5-9QWWG] N 172.20.0.0/16      0.0.0.0         intra-area 10
+2026/10/06 05:14:14.200 OSPF: [RT8AF-HXCSD]   -> 0.0.0.0
+2026/10/06 05:14:14.200 OSPF: [PKAC5-9QWWG] N 172.22.0.0/16      0.0.0.0         intra-area 20
+2026/10/06 05:14:14.200 OSPF: [RT8AF-HXCSD]   -> 172.20.0.2
+2026/10/06 05:14:14.200 OSPF: [PKAC5-9QWWG] N 172.23.0.0/16      0.0.0.0         intra-area 10
+2026/10/06 05:14:14.200 OSPF: [RT8AF-HXCSD]   -> 0.0.0.0
+2026/10/06 05:14:14.200 OSPF: [X9F7Y-T5KZ8] ========================================
+2026/10/06 05:14:14.200 OSPF: [XQ13G-RT96P] ospf_spf_process_stubs: processing stubs for area 0.0.0.0
+2026/10/06 05:14:14.200 OSPF: [YD6EH-5241W] ospf_spf_process_stubs: processing router LSA, id: 2.2.2.2
+2026/10/06 05:14:14.200 OSPF: [WSZ0V-4F6P1] ospf_spf_process_stubs: we have 2 links to process
+2026/10/06 05:14:14.200 OSPF: [N0B64-84ZHN] ospf_process_stubs(): after examining links:  Router vertex 2.2.2.2  distance 0 flags 0
+2026/10/06 05:14:14.200 OSPF: [N0B64-84ZHN]  child: Network vertex 172.23.0.2  distance 10 flags 0
+2026/10/06 05:14:14.200 OSPF: [N0B64-84ZHN]  child: Network vertex 172.20.0.2  distance 10 flags 0
+2026/10/06 05:14:14.200 OSPF: [XQ13G-RT96P] ospf_spf_process_stubs: processing stubs for area 0.0.0.0
+2026/10/06 05:14:14.200 OSPF: [N0B64-84ZHN] ospf_process_stubs(): after examining links:  Network vertex 172.23.0.2  distance 10 flags 0
+2026/10/06 05:14:14.200 OSPF: [NVPG7-N50C8] parent 2.2.2.2 backlink 0 nexthop 0.0.0.0 lsa pos 0
+2026/10/06 05:14:14.200 OSPF: [XQ13G-RT96P] ospf_spf_process_stubs: processing stubs for area 0.0.0.0
+2026/10/06 05:14:14.200 OSPF: [N0B64-84ZHN] ospf_process_stubs(): after examining links:  Network vertex 172.20.0.2  distance 10 flags 0
+2026/10/06 05:14:14.200 OSPF: [NVPG7-N50C8] parent 2.2.2.2 backlink 1 nexthop 0.0.0.0 lsa pos 1
+2026/10/06 05:14:14.200 OSPF: [N0B64-84ZHN]  child: Router vertex 3.3.3.3  distance 10 flags 0
+2026/10/06 05:14:14.200 OSPF: [XQ13G-RT96P] ospf_spf_process_stubs: processing stubs for area 0.0.0.0
+2026/10/06 05:14:14.200 OSPF: [YD6EH-5241W] ospf_spf_process_stubs: processing router LSA, id: 3.3.3.3
+2026/10/06 05:14:14.200 OSPF: [WSZ0V-4F6P1] ospf_spf_process_stubs: we have 2 links to process
+2026/10/06 05:14:14.200 OSPF: [N0B64-84ZHN] ospf_process_stubs(): after examining links:  Router vertex 3.3.3.3  distance 10 flags 0
+2026/10/06 05:14:14.200 OSPF: [NVPG7-N50C8] parent 172.20.0.2 backlink 0 nexthop 172.20.0.2 lsa pos 1
+2026/10/06 05:14:14.200 OSPF: [N0B64-84ZHN]  child: Network vertex 172.22.0.3  distance 20 flags 0
+2026/10/06 05:14:14.200 OSPF: [XQ13G-RT96P] ospf_spf_process_stubs: processing stubs for area 0.0.0.0
+2026/10/06 05:14:14.200 OSPF: [N0B64-84ZHN] ospf_process_stubs(): after examining links:  Network vertex 172.22.0.3  distance 20 flags 0
+2026/10/06 05:14:14.200 OSPF: [NVPG7-N50C8] parent 3.3.3.3 backlink 1 nexthop 172.20.0.2 lsa pos 1
+2026/10/06 05:14:14.200 OSPF: [N0B64-84ZHN]  child: Router vertex 1.1.1.1  distance 20 flags 0
+2026/10/06 05:14:14.200 OSPF: [XQ13G-RT96P] ospf_spf_process_stubs: processing stubs for area 0.0.0.0
+2026/10/06 05:14:14.200 OSPF: [YD6EH-5241W] ospf_spf_process_stubs: processing router LSA, id: 1.1.1.1
+2026/10/06 05:14:14.200 OSPF: [WSZ0V-4F6P1] ospf_spf_process_stubs: we have 2 links to process
+2026/10/06 05:14:14.200 OSPF: [RMYP3-T3NWD] ospf_intra_add_stub: Start
+2026/10/06 05:14:14.200 OSPF: [X2VER-QSG31] ospf_intra_add_stub: processing route to 172.23.0.0/16
+2026/10/06 05:14:14.200 OSPF: [H47GD-RN8CW] ospf_intra_add_stub: calculated cost is 20 + 10 = 30
+2026/10/06 05:14:14.200 OSPF: [HT02G-44K4W] ospf_intra_add_stub: another route to the same prefix found with cost 10
+2026/10/06 05:14:14.200 OSPF: [TF30A-HE5JT] ospf_intra_add_stub: old route is better, exit
+2026/10/06 05:14:14.200 OSPF: [N0B64-84ZHN] ospf_process_stubs(): after examining links:  Router vertex 1.1.1.1  distance 20 flags 0
+2026/10/06 05:14:14.200 OSPF: [NVPG7-N50C8] parent 172.22.0.3 backlink 0 nexthop 172.20.0.2 lsa pos 1
+2026/10/06 05:14:14.200 OSPF: [N0B64-84ZHN] ospf_spf_calculate Router vertex 2.2.2.2  distance 0 flags 0
+2026/10/06 05:14:14.200 OSPF: [N0B64-84ZHN]  child: Network vertex 172.23.0.2  distance 10 flags 1
+2026/10/06 05:14:14.200 OSPF: [N0B64-84ZHN]  child: Network vertex 172.20.0.2  distance 10 flags 1
+2026/10/06 05:14:14.200 OSPF: [MM90D-TJ7JR] ospf_spf_calculate: Stop. 6 vertices
+2026/10/06 05:14:14.200 OSPF: [SQ30N-DRDS1] ospf_vertex_free: Free Router vertex 2.2.2.2
+2026/10/06 05:14:14.200 OSPF: [SQ30N-DRDS1] ospf_vertex_free: Free Network vertex 172.23.0.2
+2026/10/06 05:14:14.200 OSPF: [SQ30N-DRDS1] ospf_vertex_free: Free Network vertex 172.20.0.2
+2026/10/06 05:14:14.200 OSPF: [SQ30N-DRDS1] ospf_vertex_free: Free Router vertex 3.3.3.3
+2026/10/06 05:14:14.200 OSPF: [SQ30N-DRDS1] ospf_vertex_free: Free Network vertex 172.22.0.3
+2026/10/06 05:14:14.200 OSPF: [SQ30N-DRDS1] ospf_vertex_free: Free Router vertex 1.1.1.1
+2026/10/06 05:14:14.200 OSPF: [JAPQ7-AWTY4] ospf_ia_routing:start
+2026/10/06 05:14:14.200 OSPF: [WYB8H-5T9YS] ospf_ia_routing:not ABR, considering all areas
+2026/10/06 05:14:14.200 OSPF: [JC7WM-A8RFR] Pruning unreachable networks
+2026/10/06 05:14:14.200 OSPF: [Q5QBP-7T7ZK] Pruning unreachable routers
+2026/10/06 05:14:14.200 OSPF: [QT6FN-QCD74] ospf_spf_calculate_schedule_worker: ospf install new route, vrf default id 0 new_table count 5
+2026/10/06 05:14:14.200 OSPF: [V4QH8-NMP5P] Route: Router Routing Table free
+2026/10/06 05:14:14.200 OSPF: [HRX11-4AW3M] SPF Processing Time(usecs): 329
+2026/10/06 05:14:14.200 OSPF: [PTGD1-YB1H9]             SPF Time: 322
+2026/10/06 05:14:14.200 OSPF: [J4YGV-BR16C]            InterArea: 1
+2026/10/06 05:14:14.200 OSPF: [HK5RG-M3KT0]                Prune: 1
+2026/10/06 05:14:14.200 OSPF: [ZQD66-8SF2N]         RouteInstall: 4
+2026/10/06 05:14:14.200 OSPF: [GWR1S-5R9KH] Reason(s) for SPF: R
+2026/10/06 05:14:14.200 OSPF: [SSJDW-NANMS] Packet 1.1.1.1 [Hello:RECV]: Options on eth0:172.23.0.2 *|-|-|-|-|-|E|- vrf default
+2026/10/06 05:14:14.200 OSPF: [K41K4-M4HP2] ospf_write to 224.0.0.5, id 32975, off 0, len 96, interface eth0, mtu 1500:
+2026/10/06 05:14:14.200 OSPF: [J91RT-VKRP4] NSM[eth0:172.23.0.2:1.1.1.1:default]: State change Full -> Init (1-WayReceived)
+2026/10/06 05:14:14.200 OSPF: [P4PQ9-K4XFD] DR-Election[1st]: Backup 0.0.0.0
+2026/10/06 05:14:14.200 OSPF: [HBZ7F-65Y86] DR-Election[1st]: DR     172.23.0.2
+2026/10/06 05:14:14.200 OSPF: [VDQHW-ZV0Y7] ospf_check_abr_status: Start
+2026/10/06 05:14:14.200 OSPF: [PZHXS-BVS5A] ospf_check_abr_status: looked through areas
+2026/10/06 05:14:14.200 OSPF: [TZ9WD-ZDBWM] ospf_check_abr_status: bb_configured: 1
+2026/10/06 05:14:14.200 OSPF: [Q8HWM-6RJH5] ospf_check_abr_status: bb_act_attached: 1
+2026/10/06 05:14:14.200 OSPF: [M4CMD-9SG7G] ospf_check_abr_status: areas_configured: 1
+2026/10/06 05:14:14.200 OSPF: [VM876-MPCW2] ospf_check_abr_status: areas_act_attached: 1
+2026/10/06 05:14:14.200 OSPF: [QKXMK-JYGQ4] [router-LSA]: (router-LSA area update)
+2026/10/06 05:14:14.200 OSPF: [PRCVH-XNYZ4] LSA[Type1]: Create router-LSA instance
+2026/10/06 05:14:14.200 OSPF: [W161F-1GN7D] counting fully adjacent virtual neighbors in area 0.0.0.0
+2026/10/06 05:14:14.200 OSPF: [YE8ZF-TCR6A] there are 0 of them
+2026/10/06 05:14:14.200 OSPF: [V469M-JP4ER] LSA[Type1]: Interface eth0 has no DR. Adding stub interface
+2026/10/06 05:14:14.200 OSPF: [ND9GV-50N9W] LSA[Type1]: Interface eth1 has a DR. Adding transit interface
+2026/10/06 05:14:14.200 OSPF: [T49CC-ZS33K] ospf_lsa_maxage_delete: lsa Type1,id(2.2.2.2),ar(2.2.2.2) is not found in maxage db.
+2026/10/06 05:14:14.200 OSPF: [XM6NG-0FZTQ] LSA: freed 0x7598715cef40
+2026/10/06 05:14:14.200 OSPF: [WYBB1-D7XFR] LSA[Type1:2.2.2.2]: data freed 0x759871619750
+2026/10/06 05:14:14.200 OSPF: [PX5CC-Z46XW] SPF: calculation timer scheduled
+2026/10/06 05:14:14.200 OSPF: [WGFTV-3KM3B] SPF: calculation timer delay = 50 msec
+2026/10/06 05:14:14.200 OSPF: [PVPND-T24T8] ospf_flood_through_interface: considering int eth0:172.23.0.2 (default), INBR((null)), LSA[Type1,id(2.2.2.2),ar(2.2.2.2)] AGE 0
+2026/10/06 05:14:14.200 OSPF: [RRFCS-M7Y2A] ospf_flood_through_interface: considering nbr 2.2.2.2 via eth0:172.23.0.2 (default), state: 2-Way
+2026/10/06 05:14:14.200 OSPF: [RRFCS-M7Y2A] ospf_flood_through_interface: considering nbr 1.1.1.1 via eth0:172.23.0.2 (default), state: Init
+2026/10/06 05:14:14.200 OSPF: [PVPND-T24T8] ospf_flood_through_interface: considering int eth1:172.20.0.3 (default), INBR((null)), LSA[Type1,id(2.2.2.2),ar(2.2.2.2)] AGE 0
+2026/10/06 05:14:14.200 OSPF: [RRFCS-M7Y2A] ospf_flood_through_interface: considering nbr 3.3.3.3 via eth1:172.20.0.3 (default), state: Full
+2026/10/06 05:14:14.200 OSPF: [Z7T7A-E24GB] RXmtL(0)++, NBR(3.3.3.3(default)), LSA[Type1,id(2.2.2.2),ar(2.2.2.2)]
+2026/10/06 05:14:14.200 OSPF: [RRFCS-M7Y2A] ospf_flood_through_interface: considering nbr 2.2.2.2 via eth1:172.20.0.3 (default), state: 2-Way
+2026/10/06 05:14:14.200 OSPF: [QW268-ZG2QB] ospf_flood_through_interface: DR/BDR sending upd to int eth1:172.20.0.3 (default)
+2026/10/06 05:14:14.200 OSPF: [Q193T-DWSAG] LSA[Type1:2.2.2.2]: router-LSA refresh
+2026/10/06 05:14:14.200 OSPF: [G8PT9-RDQ9A]   LSA Header
+2026/10/06 05:14:14.200 OSPF: [HVHYZ-WW6Q9]     LS age 0
+2026/10/06 05:14:14.200 OSPF: [QM54J-HDPWG]     Options 2 (*|-|-|-|-|-|E|-)
+2026/10/06 05:14:14.200 OSPF: [N96E4-YRDJ3]     LS type 1 (router-LSA)
+2026/10/06 05:14:14.200 OSPF: [GDXRB-XNVPW]     Link State ID 2.2.2.2
+2026/10/06 05:14:14.200 OSPF: [YGJ0K-AC79X]     Advertising Router 2.2.2.2
+2026/10/06 05:14:14.200 OSPF: [RC320-6Y5QP]     LS sequence number 0x80000016
+2026/10/06 05:14:14.200 OSPF: [K3R45-4G3MX]     LS checksum 0xf1ce
+2026/10/06 05:14:14.200 OSPF: [HH2KS-F1TEW]     length 48
+2026/10/06 05:14:14.200 OSPF: [TB4Y2-Z92G3] ospf_lsa_flush_area: MaxAge set to LSA[Type2,id(172.23.0.2),ar(2.2.2.2)]
+2026/10/06 05:14:14.200 OSPF: [PVPND-T24T8] ospf_flood_through_interface: considering int eth0:172.23.0.2 (default), INBR((null)), LSA[Type2,id(172.23.0.2),ar(2.2.2.2)] AGE 3600
+2026/10/06 05:14:14.200 OSPF: [RRFCS-M7Y2A] ospf_flood_through_interface: considering nbr 2.2.2.2 via eth0:172.23.0.2 (default), state: 2-Way
+2026/10/06 05:14:14.200 OSPF: [RRFCS-M7Y2A] ospf_flood_through_interface: considering nbr 1.1.1.1 via eth0:172.23.0.2 (default), state: Init
+2026/10/06 05:14:14.200 OSPF: [PVPND-T24T8] ospf_flood_through_interface: considering int eth1:172.20.0.3 (default), INBR((null)), LSA[Type2,id(172.23.0.2),ar(2.2.2.2)] AGE 3600
+2026/10/06 05:14:14.200 OSPF: [RRFCS-M7Y2A] ospf_flood_through_interface: considering nbr 3.3.3.3 via eth1:172.20.0.3 (default), state: Full
+2026/10/06 05:14:14.200 OSPF: [Z7T7A-E24GB] RXmtL(1)++, NBR(3.3.3.3(default)), LSA[Type2,id(172.23.0.2),ar(2.2.2.2)]
+2026/10/06 05:14:14.200 OSPF: [RRFCS-M7Y2A] ospf_flood_through_interface: considering nbr 2.2.2.2 via eth1:172.20.0.3 (default), state: 2-Way
+2026/10/06 05:14:14.200 OSPF: [QW268-ZG2QB] ospf_flood_through_interface: DR/BDR sending upd to int eth1:172.20.0.3 (default)
+2026/10/06 05:14:14.200 OSPF: [KSPSG-Q05QM] LSA[Type2,id(172.23.0.2),ar(2.2.2.2)]: MaxAge LSA remover scheduled.
+2026/10/06 05:14:14.200 OSPF: [QPT3G-B8GVC] RXmtL(1)--, NBR(1.1.1.1(default)), LSA[Type1,id(1.1.1.1),ar(1.1.1.1)]
+2026/10/06 05:14:14.200 OSPF: [GYY50-X1B8K] ospf_ls_upd_send_queue_event start
+2026/10/06 05:14:14.200 OSPF: [K6178-QCVRR] listcount = 2, [eth1:172.20.0.3]dst 224.0.0.5
+2026/10/06 05:14:14.200 OSPF: [ND8AK-4ZR1N] ospf_make_ls_upd: Start
+2026/10/06 05:14:14.200 OSPF: [ZX14J-XCW80] ospf_make_ls_upd: List Iteration 0 LSA[Type1,id(2.2.2.2),ar(2.2.2.2)]
+2026/10/06 05:14:14.200 OSPF: [ZX14J-XCW80] ospf_make_ls_upd: List Iteration 1 LSA[Type2,id(172.23.0.2),ar(2.2.2.2)]
+2026/10/06 05:14:14.200 OSPF: [T65F2-7KT5F] ospf_make_ls_upd: Stop
+2026/10/06 05:14:14.200 OSPF: [SYCHD-MANYV] ospf_ls_upd_send_queue_event stop
+2026/10/06 05:14:14.200 OSPF: [K41K4-M4HP2] ospf_write to 224.0.0.5, id 32976, off 0, len 128, interface eth1, mtu 1500:
+2026/10/06 05:14:14.250 OSPF: [P43T9-HM2M6] SPF: Timer (SPF calculation expire)
+2026/10/06 05:14:14.250 OSPF: [S1FG7-WJ415] ospf_spf_calculate: Start: running Dijkstra for area 0.0.0.0
+2026/10/06 05:14:14.250 OSPF: [GBQRT-FSAQE] ospf_vertex_new: Created Router vertex 2.2.2.2
+2026/10/06 05:14:14.250 OSPF: [HGJH4-ZNTR6] ospf_spf_next: Next vertex of Router vertex 2.2.2.2
+2026/10/06 05:14:14.250 OSPF: [XV2ZE-KSNW9] Looking up Network LSA, ID: 172.20.0.2
+2026/10/06 05:14:14.250 OSPF: [S551W-V5G8F] found the LSA
+2026/10/06 05:14:14.250 OSPF: [GBQRT-FSAQE] ospf_vertex_new: Created Network vertex 172.20.0.2
+2026/10/06 05:14:14.250 OSPF: [KJPGV-JXJF5] ospf_nexthop_calculation: Start
+2026/10/06 05:14:14.250 OSPF: [N0B64-84ZHN] V (parent): Router vertex 2.2.2.2  distance 0 flags 0
+2026/10/06 05:14:14.250 OSPF: [N0B64-84ZHN] W (dest)  : Network vertex 172.20.0.2  distance 0 flags 0
+2026/10/06 05:14:14.250 OSPF: [NXXE4-PQP43] V->W distance: 10
+2026/10/06 05:14:14.250 OSPF: [ZYVWC-X5FEN] ospf_nexthop_calculation: considering link type:2 link_id:172.20.0.2 link_data:172.20.0.3
+2026/10/06 05:14:14.250 OSPF: [Q2T6B-4TNP1] ospf_spf_add_parent: Adding 2.2.2.2 as parent of 172.20.0.2
+2026/10/06 05:14:14.250 OSPF: [HGJH4-ZNTR6] ospf_spf_next: Next vertex of Network vertex 172.20.0.2
+2026/10/06 05:14:14.250 OSPF: [VE2RF-67E8G] found Router LSA 3.3.3.3
+2026/10/06 05:14:14.250 OSPF: [GBQRT-FSAQE] ospf_vertex_new: Created Router vertex 3.3.3.3
+2026/10/06 05:14:14.250 OSPF: [KJPGV-JXJF5] ospf_nexthop_calculation: Start
+2026/10/06 05:14:14.250 OSPF: [N0B64-84ZHN] V (parent): Network vertex 172.20.0.2  distance 10 flags 0
+2026/10/06 05:14:14.250 OSPF: [NVPG7-N50C8] parent 2.2.2.2 backlink 1 nexthop 0.0.0.0 lsa pos 1
+2026/10/06 05:14:14.250 OSPF: [N0B64-84ZHN] W (dest)  : Router vertex 3.3.3.3  distance 0 flags 0
+2026/10/06 05:14:14.250 OSPF: [NXXE4-PQP43] V->W distance: 10
+2026/10/06 05:14:14.250 OSPF: [Q2T6B-4TNP1] ospf_spf_add_parent: Adding 172.20.0.2 as parent of 3.3.3.3
+2026/10/06 05:14:14.250 OSPF: [VE2RF-67E8G] found Router LSA 2.2.2.2
+2026/10/06 05:14:14.250 OSPF: [P4ZB3-JNNHZ] The LSA is already in SPF
+2026/10/06 05:14:14.250 OSPF: [RMYP3-T3NWD] ospf_intra_add_router: Start
+2026/10/06 05:14:14.250 OSPF: [KDTKZ-EVJMW] ospf_intra_add_router: LS ID: 3.3.3.3
+2026/10/06 05:14:14.250 OSPF: [KPCNN-DPESJ] ospf_intra_add_router: this router is neither ASBR nor ABR, skipping it
+2026/10/06 05:14:14.250 OSPF: [HGJH4-ZNTR6] ospf_spf_next: Next vertex of Router vertex 3.3.3.3
+2026/10/06 05:14:14.250 OSPF: [XV2ZE-KSNW9] Looking up Network LSA, ID: 172.20.0.2
+2026/10/06 05:14:14.250 OSPF: [S551W-V5G8F] found the LSA
+2026/10/06 05:14:14.250 OSPF: [P4ZB3-JNNHZ] The LSA is already in SPF
+2026/10/06 05:14:14.250 OSPF: [XV2ZE-KSNW9] Looking up Network LSA, ID: 172.22.0.3
+2026/10/06 05:14:14.250 OSPF: [S551W-V5G8F] found the LSA
+2026/10/06 05:14:14.250 OSPF: [GBQRT-FSAQE] ospf_vertex_new: Created Network vertex 172.22.0.3
+2026/10/06 05:14:14.250 OSPF: [KJPGV-JXJF5] ospf_nexthop_calculation: Start
+2026/10/06 05:14:14.250 OSPF: [N0B64-84ZHN] V (parent): Router vertex 3.3.3.3  distance 10 flags 0
+2026/10/06 05:14:14.250 OSPF: [NVPG7-N50C8] parent 172.20.0.2 backlink 0 nexthop 172.20.0.2 lsa pos 1
+2026/10/06 05:14:14.250 OSPF: [N0B64-84ZHN] W (dest)  : Network vertex 172.22.0.3  distance 0 flags 0
+2026/10/06 05:14:14.250 OSPF: [NXXE4-PQP43] V->W distance: 20
+2026/10/06 05:14:14.250 OSPF: [T1KGD-7A4V9] ospf_nexthop_calculation: Intervening routers, adding parent(s)
+2026/10/06 05:14:14.250 OSPF: [Q2T6B-4TNP1] ospf_spf_add_parent: Adding 3.3.3.3 as parent of 172.22.0.3
+2026/10/06 05:14:14.250 OSPF: [HGJH4-ZNTR6] ospf_spf_next: Next vertex of Network vertex 172.22.0.3
+2026/10/06 05:14:14.250 OSPF: [VE2RF-67E8G] found Router LSA 1.1.1.1
+2026/10/06 05:14:14.250 OSPF: [GBQRT-FSAQE] ospf_vertex_new: Created Router vertex 1.1.1.1
+2026/10/06 05:14:14.250 OSPF: [KJPGV-JXJF5] ospf_nexthop_calculation: Start
+2026/10/06 05:14:14.250 OSPF: [N0B64-84ZHN] V (parent): Network vertex 172.22.0.3  distance 20 flags 0
+2026/10/06 05:14:14.250 OSPF: [NVPG7-N50C8] parent 3.3.3.3 backlink 1 nexthop 172.20.0.2 lsa pos 1
+2026/10/06 05:14:14.250 OSPF: [N0B64-84ZHN] W (dest)  : Router vertex 1.1.1.1  distance 0 flags 0
+2026/10/06 05:14:14.250 OSPF: [NXXE4-PQP43] V->W distance: 20
+2026/10/06 05:14:14.250 OSPF: [T1KGD-7A4V9] ospf_nexthop_calculation: Intervening routers, adding parent(s)
+2026/10/06 05:14:14.250 OSPF: [Q2T6B-4TNP1] ospf_spf_add_parent: Adding 172.22.0.3 as parent of 1.1.1.1
+2026/10/06 05:14:14.250 OSPF: [VE2RF-67E8G] found Router LSA 3.3.3.3
+2026/10/06 05:14:14.250 OSPF: [P4ZB3-JNNHZ] The LSA is already in SPF
+2026/10/06 05:14:14.250 OSPF: [RMYP3-T3NWD] ospf_intra_add_router: Start
+2026/10/06 05:14:14.250 OSPF: [KDTKZ-EVJMW] ospf_intra_add_router: LS ID: 1.1.1.1
+2026/10/06 05:14:14.250 OSPF: [KPCNN-DPESJ] ospf_intra_add_router: this router is neither ASBR nor ABR, skipping it
+2026/10/06 05:14:14.250 OSPF: [HGJH4-ZNTR6] ospf_spf_next: Next vertex of Router vertex 1.1.1.1
+2026/10/06 05:14:14.250 OSPF: [XV2ZE-KSNW9] Looking up Network LSA, ID: 172.22.0.3
+2026/10/06 05:14:14.250 OSPF: [S551W-V5G8F] found the LSA
+2026/10/06 05:14:14.250 OSPF: [P4ZB3-JNNHZ] The LSA is already in SPF
+2026/10/06 05:14:14.250 OSPF: [SK0YS-JEEHQ] SPF Result: 0 [R] 2.2.2.2
+2026/10/06 05:14:14.250 OSPF: [PC8JR-2QBKA] SPF Result: 1 [N] 172.20.0.2/16
+2026/10/06 05:14:14.250 OSPF: [G5AK8-66BHD]  nexthop 0x7598715cf220 0.0.0.0 1
+2026/10/06 05:14:14.250 OSPF: [SK0YS-JEEHQ] SPF Result: 2 [R] 3.3.3.3
+2026/10/06 05:14:14.250 OSPF: [G5AK8-66BHD]  nexthop 0x7598715cf240 172.20.0.2 1
+2026/10/06 05:14:14.250 OSPF: [PC8JR-2QBKA] SPF Result: 3 [N] 172.22.0.3/16
+2026/10/06 05:14:14.250 OSPF: [G5AK8-66BHD]  nexthop 0x7598715cf280 172.20.0.2 1
+2026/10/06 05:14:14.250 OSPF: [SK0YS-JEEHQ] SPF Result: 4 [R] 1.1.1.1
+2026/10/06 05:14:14.250 OSPF: [G5AK8-66BHD]  nexthop 0x7598715cf290 172.20.0.2 1
+2026/10/06 05:14:14.250 OSPF: [WS1E3-63QTY] ========== OSPF routing table ==========
+2026/10/06 05:14:14.250 OSPF: [PKAC5-9QWWG] N 172.20.0.0/16      0.0.0.0         intra-area 10
+2026/10/06 05:14:14.250 OSPF: [RT8AF-HXCSD]   -> 0.0.0.0
+2026/10/06 05:14:14.250 OSPF: [PKAC5-9QWWG] N 172.22.0.0/16      0.0.0.0         intra-area 20
+2026/10/06 05:14:14.250 OSPF: [RT8AF-HXCSD]   -> 172.20.0.2
+2026/10/06 05:14:14.250 OSPF: [X9F7Y-T5KZ8] ========================================
+2026/10/06 05:14:14.250 OSPF: [XQ13G-RT96P] ospf_spf_process_stubs: processing stubs for area 0.0.0.0
+2026/10/06 05:14:14.250 OSPF: [YD6EH-5241W] ospf_spf_process_stubs: processing router LSA, id: 2.2.2.2
+2026/10/06 05:14:14.250 OSPF: [WSZ0V-4F6P1] ospf_spf_process_stubs: we have 2 links to process
+2026/10/06 05:14:14.250 OSPF: [RMYP3-T3NWD] ospf_intra_add_stub: Start
+2026/10/06 05:14:14.250 OSPF: [X2VER-QSG31] ospf_intra_add_stub: processing route to 172.23.0.0/16
+2026/10/06 05:14:14.250 OSPF: [H47GD-RN8CW] ospf_intra_add_stub: calculated cost is 0 + 10 = 10
+2026/10/06 05:14:14.250 OSPF: [QK7NM-FD67D] ospf_intra_add_stub: installing new route
+2026/10/06 05:14:14.250 OSPF: [XB6VP-YXKFF] ospf_intra_add_stub: this network is on this router
+2026/10/06 05:14:14.250 OSPF: [JHQDX-M9R7H] ospf_intra_add_stub: the lsa pos is 0
+2026/10/06 05:14:14.250 OSPF: [RX9VN-BSRSB] ospf_intra_add_stub: Stop
+2026/10/06 05:14:14.250 OSPF: [N0B64-84ZHN] ospf_process_stubs(): after examining links:  Router vertex 2.2.2.2  distance 0 flags 0
+2026/10/06 05:14:14.250 OSPF: [N0B64-84ZHN]  child: Network vertex 172.20.0.2  distance 10 flags 0
+2026/10/06 05:14:14.250 OSPF: [XQ13G-RT96P] ospf_spf_process_stubs: processing stubs for area 0.0.0.0
+2026/10/06 05:14:14.250 OSPF: [N0B64-84ZHN] ospf_process_stubs(): after examining links:  Network vertex 172.20.0.2  distance 10 flags 0
+2026/10/06 05:14:14.250 OSPF: [NVPG7-N50C8] parent 2.2.2.2 backlink 1 nexthop 0.0.0.0 lsa pos 1
+2026/10/06 05:14:14.250 OSPF: [N0B64-84ZHN]  child: Router vertex 3.3.3.3  distance 10 flags 0
+2026/10/06 05:14:14.250 OSPF: [XQ13G-RT96P] ospf_spf_process_stubs: processing stubs for area 0.0.0.0
+2026/10/06 05:14:14.250 OSPF: [YD6EH-5241W] ospf_spf_process_stubs: processing router LSA, id: 3.3.3.3
+2026/10/06 05:14:14.250 OSPF: [WSZ0V-4F6P1] ospf_spf_process_stubs: we have 2 links to process
+2026/10/06 05:14:14.250 OSPF: [N0B64-84ZHN] ospf_process_stubs(): after examining links:  Router vertex 3.3.3.3  distance 10 flags 0
+2026/10/06 05:14:14.250 OSPF: [NVPG7-N50C8] parent 172.20.0.2 backlink 0 nexthop 172.20.0.2 lsa pos 1
+2026/10/06 05:14:14.250 OSPF: [N0B64-84ZHN]  child: Network vertex 172.22.0.3  distance 20 flags 0
+2026/10/06 05:14:14.250 OSPF: [XQ13G-RT96P] ospf_spf_process_stubs: processing stubs for area 0.0.0.0
+2026/10/06 05:14:14.250 OSPF: [N0B64-84ZHN] ospf_process_stubs(): after examining links:  Network vertex 172.22.0.3  distance 20 flags 0
+2026/10/06 05:14:14.250 OSPF: [NVPG7-N50C8] parent 3.3.3.3 backlink 1 nexthop 172.20.0.2 lsa pos 1
+2026/10/06 05:14:14.250 OSPF: [N0B64-84ZHN]  child: Router vertex 1.1.1.1  distance 20 flags 0
+2026/10/06 05:14:14.250 OSPF: [XQ13G-RT96P] ospf_spf_process_stubs: processing stubs for area 0.0.0.0
+2026/10/06 05:14:14.250 OSPF: [YD6EH-5241W] ospf_spf_process_stubs: processing router LSA, id: 1.1.1.1
+2026/10/06 05:14:14.250 OSPF: [WSZ0V-4F6P1] ospf_spf_process_stubs: we have 2 links to process
+2026/10/06 05:14:14.250 OSPF: [RMYP3-T3NWD] ospf_intra_add_stub: Start
+2026/10/06 05:14:14.250 OSPF: [X2VER-QSG31] ospf_intra_add_stub: processing route to 172.23.0.0/16
+2026/10/06 05:14:14.250 OSPF: [H47GD-RN8CW] ospf_intra_add_stub: calculated cost is 20 + 10 = 30
+2026/10/06 05:14:14.250 OSPF: [HT02G-44K4W] ospf_intra_add_stub: another route to the same prefix found with cost 10
+2026/10/06 05:14:14.250 OSPF: [TF30A-HE5JT] ospf_intra_add_stub: old route is better, exit
+2026/10/06 05:14:14.250 OSPF: [N0B64-84ZHN] ospf_process_stubs(): after examining links:  Router vertex 1.1.1.1  distance 20 flags 0
+2026/10/06 05:14:14.250 OSPF: [NVPG7-N50C8] parent 172.22.0.3 backlink 0 nexthop 172.20.0.2 lsa pos 1
+2026/10/06 05:14:14.250 OSPF: [N0B64-84ZHN] ospf_spf_calculate Router vertex 2.2.2.2  distance 0 flags 0
+2026/10/06 05:14:14.250 OSPF: [N0B64-84ZHN]  child: Network vertex 172.20.0.2  distance 10 flags 1
+2026/10/06 05:14:14.250 OSPF: [MM90D-TJ7JR] ospf_spf_calculate: Stop. 5 vertices
+2026/10/06 05:14:14.250 OSPF: [SQ30N-DRDS1] ospf_vertex_free: Free Router vertex 2.2.2.2
+2026/10/06 05:14:14.250 OSPF: [SQ30N-DRDS1] ospf_vertex_free: Free Network vertex 172.20.0.2
+2026/10/06 05:14:14.250 OSPF: [SQ30N-DRDS1] ospf_vertex_free: Free Router vertex 3.3.3.3
+2026/10/06 05:14:14.250 OSPF: [SQ30N-DRDS1] ospf_vertex_free: Free Network vertex 172.22.0.3
+2026/10/06 05:14:14.250 OSPF: [SQ30N-DRDS1] ospf_vertex_free: Free Router vertex 1.1.1.1
+2026/10/06 05:14:14.250 OSPF: [JAPQ7-AWTY4] ospf_ia_routing:start
+2026/10/06 05:14:14.250 OSPF: [WYB8H-5T9YS] ospf_ia_routing:not ABR, considering all areas
+2026/10/06 05:14:14.250 OSPF: [JC7WM-A8RFR] Pruning unreachable networks
+2026/10/06 05:14:14.250 OSPF: [Q5QBP-7T7ZK] Pruning unreachable routers
+2026/10/06 05:14:14.250 OSPF: [QT6FN-QCD74] ospf_spf_calculate_schedule_worker: ospf install new route, vrf default id 0 new_table count 5
+2026/10/06 05:14:14.250 OSPF: [V4QH8-NMP5P] Route: Router Routing Table free
+2026/10/06 05:14:14.250 OSPF: [HRX11-4AW3M] SPF Processing Time(usecs): 216
+2026/10/06 05:14:14.250 OSPF: [PTGD1-YB1H9]             SPF Time: 150
+2026/10/06 05:14:14.250 OSPF: [J4YGV-BR16C]            InterArea: 1
+2026/10/06 05:14:14.250 OSPF: [HK5RG-M3KT0]                Prune: 0
+2026/10/06 05:14:14.250 OSPF: [ZQD66-8SF2N]         RouteInstall: 42
+2026/10/06 05:14:14.250 OSPF: [GWR1S-5R9KH] Reason(s) for SPF: R
+2026/10/06 05:14:14.792 OSPF: [K41K4-M4HP2] ospf_write to 224.0.0.5, id 32977, off 0, len 64, interface eth1, mtu 1500:
+2026/10/06 05:14:14.820 OSPF: [QPT3G-B8GVC] RXmtL(2)--, NBR(3.3.3.3(default)), LSA[Type1,id(2.2.2.2),ar(2.2.2.2)]
+2026/10/06 05:14:14.820 OSPF: [TVDQM-4KENF] Do not generate LSA with initial seqence number.
+2026/10/06 05:14:14.820 OSPF: [XM6NG-0FZTQ] LSA: freed 0x7598715ce880
+2026/10/06 05:14:14.820 OSPF: [QPT3G-B8GVC] RXmtL(1)--, NBR(3.3.3.3(default)), LSA[Type2,id(172.23.0.2),ar(2.2.2.2)]
+2026/10/06 05:14:14.820 OSPF: [TVDQM-4KENF] Do not generate LSA with initial seqence number.
+2026/10/06 05:14:14.820 OSPF: [XM6NG-0FZTQ] LSA: freed 0x7598715ce910
+2026/10/06 05:14:15.200 OSPF: [RHDX2-GZB1C] SPF Processing Time(usecs): External Routes: 3
+2026/10/06 05:14:19.668 OSPF: [JM0T4-6WPRP] ospf_make_hello: options: 2, int: eth0:172.23.0.2
+2026/10/06 05:14:19.668 OSPF: [JM0T4-6WPRP] ospf_make_hello: options: 2, int: eth1:172.20.0.3
+2026/10/06 05:14:19.668 OSPF: [SSJDW-NANMS] Packet 3.3.3.3 [Hello:RECV]: Options on eth1:172.20.0.3 *|-|-|-|-|-|E|- vrf default
+2026/10/06 05:14:19.668 OSPF: [K41K4-M4HP2] ospf_write to 224.0.0.5, id 32978, off 0, len 68, interface eth0, mtu 1500:
+2026/10/06 05:14:19.668 OSPF: [K41K4-M4HP2] ospf_write to 224.0.0.5, id 32979, off 0, len 68, interface eth1, mtu 1500:
+2026/10/06 05:14:19.669 OSPF: [J91RT-VKRP4] NSM[eth0:172.23.0.2:1.1.1.1:default]: State change Init -> ExStart (2-WayReceived)
+2026/10/06 05:14:19.669 OSPF: [P4PQ9-K4XFD] DR-Election[1st]: Backup 172.23.0.3
+2026/10/06 05:14:19.669 OSPF: [HBZ7F-65Y86] DR-Election[1st]: DR     172.23.0.2
+2026/10/06 05:14:19.669 OSPF: [NVWQG-0MJEV] LSA[Type1:1.1.1.1]: 0x7598715ceb50 new LSA created with Link State Update
+2026/10/06 05:14:19.669 OSPF: [N0X8S-XBM60] LSA Type-1 from 3.3.3.3, ID: 1.1.1.1, ADV: 1.1.1.1
+2026/10/06 05:14:19.669 OSPF: [GAG1P-PT9JG] default:LSA[Flooding]: start, NBR 3.3.3.3 (Full), cur(0x7598715ce640), New-LSA[Type1,id(1.1.1.1),ar(1.1.1.1)]
+2026/10/06 05:14:19.669 OSPF: [PVPND-T24T8] ospf_flood_through_interface: considering int eth0:172.23.0.2 (default), INBR(3.3.3.3), LSA[Type1,id(1.1.1.1),ar(1.1.1.1)] AGE 2
+2026/10/06 05:14:19.669 OSPF: [RRFCS-M7Y2A] ospf_flood_through_interface: considering nbr 2.2.2.2 via eth0:172.23.0.2 (default), state: 2-Way
+2026/10/06 05:14:19.669 OSPF: [RRFCS-M7Y2A] ospf_flood_through_interface: considering nbr 1.1.1.1 via eth0:172.23.0.2 (default), state: ExStart
+2026/10/06 05:14:19.669 OSPF: [PVPND-T24T8] ospf_flood_through_interface: considering int eth1:172.20.0.3 (default), INBR(3.3.3.3), LSA[Type1,id(1.1.1.1),ar(1.1.1.1)] AGE 2
+2026/10/06 05:14:19.669 OSPF: [RRFCS-M7Y2A] ospf_flood_through_interface: considering nbr 3.3.3.3 via eth1:172.20.0.3 (default), state: Full
+2026/10/06 05:14:19.669 OSPF: [JKBKX-KWN0N] ospf_flood_through_interface: Skipping neighbor eth1:172.20.0.3 via 3.3.3.3 -- inbr == onbr.
+2026/10/06 05:14:19.669 OSPF: [RRFCS-M7Y2A] ospf_flood_through_interface: considering nbr 2.2.2.2 via eth1:172.20.0.3 (default), state: 2-Way
+2026/10/06 05:14:19.669 OSPF: [T49CC-ZS33K] ospf_lsa_maxage_delete: lsa Type1,id(1.1.1.1),ar(1.1.1.1) is not found in maxage db.
+2026/10/06 05:14:19.669 OSPF: [XM6NG-0FZTQ] LSA: freed 0x7598715ce640
+2026/10/06 05:14:19.669 OSPF: [WYBB1-D7XFR] LSA[Type1:1.1.1.1]: data freed 0x759871619560
+2026/10/06 05:14:19.669 OSPF: [K41K4-M4HP2] ospf_write to 172.23.0.3, id 32980, off 0, len 52, interface eth0, mtu 1500:
+2026/10/06 05:14:19.669 OSPF: [S5PCG-77H23] Packet[DD]: Neighbor 1.1.1.1 Negotiation done (Master).
+2026/10/06 05:14:19.669 OSPF: [Z7T7A-E24GB] RXmtL(0)++, NBR(1.1.1.1(default)), LSA[Type2,id(172.23.0.2),ar(2.2.2.2)]
+2026/10/06 05:14:19.669 OSPF: [J91RT-VKRP4] NSM[eth0:172.23.0.2:1.1.1.1:default]: State change ExStart -> Exchange (NegotiationDone)
+2026/10/06 05:14:19.669 OSPF: [XM6NG-0FZTQ] LSA: freed 0x7598715cebe0
+2026/10/06 05:14:19.669 OSPF: [WYBB1-D7XFR] LSA[Type1:1.1.1.1]: data freed 0x7598715e6bb0
+2026/10/06 05:14:19.669 OSPF: [XM6NG-0FZTQ] LSA: freed 0x7598715cec70
+2026/10/06 05:14:19.669 OSPF: [WYBB1-D7XFR] LSA[Type1:2.2.2.2]: data freed 0x7598715e6bd0
+2026/10/06 05:14:19.669 OSPF: [XM6NG-0FZTQ] LSA: freed 0x7598715ced90
+2026/10/06 05:14:19.669 OSPF: [WYBB1-D7XFR] LSA[Type1:3.3.3.3]: data freed 0x7598715e6bf0
+2026/10/06 05:14:19.669 OSPF: [XM6NG-0FZTQ] LSA: freed 0x7598715ceeb0
+2026/10/06 05:14:19.669 OSPF: [WYBB1-D7XFR] LSA[Type2:172.20.0.2]: data freed 0x7598715e6c30
+2026/10/06 05:14:19.669 OSPF: [XM6NG-0FZTQ] LSA: freed 0x7598715ce0a0
+2026/10/06 05:14:19.669 OSPF: [WYBB1-D7XFR] LSA[Type2:172.22.0.3]: data freed 0x7598715e6c50
+2026/10/06 05:14:19.669 OSPF: [K41K4-M4HP2] ospf_write to 172.23.0.3, id 32981, off 0, len 52, interface eth0, mtu 1500:
+2026/10/06 05:14:19.669 OSPF: [J91RT-VKRP4] NSM[eth0:172.23.0.2:1.1.1.1:default]: State change Exchange -> Full (ExchangeDone)
+2026/10/06 05:14:19.669 OSPF: [VDQHW-ZV0Y7] ospf_check_abr_status: Start
+2026/10/06 05:14:19.669 OSPF: [PZHXS-BVS5A] ospf_check_abr_status: looked through areas
+2026/10/06 05:14:19.669 OSPF: [TZ9WD-ZDBWM] ospf_check_abr_status: bb_configured: 1
+2026/10/06 05:14:19.669 OSPF: [Q8HWM-6RJH5] ospf_check_abr_status: bb_act_attached: 1
+2026/10/06 05:14:19.669 OSPF: [M4CMD-9SG7G] ospf_check_abr_status: areas_configured: 1
+2026/10/06 05:14:19.669 OSPF: [VM876-MPCW2] ospf_check_abr_status: areas_act_attached: 1
+2026/10/06 05:14:19.669 OSPF: [QKXMK-JYGQ4] [router-LSA]: (router-LSA area update)
+2026/10/06 05:14:19.669 OSPF: [PRCVH-XNYZ4] LSA[Type1]: Create router-LSA instance
+2026/10/06 05:14:19.669 OSPF: [W161F-1GN7D] counting fully adjacent virtual neighbors in area 0.0.0.0
+2026/10/06 05:14:19.669 OSPF: [YE8ZF-TCR6A] there are 0 of them
+2026/10/06 05:14:19.669 OSPF: [ND9GV-50N9W] LSA[Type1]: Interface eth0 has a DR. Adding transit interface
+2026/10/06 05:14:19.669 OSPF: [ND9GV-50N9W] LSA[Type1]: Interface eth1 has a DR. Adding transit interface
+2026/10/06 05:14:19.669 OSPF: [T49CC-ZS33K] ospf_lsa_maxage_delete: lsa Type1,id(2.2.2.2),ar(2.2.2.2) is not found in maxage db.
+2026/10/06 05:14:19.669 OSPF: [XM6NG-0FZTQ] LSA: freed 0x7598715ce760
+2026/10/06 05:14:19.669 OSPF: [WYBB1-D7XFR] LSA[Type1:2.2.2.2]: data freed 0x759871619810
+2026/10/06 05:14:19.669 OSPF: [PX5CC-Z46XW] SPF: calculation timer scheduled
+2026/10/06 05:14:19.669 OSPF: [WGFTV-3KM3B] SPF: calculation timer delay = 0 msec
+2026/10/06 05:14:19.669 OSPF: [PVPND-T24T8] ospf_flood_through_interface: considering int eth0:172.23.0.2 (default), INBR((null)), LSA[Type1,id(2.2.2.2),ar(2.2.2.2)] AGE 0
+2026/10/06 05:14:19.669 OSPF: [RRFCS-M7Y2A] ospf_flood_through_interface: considering nbr 2.2.2.2 via eth0:172.23.0.2 (default), state: 2-Way
+2026/10/06 05:14:19.669 OSPF: [RRFCS-M7Y2A] ospf_flood_through_interface: considering nbr 1.1.1.1 via eth0:172.23.0.2 (default), state: Full
+2026/10/06 05:14:19.669 OSPF: [Z7T7A-E24GB] RXmtL(1)++, NBR(1.1.1.1(default)), LSA[Type1,id(2.2.2.2),ar(2.2.2.2)]
+2026/10/06 05:14:19.669 OSPF: [QW268-ZG2QB] ospf_flood_through_interface: DR/BDR sending upd to int eth0:172.23.0.2 (default)
+2026/10/06 05:14:19.669 OSPF: [PVPND-T24T8] ospf_flood_through_interface: considering int eth1:172.20.0.3 (default), INBR((null)), LSA[Type1,id(2.2.2.2),ar(2.2.2.2)] AGE 0
+2026/10/06 05:14:19.669 OSPF: [RRFCS-M7Y2A] ospf_flood_through_interface: considering nbr 3.3.3.3 via eth1:172.20.0.3 (default), state: Full
+2026/10/06 05:14:19.669 OSPF: [Z7T7A-E24GB] RXmtL(0)++, NBR(3.3.3.3(default)), LSA[Type1,id(2.2.2.2),ar(2.2.2.2)]
+2026/10/06 05:14:19.669 OSPF: [RRFCS-M7Y2A] ospf_flood_through_interface: considering nbr 2.2.2.2 via eth1:172.20.0.3 (default), state: 2-Way
+2026/10/06 05:14:19.669 OSPF: [QW268-ZG2QB] ospf_flood_through_interface: DR/BDR sending upd to int eth1:172.20.0.3 (default)
+2026/10/06 05:14:19.669 OSPF: [Q193T-DWSAG] LSA[Type1:2.2.2.2]: router-LSA refresh
+2026/10/06 05:14:19.669 OSPF: [G8PT9-RDQ9A]   LSA Header
+2026/10/06 05:14:19.669 OSPF: [HVHYZ-WW6Q9]     LS age 0
+2026/10/06 05:14:19.669 OSPF: [QM54J-HDPWG]     Options 2 (*|-|-|-|-|-|E|-)
+2026/10/06 05:14:19.669 OSPF: [N96E4-YRDJ3]     LS type 1 (router-LSA)
+2026/10/06 05:14:19.669 OSPF: [GDXRB-XNVPW]     Link State ID 2.2.2.2
+2026/10/06 05:14:19.669 OSPF: [YGJ0K-AC79X]     Advertising Router 2.2.2.2
+2026/10/06 05:14:19.669 OSPF: [RC320-6Y5QP]     LS sequence number 0x80000017
+2026/10/06 05:14:19.669 OSPF: [K3R45-4G3MX]     LS checksum 0x9167
+2026/10/06 05:14:19.669 OSPF: [HH2KS-F1TEW]     length 48
+2026/10/06 05:14:19.669 OSPF: [M9X9A-PMW7M] LSA[Type2]: Create network-LSA instance
+2026/10/06 05:14:19.669 OSPF: [QPT3G-B8GVC] RXmtL(2)--, NBR(1.1.1.1(default)), LSA[Type2,id(172.23.0.2),ar(2.2.2.2)]
+2026/10/06 05:14:19.669 OSPF: [XM6NG-0FZTQ] LSA: freed 0x7598715ce010
+2026/10/06 05:14:19.669 OSPF: [WYBB1-D7XFR] LSA[Type2:172.23.0.2]: data freed 0x7598715e5c70
+2026/10/06 05:14:19.669 OSPF: [PX5CC-Z46XW] SPF: calculation timer scheduled
+2026/10/06 05:14:19.669 OSPF: [PQSV2-Q4Z5S] SPF: calculation timer is already scheduled: 0x75987161a2c0
+2026/10/06 05:14:19.669 OSPF: [PVPND-T24T8] ospf_flood_through_interface: considering int eth0:172.23.0.2 (default), INBR((null)), LSA[Type2,id(172.23.0.2),ar(2.2.2.2)] AGE 0
+2026/10/06 05:14:19.669 OSPF: [RRFCS-M7Y2A] ospf_flood_through_interface: considering nbr 2.2.2.2 via eth0:172.23.0.2 (default), state: 2-Way
+2026/10/06 05:14:19.669 OSPF: [RRFCS-M7Y2A] ospf_flood_through_interface: considering nbr 1.1.1.1 via eth0:172.23.0.2 (default), state: Full
+2026/10/06 05:14:19.669 OSPF: [Z7T7A-E24GB] RXmtL(1)++, NBR(1.1.1.1(default)), LSA[Type2,id(172.23.0.2),ar(2.2.2.2)]
+2026/10/06 05:14:19.669 OSPF: [QW268-ZG2QB] ospf_flood_through_interface: DR/BDR sending upd to int eth0:172.23.0.2 (default)
+2026/10/06 05:14:19.669 OSPF: [PVPND-T24T8] ospf_flood_through_interface: considering int eth1:172.20.0.3 (default), INBR((null)), LSA[Type2,id(172.23.0.2),ar(2.2.2.2)] AGE 0
+2026/10/06 05:14:19.669 OSPF: [RRFCS-M7Y2A] ospf_flood_through_interface: considering nbr 3.3.3.3 via eth1:172.20.0.3 (default), state: Full
+2026/10/06 05:14:19.669 OSPF: [Z7T7A-E24GB] RXmtL(1)++, NBR(3.3.3.3(default)), LSA[Type2,id(172.23.0.2),ar(2.2.2.2)]
+2026/10/06 05:14:19.669 OSPF: [RRFCS-M7Y2A] ospf_flood_through_interface: considering nbr 2.2.2.2 via eth1:172.20.0.3 (default), state: 2-Way
+2026/10/06 05:14:19.669 OSPF: [QW268-ZG2QB] ospf_flood_through_interface: DR/BDR sending upd to int eth1:172.20.0.3 (default)
+2026/10/06 05:14:19.669 OSPF: [SY1WX-1063Z] LSA[Type2:172.23.0.2]: Originate network-LSA 0x7598715ce250
+2026/10/06 05:14:19.669 OSPF: [G8PT9-RDQ9A]   LSA Header
+2026/10/06 05:14:19.669 OSPF: [HVHYZ-WW6Q9]     LS age 0
+2026/10/06 05:14:19.669 OSPF: [QM54J-HDPWG]     Options 2 (*|-|-|-|-|-|E|-)
+2026/10/06 05:14:19.669 OSPF: [N96E4-YRDJ3]     LS type 2 (network-LSA)
+2026/10/06 05:14:19.669 OSPF: [GDXRB-XNVPW]     Link State ID 172.23.0.2
+2026/10/06 05:14:19.669 OSPF: [YGJ0K-AC79X]     Advertising Router 2.2.2.2
+2026/10/06 05:14:19.669 OSPF: [RC320-6Y5QP]     LS sequence number 0x80000009
+2026/10/06 05:14:19.669 OSPF: [K3R45-4G3MX]     LS checksum 0xbdba
+2026/10/06 05:14:19.669 OSPF: [HH2KS-F1TEW]     length 32
+2026/10/06 05:14:19.669 OSPF: [GYY50-X1B8K] ospf_ls_upd_send_queue_event start
+2026/10/06 05:14:19.669 OSPF: [K6178-QCVRR] listcount = 2, [eth0:172.23.0.2]dst 224.0.0.5
+2026/10/06 05:14:19.669 OSPF: [ND8AK-4ZR1N] ospf_make_ls_upd: Start
+2026/10/06 05:14:19.669 OSPF: [ZX14J-XCW80] ospf_make_ls_upd: List Iteration 0 LSA[Type1,id(2.2.2.2),ar(2.2.2.2)]
+2026/10/06 05:14:19.669 OSPF: [ZX14J-XCW80] ospf_make_ls_upd: List Iteration 1 LSA[Type2,id(172.23.0.2),ar(2.2.2.2)]
+2026/10/06 05:14:19.669 OSPF: [T65F2-7KT5F] ospf_make_ls_upd: Stop
+2026/10/06 05:14:19.669 OSPF: [SYCHD-MANYV] ospf_ls_upd_send_queue_event stop
+2026/10/06 05:14:19.669 OSPF: [GYY50-X1B8K] ospf_ls_upd_send_queue_event start
+2026/10/06 05:14:19.669 OSPF: [K6178-QCVRR] listcount = 2, [eth1:172.20.0.3]dst 224.0.0.5
+2026/10/06 05:14:19.669 OSPF: [ND8AK-4ZR1N] ospf_make_ls_upd: Start
+2026/10/06 05:14:19.669 OSPF: [ZX14J-XCW80] ospf_make_ls_upd: List Iteration 0 LSA[Type1,id(2.2.2.2),ar(2.2.2.2)]
+2026/10/06 05:14:19.669 OSPF: [ZX14J-XCW80] ospf_make_ls_upd: List Iteration 1 LSA[Type2,id(172.23.0.2),ar(2.2.2.2)]
+2026/10/06 05:14:19.669 OSPF: [T65F2-7KT5F] ospf_make_ls_upd: Stop
+2026/10/06 05:14:19.669 OSPF: [SYCHD-MANYV] ospf_ls_upd_send_queue_event stop
+2026/10/06 05:14:19.669 OSPF: [P43T9-HM2M6] SPF: Timer (SPF calculation expire)
+2026/10/06 05:14:19.669 OSPF: [S1FG7-WJ415] ospf_spf_calculate: Start: running Dijkstra for area 0.0.0.0
+2026/10/06 05:14:19.670 OSPF: [GBQRT-FSAQE] ospf_vertex_new: Created Router vertex 2.2.2.2
+2026/10/06 05:14:19.670 OSPF: [HGJH4-ZNTR6] ospf_spf_next: Next vertex of Router vertex 2.2.2.2
+2026/10/06 05:14:19.670 OSPF: [XV2ZE-KSNW9] Looking up Network LSA, ID: 172.23.0.2
+2026/10/06 05:14:19.670 OSPF: [S551W-V5G8F] found the LSA
+2026/10/06 05:14:19.670 OSPF: [GBQRT-FSAQE] ospf_vertex_new: Created Network vertex 172.23.0.2
+2026/10/06 05:14:19.670 OSPF: [KJPGV-JXJF5] ospf_nexthop_calculation: Start
+2026/10/06 05:14:19.670 OSPF: [N0B64-84ZHN] V (parent): Router vertex 2.2.2.2  distance 0 flags 0
+2026/10/06 05:14:19.670 OSPF: [N0B64-84ZHN] W (dest)  : Network vertex 172.23.0.2  distance 0 flags 0
+2026/10/06 05:14:19.670 OSPF: [NXXE4-PQP43] V->W distance: 10
+2026/10/06 05:14:19.670 OSPF: [ZYVWC-X5FEN] ospf_nexthop_calculation: considering link type:2 link_id:172.23.0.2 link_data:172.23.0.2
+2026/10/06 05:14:19.670 OSPF: [Q2T6B-4TNP1] ospf_spf_add_parent: Adding 2.2.2.2 as parent of 172.23.0.2
+2026/10/06 05:14:19.670 OSPF: [XV2ZE-KSNW9] Looking up Network LSA, ID: 172.20.0.2
+2026/10/06 05:14:19.670 OSPF: [S551W-V5G8F] found the LSA
+2026/10/06 05:14:19.670 OSPF: [GBQRT-FSAQE] ospf_vertex_new: Created Network vertex 172.20.0.2
+2026/10/06 05:14:19.670 OSPF: [KJPGV-JXJF5] ospf_nexthop_calculation: Start
+2026/10/06 05:14:19.670 OSPF: [N0B64-84ZHN] V (parent): Router vertex 2.2.2.2  distance 0 flags 0
+2026/10/06 05:14:19.670 OSPF: [N0B64-84ZHN] W (dest)  : Network vertex 172.20.0.2  distance 0 flags 0
+2026/10/06 05:14:19.670 OSPF: [NXXE4-PQP43] V->W distance: 10
+2026/10/06 05:14:19.670 OSPF: [ZYVWC-X5FEN] ospf_nexthop_calculation: considering link type:2 link_id:172.20.0.2 link_data:172.20.0.3
+2026/10/06 05:14:19.670 OSPF: [Q2T6B-4TNP1] ospf_spf_add_parent: Adding 2.2.2.2 as parent of 172.20.0.2
+2026/10/06 05:14:19.670 OSPF: [HGJH4-ZNTR6] ospf_spf_next: Next vertex of Network vertex 172.23.0.2
+2026/10/06 05:14:19.670 OSPF: [VE2RF-67E8G] found Router LSA 2.2.2.2
+2026/10/06 05:14:19.670 OSPF: [P4ZB3-JNNHZ] The LSA is already in SPF
+2026/10/06 05:14:19.670 OSPF: [VE2RF-67E8G] found Router LSA 1.1.1.1
+2026/10/06 05:14:19.670 OSPF: [R9BAP-F0K17] The LSA doesn't have a link back
+2026/10/06 05:14:19.670 OSPF: [HGJH4-ZNTR6] ospf_spf_next: Next vertex of Network vertex 172.20.0.2
+2026/10/06 05:14:19.670 OSPF: [VE2RF-67E8G] found Router LSA 3.3.3.3
+2026/10/06 05:14:19.670 OSPF: [GBQRT-FSAQE] ospf_vertex_new: Created Router vertex 3.3.3.3
+2026/10/06 05:14:19.670 OSPF: [KJPGV-JXJF5] ospf_nexthop_calculation: Start
+2026/10/06 05:14:19.670 OSPF: [N0B64-84ZHN] V (parent): Network vertex 172.20.0.2  distance 10 flags 0
+2026/10/06 05:14:19.670 OSPF: [NVPG7-N50C8] parent 2.2.2.2 backlink 1 nexthop 0.0.0.0 lsa pos 1
+2026/10/06 05:14:19.670 OSPF: [N0B64-84ZHN] W (dest)  : Router vertex 3.3.3.3  distance 0 flags 0
+2026/10/06 05:14:19.670 OSPF: [NXXE4-PQP43] V->W distance: 10
+2026/10/06 05:14:19.670 OSPF: [Q2T6B-4TNP1] ospf_spf_add_parent: Adding 172.20.0.2 as parent of 3.3.3.3
+2026/10/06 05:14:19.670 OSPF: [VE2RF-67E8G] found Router LSA 2.2.2.2
+2026/10/06 05:14:19.670 OSPF: [P4ZB3-JNNHZ] The LSA is already in SPF
+2026/10/06 05:14:19.670 OSPF: [RMYP3-T3NWD] ospf_intra_add_router: Start
+2026/10/06 05:14:19.670 OSPF: [KDTKZ-EVJMW] ospf_intra_add_router: LS ID: 3.3.3.3
+2026/10/06 05:14:19.670 OSPF: [KPCNN-DPESJ] ospf_intra_add_router: this router is neither ASBR nor ABR, skipping it
+2026/10/06 05:14:19.670 OSPF: [HGJH4-ZNTR6] ospf_spf_next: Next vertex of Router vertex 3.3.3.3
+2026/10/06 05:14:19.670 OSPF: [XV2ZE-KSNW9] Looking up Network LSA, ID: 172.20.0.2
+2026/10/06 05:14:19.670 OSPF: [S551W-V5G8F] found the LSA
+2026/10/06 05:14:19.670 OSPF: [P4ZB3-JNNHZ] The LSA is already in SPF
+2026/10/06 05:14:19.670 OSPF: [XV2ZE-KSNW9] Looking up Network LSA, ID: 172.22.0.3
+2026/10/06 05:14:19.670 OSPF: [S551W-V5G8F] found the LSA
+2026/10/06 05:14:19.670 OSPF: [GBQRT-FSAQE] ospf_vertex_new: Created Network vertex 172.22.0.3
+2026/10/06 05:14:19.670 OSPF: [KJPGV-JXJF5] ospf_nexthop_calculation: Start
+2026/10/06 05:14:19.670 OSPF: [N0B64-84ZHN] V (parent): Router vertex 3.3.3.3  distance 10 flags 0
+2026/10/06 05:14:19.670 OSPF: [NVPG7-N50C8] parent 172.20.0.2 backlink 0 nexthop 172.20.0.2 lsa pos 1
+2026/10/06 05:14:19.670 OSPF: [N0B64-84ZHN] W (dest)  : Network vertex 172.22.0.3  distance 0 flags 0
+2026/10/06 05:14:19.670 OSPF: [NXXE4-PQP43] V->W distance: 20
+2026/10/06 05:14:19.670 OSPF: [T1KGD-7A4V9] ospf_nexthop_calculation: Intervening routers, adding parent(s)
+2026/10/06 05:14:19.670 OSPF: [Q2T6B-4TNP1] ospf_spf_add_parent: Adding 3.3.3.3 as parent of 172.22.0.3
+2026/10/06 05:14:19.670 OSPF: [HGJH4-ZNTR6] ospf_spf_next: Next vertex of Network vertex 172.22.0.3
+2026/10/06 05:14:19.670 OSPF: [VE2RF-67E8G] found Router LSA 1.1.1.1
+2026/10/06 05:14:19.670 OSPF: [GBQRT-FSAQE] ospf_vertex_new: Created Router vertex 1.1.1.1
+2026/10/06 05:14:19.670 OSPF: [KJPGV-JXJF5] ospf_nexthop_calculation: Start
+2026/10/06 05:14:19.670 OSPF: [N0B64-84ZHN] V (parent): Network vertex 172.22.0.3  distance 20 flags 0
+2026/10/06 05:14:19.670 OSPF: [NVPG7-N50C8] parent 3.3.3.3 backlink 1 nexthop 172.20.0.2 lsa pos 1
+2026/10/06 05:14:19.670 OSPF: [N0B64-84ZHN] W (dest)  : Router vertex 1.1.1.1  distance 0 flags 0
+2026/10/06 05:14:19.670 OSPF: [NXXE4-PQP43] V->W distance: 20
+2026/10/06 05:14:19.670 OSPF: [T1KGD-7A4V9] ospf_nexthop_calculation: Intervening routers, adding parent(s)
+2026/10/06 05:14:19.670 OSPF: [Q2T6B-4TNP1] ospf_spf_add_parent: Adding 172.22.0.3 as parent of 1.1.1.1
+2026/10/06 05:14:19.670 OSPF: [VE2RF-67E8G] found Router LSA 3.3.3.3
+2026/10/06 05:14:19.670 OSPF: [P4ZB3-JNNHZ] The LSA is already in SPF
+2026/10/06 05:14:19.670 OSPF: [RMYP3-T3NWD] ospf_intra_add_router: Start
+2026/10/06 05:14:19.670 OSPF: [KDTKZ-EVJMW] ospf_intra_add_router: LS ID: 1.1.1.1
+2026/10/06 05:14:19.670 OSPF: [KPCNN-DPESJ] ospf_intra_add_router: this router is neither ASBR nor ABR, skipping it
+2026/10/06 05:14:19.670 OSPF: [HGJH4-ZNTR6] ospf_spf_next: Next vertex of Router vertex 1.1.1.1
+2026/10/06 05:14:19.670 OSPF: [XV2ZE-KSNW9] Looking up Network LSA, ID: 172.22.0.3
+2026/10/06 05:14:19.670 OSPF: [S551W-V5G8F] found the LSA
+2026/10/06 05:14:19.670 OSPF: [P4ZB3-JNNHZ] The LSA is already in SPF
+2026/10/06 05:14:19.670 OSPF: [SK0YS-JEEHQ] SPF Result: 0 [R] 2.2.2.2
+2026/10/06 05:14:19.670 OSPF: [PC8JR-2QBKA] SPF Result: 1 [N] 172.23.0.2/16
+2026/10/06 05:14:19.670 OSPF: [G5AK8-66BHD]  nexthop 0x7598715cf360 0.0.0.0 0
+2026/10/06 05:14:19.670 OSPF: [PC8JR-2QBKA] SPF Result: 1 [N] 172.20.0.2/16
+2026/10/06 05:14:19.670 OSPF: [G5AK8-66BHD]  nexthop 0x7598715cf380 0.0.0.0 1
+2026/10/06 05:14:19.670 OSPF: [SK0YS-JEEHQ] SPF Result: 2 [R] 3.3.3.3
+2026/10/06 05:14:19.670 OSPF: [G5AK8-66BHD]  nexthop 0x7598715cf3a0 172.20.0.2 1
+2026/10/06 05:14:19.670 OSPF: [PC8JR-2QBKA] SPF Result: 3 [N] 172.22.0.3/16
+2026/10/06 05:14:19.670 OSPF: [G5AK8-66BHD]  nexthop 0x7598715cf3d0 172.20.0.2 1
+2026/10/06 05:14:19.670 OSPF: [SK0YS-JEEHQ] SPF Result: 4 [R] 1.1.1.1
+2026/10/06 05:14:19.670 OSPF: [G5AK8-66BHD]  nexthop 0x7598715cf3e0 172.20.0.2 1
+2026/10/06 05:14:19.670 OSPF: [WS1E3-63QTY] ========== OSPF routing table ==========
+2026/10/06 05:14:19.670 OSPF: [PKAC5-9QWWG] N 172.20.0.0/16      0.0.0.0         intra-area 10
+2026/10/06 05:14:19.670 OSPF: [RT8AF-HXCSD]   -> 0.0.0.0
+2026/10/06 05:14:19.670 OSPF: [PKAC5-9QWWG] N 172.22.0.0/16      0.0.0.0         intra-area 20
+2026/10/06 05:14:19.670 OSPF: [RT8AF-HXCSD]   -> 172.20.0.2
+2026/10/06 05:14:19.670 OSPF: [PKAC5-9QWWG] N 172.23.0.0/16      0.0.0.0         intra-area 10
+2026/10/06 05:14:19.670 OSPF: [RT8AF-HXCSD]   -> 0.0.0.0
+2026/10/06 05:14:19.670 OSPF: [X9F7Y-T5KZ8] ========================================
+2026/10/06 05:14:19.670 OSPF: [XQ13G-RT96P] ospf_spf_process_stubs: processing stubs for area 0.0.0.0
+2026/10/06 05:14:19.670 OSPF: [YD6EH-5241W] ospf_spf_process_stubs: processing router LSA, id: 2.2.2.2
+2026/10/06 05:14:19.670 OSPF: [WSZ0V-4F6P1] ospf_spf_process_stubs: we have 2 links to process
+2026/10/06 05:14:19.670 OSPF: [N0B64-84ZHN] ospf_process_stubs(): after examining links:  Router vertex 2.2.2.2  distance 0 flags 0
+2026/10/06 05:14:19.670 OSPF: [N0B64-84ZHN]  child: Network vertex 172.23.0.2  distance 10 flags 0
+2026/10/06 05:14:19.670 OSPF: [N0B64-84ZHN]  child: Network vertex 172.20.0.2  distance 10 flags 0
+2026/10/06 05:14:19.670 OSPF: [XQ13G-RT96P] ospf_spf_process_stubs: processing stubs for area 0.0.0.0
+2026/10/06 05:14:19.670 OSPF: [N0B64-84ZHN] ospf_process_stubs(): after examining links:  Network vertex 172.23.0.2  distance 10 flags 0
+2026/10/06 05:14:19.670 OSPF: [NVPG7-N50C8] parent 2.2.2.2 backlink 0 nexthop 0.0.0.0 lsa pos 0
+2026/10/06 05:14:19.670 OSPF: [XQ13G-RT96P] ospf_spf_process_stubs: processing stubs for area 0.0.0.0
+2026/10/06 05:14:19.670 OSPF: [N0B64-84ZHN] ospf_process_stubs(): after examining links:  Network vertex 172.20.0.2  distance 10 flags 0
+2026/10/06 05:14:19.670 OSPF: [NVPG7-N50C8] parent 2.2.2.2 backlink 1 nexthop 0.0.0.0 lsa pos 1
+2026/10/06 05:14:19.670 OSPF: [N0B64-84ZHN]  child: Router vertex 3.3.3.3  distance 10 flags 0
+2026/10/06 05:14:19.670 OSPF: [XQ13G-RT96P] ospf_spf_process_stubs: processing stubs for area 0.0.0.0
+2026/10/06 05:14:19.670 OSPF: [YD6EH-5241W] ospf_spf_process_stubs: processing router LSA, id: 3.3.3.3
+2026/10/06 05:14:19.670 OSPF: [WSZ0V-4F6P1] ospf_spf_process_stubs: we have 2 links to process
+2026/10/06 05:14:19.670 OSPF: [N0B64-84ZHN] ospf_process_stubs(): after examining links:  Router vertex 3.3.3.3  distance 10 flags 0
+2026/10/06 05:14:19.670 OSPF: [NVPG7-N50C8] parent 172.20.0.2 backlink 0 nexthop 172.20.0.2 lsa pos 1
+2026/10/06 05:14:19.670 OSPF: [N0B64-84ZHN]  child: Network vertex 172.22.0.3  distance 20 flags 0
+2026/10/06 05:14:19.670 OSPF: [XQ13G-RT96P] ospf_spf_process_stubs: processing stubs for area 0.0.0.0
+2026/10/06 05:14:19.670 OSPF: [N0B64-84ZHN] ospf_process_stubs(): after examining links:  Network vertex 172.22.0.3  distance 20 flags 0
+2026/10/06 05:14:19.670 OSPF: [NVPG7-N50C8] parent 3.3.3.3 backlink 1 nexthop 172.20.0.2 lsa pos 1
+2026/10/06 05:14:19.670 OSPF: [N0B64-84ZHN]  child: Router vertex 1.1.1.1  distance 20 flags 0
+2026/10/06 05:14:19.670 OSPF: [XQ13G-RT96P] ospf_spf_process_stubs: processing stubs for area 0.0.0.0
+2026/10/06 05:14:19.670 OSPF: [YD6EH-5241W] ospf_spf_process_stubs: processing router LSA, id: 1.1.1.1
+2026/10/06 05:14:19.670 OSPF: [WSZ0V-4F6P1] ospf_spf_process_stubs: we have 2 links to process
+2026/10/06 05:14:19.670 OSPF: [RMYP3-T3NWD] ospf_intra_add_stub: Start
+2026/10/06 05:14:19.670 OSPF: [X2VER-QSG31] ospf_intra_add_stub: processing route to 172.23.0.0/16
+2026/10/06 05:14:19.670 OSPF: [H47GD-RN8CW] ospf_intra_add_stub: calculated cost is 20 + 10 = 30
+2026/10/06 05:14:19.670 OSPF: [HT02G-44K4W] ospf_intra_add_stub: another route to the same prefix found with cost 10
+2026/10/06 05:14:19.670 OSPF: [TF30A-HE5JT] ospf_intra_add_stub: old route is better, exit
+2026/10/06 05:14:19.670 OSPF: [N0B64-84ZHN] ospf_process_stubs(): after examining links:  Router vertex 1.1.1.1  distance 20 flags 0
+2026/10/06 05:14:19.670 OSPF: [NVPG7-N50C8] parent 172.22.0.3 backlink 0 nexthop 172.20.0.2 lsa pos 1
+2026/10/06 05:14:19.670 OSPF: [N0B64-84ZHN] ospf_spf_calculate Router vertex 2.2.2.2  distance 0 flags 0
+2026/10/06 05:14:19.670 OSPF: [N0B64-84ZHN]  child: Network vertex 172.23.0.2  distance 10 flags 1
+2026/10/06 05:14:19.670 OSPF: [N0B64-84ZHN]  child: Network vertex 172.20.0.2  distance 10 flags 1
+2026/10/06 05:14:19.670 OSPF: [MM90D-TJ7JR] ospf_spf_calculate: Stop. 6 vertices
+2026/10/06 05:14:19.670 OSPF: [SQ30N-DRDS1] ospf_vertex_free: Free Router vertex 2.2.2.2
+2026/10/06 05:14:19.670 OSPF: [SQ30N-DRDS1] ospf_vertex_free: Free Network vertex 172.23.0.2
+2026/10/06 05:14:19.670 OSPF: [SQ30N-DRDS1] ospf_vertex_free: Free Network vertex 172.20.0.2
+2026/10/06 05:14:19.670 OSPF: [SQ30N-DRDS1] ospf_vertex_free: Free Router vertex 3.3.3.3
+2026/10/06 05:14:19.670 OSPF: [SQ30N-DRDS1] ospf_vertex_free: Free Network vertex 172.22.0.3
+2026/10/06 05:14:19.670 OSPF: [SQ30N-DRDS1] ospf_vertex_free: Free Router vertex 1.1.1.1
+2026/10/06 05:14:19.670 OSPF: [JAPQ7-AWTY4] ospf_ia_routing:start
+2026/10/06 05:14:19.670 OSPF: [WYB8H-5T9YS] ospf_ia_routing:not ABR, considering all areas
+2026/10/06 05:14:19.670 OSPF: [JC7WM-A8RFR] Pruning unreachable networks
+2026/10/06 05:14:19.670 OSPF: [Q5QBP-7T7ZK] Pruning unreachable routers
+2026/10/06 05:14:19.670 OSPF: [QT6FN-QCD74] ospf_spf_calculate_schedule_worker: ospf install new route, vrf default id 0 new_table count 5
+2026/10/06 05:14:19.670 OSPF: [V4QH8-NMP5P] Route: Router Routing Table free
+2026/10/06 05:14:19.670 OSPF: [HRX11-4AW3M] SPF Processing Time(usecs): 270
+2026/10/06 05:14:19.670 OSPF: [PTGD1-YB1H9]             SPF Time: 264
+2026/10/06 05:14:19.670 OSPF: [J4YGV-BR16C]            InterArea: 1
+2026/10/06 05:14:19.670 OSPF: [HK5RG-M3KT0]                Prune: 1
+2026/10/06 05:14:19.670 OSPF: [ZQD66-8SF2N]         RouteInstall: 3
+2026/10/06 05:14:19.670 OSPF: [GWR1S-5R9KH] Reason(s) for SPF: R, N
+2026/10/06 05:14:19.670 OSPF: [NVWQG-0MJEV] LSA[Type1:1.1.1.1]: 0x7598715ce2e0 new LSA created with Link State Update
+2026/10/06 05:14:19.670 OSPF: [N0X8S-XBM60] LSA Type-1 from 1.1.1.1, ID: 1.1.1.1, ADV: 1.1.1.1
+2026/10/06 05:14:19.670 OSPF: [GAG1P-PT9JG] default:LSA[Flooding]: start, NBR 1.1.1.1 (Full), cur(0x7598715ceb50), New-LSA[Type1,id(1.1.1.1),ar(1.1.1.1)]
+2026/10/06 05:14:19.670 OSPF: [SWMWR-PCW95] default:LSA[Flooding]: LSA is received recently.
+2026/10/06 05:14:19.670 OSPF: [KPJSK-WQXZ5] ospf_lsa_discard() in ospf_ls_upd() point 5: lsa 0x7598715ce2e0 Type-1
+2026/10/06 05:14:19.670 OSPF: [XM6NG-0FZTQ] LSA: freed 0x7598715ce2e0
+2026/10/06 05:14:19.670 OSPF: [WYBB1-D7XFR] LSA[Type1:1.1.1.1]: data freed 0x759871619690
+2026/10/06 05:14:19.670 OSPF: [K41K4-M4HP2] ospf_write to 224.0.0.5, id 32982, off 0, len 128, interface eth0, mtu 1500:
+2026/10/06 05:14:19.670 OSPF: [K41K4-M4HP2] ospf_write to 224.0.0.5, id 32983, off 0, len 128, interface eth1, mtu 1500:
+2026/10/06 05:14:19.792 OSPF: [K41K4-M4HP2] ospf_write to 224.0.0.5, id 32984, off 0, len 64, interface eth1, mtu 1500:
+2026/10/06 05:14:19.820 OSPF: [QPT3G-B8GVC] RXmtL(2)--, NBR(3.3.3.3(default)), LSA[Type1,id(2.2.2.2),ar(2.2.2.2)]
+2026/10/06 05:14:19.820 OSPF: [TVDQM-4KENF] Do not generate LSA with initial seqence number.
+2026/10/06 05:14:19.820 OSPF: [XM6NG-0FZTQ] LSA: freed 0x7598715ce370
+2026/10/06 05:14:19.820 OSPF: [QPT3G-B8GVC] RXmtL(1)--, NBR(3.3.3.3(default)), LSA[Type2,id(172.23.0.2),ar(2.2.2.2)]
+2026/10/06 05:14:19.820 OSPF: [TVDQM-4KENF] Do not generate LSA with initial seqence number.
+2026/10/06 05:14:19.820 OSPF: [XM6NG-0FZTQ] LSA: freed 0x7598715ce490
+2026/10/06 05:14:20.670 OSPF: [QPT3G-B8GVC] RXmtL(2)--, NBR(1.1.1.1(default)), LSA[Type1,id(2.2.2.2),ar(2.2.2.2)]
+2026/10/06 05:14:20.670 OSPF: [TVDQM-4KENF] Do not generate LSA with initial seqence number.
+2026/10/06 05:14:20.670 OSPF: [XM6NG-0FZTQ] LSA: freed 0x7598715ce520
+2026/10/06 05:14:20.670 OSPF: [QPT3G-B8GVC] RXmtL(1)--, NBR(1.1.1.1(default)), LSA[Type2,id(172.23.0.2),ar(2.2.2.2)]
+2026/10/06 05:14:20.670 OSPF: [TVDQM-4KENF] Do not generate LSA with initial seqence number.
+2026/10/06 05:14:20.670 OSPF: [XM6NG-0FZTQ] LSA: freed 0x7598715ce5b0
+2026/10/06 05:14:20.670 OSPF: [RHDX2-GZB1C] SPF Processing Time(usecs): External Routes: 2
+2026/10/06 05:14:24.200 OSPF: [SSJDW-NANMS] Packet 1.1.1.1 [Hello:RECV]: Options on eth0:172.23.0.2 *|-|-|-|-|-|E|- vrf default
+2026/10/06 05:14:24.200 OSPF: [P4PQ9-K4XFD] DR-Election[1st]: Backup 172.23.0.3
+2026/10/06 05:14:24.200 OSPF: [HBZ7F-65Y86] DR-Election[1st]: DR     172.23.0.2
+2026/10/06 05:14:24.669 OSPF: [NVWQG-0MJEV] LSA[Type1:1.1.1.1]: 0x7598715ce640 new LSA created with Link State Update
+2026/10/06 05:14:24.669 OSPF: [NVWQG-0MJEV] LSA[Type2:172.23.0.3]: 0x7598715ce6d0 new LSA created with Link State Update
+2026/10/06 05:14:24.669 OSPF: [N0X8S-XBM60] LSA Type-1 from 1.1.1.1, ID: 1.1.1.1, ADV: 1.1.1.1
+2026/10/06 05:14:24.669 OSPF: [GAG1P-PT9JG] default:LSA[Flooding]: start, NBR 1.1.1.1 (Full), cur(0x7598715ceb50), New-LSA[Type1,id(1.1.1.1),ar(1.1.1.1)]
+2026/10/06 05:14:24.669 OSPF: [PVPND-T24T8] ospf_flood_through_interface: considering int eth0:172.23.0.2 (default), INBR(1.1.1.1), LSA[Type1,id(1.1.1.1),ar(1.1.1.1)] AGE 6
+2026/10/06 05:14:24.669 OSPF: [RRFCS-M7Y2A] ospf_flood_through_interface: considering nbr 2.2.2.2 via eth0:172.23.0.2 (default), state: 2-Way
+2026/10/06 05:14:24.669 OSPF: [RRFCS-M7Y2A] ospf_flood_through_interface: considering nbr 1.1.1.1 via eth0:172.23.0.2 (default), state: Full
+2026/10/06 05:14:24.669 OSPF: [JKBKX-KWN0N] ospf_flood_through_interface: Skipping neighbor eth0:172.23.0.2 via 1.1.1.1 -- inbr == onbr.
+2026/10/06 05:14:24.669 OSPF: [PVPND-T24T8] ospf_flood_through_interface: considering int eth1:172.20.0.3 (default), INBR(1.1.1.1), LSA[Type1,id(1.1.1.1),ar(1.1.1.1)] AGE 6
+2026/10/06 05:14:24.669 OSPF: [RRFCS-M7Y2A] ospf_flood_through_interface: considering nbr 3.3.3.3 via eth1:172.20.0.3 (default), state: Full
+2026/10/06 05:14:24.669 OSPF: [Z7T7A-E24GB] RXmtL(0)++, NBR(3.3.3.3(default)), LSA[Type1,id(1.1.1.1),ar(1.1.1.1)]
+2026/10/06 05:14:24.669 OSPF: [RRFCS-M7Y2A] ospf_flood_through_interface: considering nbr 2.2.2.2 via eth1:172.20.0.3 (default), state: 2-Way
+2026/10/06 05:14:24.669 OSPF: [QW268-ZG2QB] ospf_flood_through_interface: DR/BDR sending upd to int eth1:172.20.0.3 (default)
+2026/10/06 05:14:24.669 OSPF: [T49CC-ZS33K] ospf_lsa_maxage_delete: lsa Type1,id(1.1.1.1),ar(1.1.1.1) is not found in maxage db.
+2026/10/06 05:14:24.669 OSPF: [XM6NG-0FZTQ] LSA: freed 0x7598715ceb50
+2026/10/06 05:14:24.669 OSPF: [WYBB1-D7XFR] LSA[Type1:1.1.1.1]: data freed 0x759871619890
+2026/10/06 05:14:24.669 OSPF: [PX5CC-Z46XW] SPF: calculation timer scheduled
+2026/10/06 05:14:24.669 OSPF: [WGFTV-3KM3B] SPF: calculation timer delay = 0 msec
+2026/10/06 05:14:24.669 OSPF: [N0X8S-XBM60] LSA Type-2 from 1.1.1.1, ID: 172.23.0.3, ADV: 1.1.1.1
+2026/10/06 05:14:24.669 OSPF: [ZDWEA-NGVNG] Link State Update[Type2,id(172.23.0.3),ar(1.1.1.1)]: LS age is equal to MaxAge.
+2026/10/06 05:14:24.669 OSPF: [KPJSK-WQXZ5] ospf_lsa_discard() in ospf_ls_upd() point 3: lsa 0x7598715ce6d0 Type-2
+2026/10/06 05:14:24.671 OSPF: [GYY50-X1B8K] ospf_ls_upd_send_queue_event start
+2026/10/06 05:14:24.671 OSPF: [K6178-QCVRR] listcount = 1, [eth1:172.20.0.3]dst 224.0.0.5
+2026/10/06 05:14:24.671 OSPF: [ND8AK-4ZR1N] ospf_make_ls_upd: Start
+2026/10/06 05:14:24.671 OSPF: [ZX14J-XCW80] ospf_make_ls_upd: List Iteration 0 LSA[Type1,id(1.1.1.1),ar(1.1.1.1)]
+2026/10/06 05:14:24.671 OSPF: [T65F2-7KT5F] ospf_make_ls_upd: Stop
+2026/10/06 05:14:24.671 OSPF: [SYCHD-MANYV] ospf_ls_upd_send_queue_event stop
+2026/10/06 05:14:24.671 OSPF: [XM6NG-0FZTQ] LSA: freed 0x7598715ce6d0
+2026/10/06 05:14:24.671 OSPF: [WYBB1-D7XFR] LSA[Type2:172.23.0.3]: data freed 0x7598715e6c10
+2026/10/06 05:14:24.671 OSPF: [P43T9-HM2M6] SPF: Timer (SPF calculation expire)
+2026/10/06 05:14:24.671 OSPF: [S1FG7-WJ415] ospf_spf_calculate: Start: running Dijkstra for area 0.0.0.0
+2026/10/06 05:14:24.671 OSPF: [GBQRT-FSAQE] ospf_vertex_new: Created Router vertex 2.2.2.2
+2026/10/06 05:14:24.671 OSPF: [HGJH4-ZNTR6] ospf_spf_next: Next vertex of Router vertex 2.2.2.2
+2026/10/06 05:14:24.671 OSPF: [XV2ZE-KSNW9] Looking up Network LSA, ID: 172.23.0.2
+2026/10/06 05:14:24.671 OSPF: [S551W-V5G8F] found the LSA
+2026/10/06 05:14:24.671 OSPF: [GBQRT-FSAQE] ospf_vertex_new: Created Network vertex 172.23.0.2
+2026/10/06 05:14:24.671 OSPF: [KJPGV-JXJF5] ospf_nexthop_calculation: Start
+2026/10/06 05:14:24.671 OSPF: [N0B64-84ZHN] V (parent): Router vertex 2.2.2.2  distance 0 flags 0
+2026/10/06 05:14:24.671 OSPF: [N0B64-84ZHN] W (dest)  : Network vertex 172.23.0.2  distance 0 flags 0
+2026/10/06 05:14:24.671 OSPF: [NXXE4-PQP43] V->W distance: 10
+2026/10/06 05:14:24.671 OSPF: [ZYVWC-X5FEN] ospf_nexthop_calculation: considering link type:2 link_id:172.23.0.2 link_data:172.23.0.2
+2026/10/06 05:14:24.671 OSPF: [Q2T6B-4TNP1] ospf_spf_add_parent: Adding 2.2.2.2 as parent of 172.23.0.2
+2026/10/06 05:14:24.671 OSPF: [XV2ZE-KSNW9] Looking up Network LSA, ID: 172.20.0.2
+2026/10/06 05:14:24.671 OSPF: [S551W-V5G8F] found the LSA
+2026/10/06 05:14:24.671 OSPF: [GBQRT-FSAQE] ospf_vertex_new: Created Network vertex 172.20.0.2
+2026/10/06 05:14:24.671 OSPF: [KJPGV-JXJF5] ospf_nexthop_calculation: Start
+2026/10/06 05:14:24.671 OSPF: [N0B64-84ZHN] V (parent): Router vertex 2.2.2.2  distance 0 flags 0
+2026/10/06 05:14:24.671 OSPF: [N0B64-84ZHN] W (dest)  : Network vertex 172.20.0.2  distance 0 flags 0
+2026/10/06 05:14:24.671 OSPF: [NXXE4-PQP43] V->W distance: 10
+2026/10/06 05:14:24.671 OSPF: [ZYVWC-X5FEN] ospf_nexthop_calculation: considering link type:2 link_id:172.20.0.2 link_data:172.20.0.3
+2026/10/06 05:14:24.671 OSPF: [Q2T6B-4TNP1] ospf_spf_add_parent: Adding 2.2.2.2 as parent of 172.20.0.2
+2026/10/06 05:14:24.671 OSPF: [HGJH4-ZNTR6] ospf_spf_next: Next vertex of Network vertex 172.20.0.2
+2026/10/06 05:14:24.671 OSPF: [VE2RF-67E8G] found Router LSA 3.3.3.3
+2026/10/06 05:14:24.671 OSPF: [GBQRT-FSAQE] ospf_vertex_new: Created Router vertex 3.3.3.3
+2026/10/06 05:14:24.671 OSPF: [KJPGV-JXJF5] ospf_nexthop_calculation: Start
+2026/10/06 05:14:24.671 OSPF: [N0B64-84ZHN] V (parent): Network vertex 172.20.0.2  distance 10 flags 0
+2026/10/06 05:14:24.671 OSPF: [NVPG7-N50C8] parent 2.2.2.2 backlink 1 nexthop 0.0.0.0 lsa pos 1
+2026/10/06 05:14:24.671 OSPF: [N0B64-84ZHN] W (dest)  : Router vertex 3.3.3.3  distance 0 flags 0
+2026/10/06 05:14:24.671 OSPF: [NXXE4-PQP43] V->W distance: 10
+2026/10/06 05:14:24.671 OSPF: [Q2T6B-4TNP1] ospf_spf_add_parent: Adding 172.20.0.2 as parent of 3.3.3.3
+2026/10/06 05:14:24.671 OSPF: [VE2RF-67E8G] found Router LSA 2.2.2.2
+2026/10/06 05:14:24.671 OSPF: [P4ZB3-JNNHZ] The LSA is already in SPF
+2026/10/06 05:14:24.671 OSPF: [HGJH4-ZNTR6] ospf_spf_next: Next vertex of Network vertex 172.23.0.2
+2026/10/06 05:14:24.671 OSPF: [VE2RF-67E8G] found Router LSA 2.2.2.2
+2026/10/06 05:14:24.671 OSPF: [P4ZB3-JNNHZ] The LSA is already in SPF
+2026/10/06 05:14:24.671 OSPF: [VE2RF-67E8G] found Router LSA 1.1.1.1
+2026/10/06 05:14:24.671 OSPF: [GBQRT-FSAQE] ospf_vertex_new: Created Router vertex 1.1.1.1
+2026/10/06 05:14:24.671 OSPF: [KJPGV-JXJF5] ospf_nexthop_calculation: Start
+2026/10/06 05:14:24.671 OSPF: [N0B64-84ZHN] V (parent): Network vertex 172.23.0.2  distance 10 flags 0
+2026/10/06 05:14:24.671 OSPF: [NVPG7-N50C8] parent 2.2.2.2 backlink 0 nexthop 0.0.0.0 lsa pos 0
+2026/10/06 05:14:24.671 OSPF: [N0B64-84ZHN] W (dest)  : Router vertex 1.1.1.1  distance 0 flags 0
+2026/10/06 05:14:24.671 OSPF: [NXXE4-PQP43] V->W distance: 10
+2026/10/06 05:14:24.671 OSPF: [Q2T6B-4TNP1] ospf_spf_add_parent: Adding 172.23.0.2 as parent of 1.1.1.1
+2026/10/06 05:14:24.671 OSPF: [RMYP3-T3NWD] ospf_intra_add_router: Start
+2026/10/06 05:14:24.671 OSPF: [KDTKZ-EVJMW] ospf_intra_add_router: LS ID: 1.1.1.1
+2026/10/06 05:14:24.671 OSPF: [KPCNN-DPESJ] ospf_intra_add_router: this router is neither ASBR nor ABR, skipping it
+2026/10/06 05:14:24.671 OSPF: [HGJH4-ZNTR6] ospf_spf_next: Next vertex of Router vertex 1.1.1.1
+2026/10/06 05:14:24.671 OSPF: [XV2ZE-KSNW9] Looking up Network LSA, ID: 172.22.0.3
+2026/10/06 05:14:24.671 OSPF: [S551W-V5G8F] found the LSA
+2026/10/06 05:14:24.671 OSPF: [GBQRT-FSAQE] ospf_vertex_new: Created Network vertex 172.22.0.3
+2026/10/06 05:14:24.671 OSPF: [KJPGV-JXJF5] ospf_nexthop_calculation: Start
+2026/10/06 05:14:24.671 OSPF: [N0B64-84ZHN] V (parent): Router vertex 1.1.1.1  distance 10 flags 0
+2026/10/06 05:14:24.671 OSPF: [NVPG7-N50C8] parent 172.23.0.2 backlink 1 nexthop 172.23.0.3 lsa pos 0
+2026/10/06 05:14:24.671 OSPF: [N0B64-84ZHN] W (dest)  : Network vertex 172.22.0.3  distance 0 flags 0
+2026/10/06 05:14:24.671 OSPF: [NXXE4-PQP43] V->W distance: 20
+2026/10/06 05:14:24.671 OSPF: [T1KGD-7A4V9] ospf_nexthop_calculation: Intervening routers, adding parent(s)
+2026/10/06 05:14:24.671 OSPF: [Q2T6B-4TNP1] ospf_spf_add_parent: Adding 1.1.1.1 as parent of 172.22.0.3
+2026/10/06 05:14:24.671 OSPF: [XV2ZE-KSNW9] Looking up Network LSA, ID: 172.23.0.2
+2026/10/06 05:14:24.671 OSPF: [S551W-V5G8F] found the LSA
+2026/10/06 05:14:24.671 OSPF: [P4ZB3-JNNHZ] The LSA is already in SPF
+2026/10/06 05:14:24.671 OSPF: [RMYP3-T3NWD] ospf_intra_add_router: Start
+2026/10/06 05:14:24.671 OSPF: [KDTKZ-EVJMW] ospf_intra_add_router: LS ID: 3.3.3.3
+2026/10/06 05:14:24.671 OSPF: [KPCNN-DPESJ] ospf_intra_add_router: this router is neither ASBR nor ABR, skipping it
+2026/10/06 05:14:24.671 OSPF: [HGJH4-ZNTR6] ospf_spf_next: Next vertex of Router vertex 3.3.3.3
+2026/10/06 05:14:24.671 OSPF: [XV2ZE-KSNW9] Looking up Network LSA, ID: 172.20.0.2
+2026/10/06 05:14:24.671 OSPF: [S551W-V5G8F] found the LSA
+2026/10/06 05:14:24.671 OSPF: [P4ZB3-JNNHZ] The LSA is already in SPF
+2026/10/06 05:14:24.671 OSPF: [XV2ZE-KSNW9] Looking up Network LSA, ID: 172.22.0.3
+2026/10/06 05:14:24.671 OSPF: [S551W-V5G8F] found the LSA
+2026/10/06 05:14:24.671 OSPF: [KJPGV-JXJF5] ospf_nexthop_calculation: Start
+2026/10/06 05:14:24.671 OSPF: [N0B64-84ZHN] V (parent): Router vertex 3.3.3.3  distance 10 flags 0
+2026/10/06 05:14:24.671 OSPF: [NVPG7-N50C8] parent 172.20.0.2 backlink 0 nexthop 172.20.0.2 lsa pos 1
+2026/10/06 05:14:24.671 OSPF: [N0B64-84ZHN] W (dest)  : Network vertex 172.22.0.3  distance 20 flags 0
+2026/10/06 05:14:24.671 OSPF: [NVPG7-N50C8] parent 1.1.1.1 backlink 0 nexthop 172.23.0.3 lsa pos 0
+2026/10/06 05:14:24.671 OSPF: [NXXE4-PQP43] V->W distance: 20
+2026/10/06 05:14:24.671 OSPF: [T1KGD-7A4V9] ospf_nexthop_calculation: Intervening routers, adding parent(s)
+2026/10/06 05:14:24.671 OSPF: [Q2T6B-4TNP1] ospf_spf_add_parent: Adding 3.3.3.3 as parent of 172.22.0.3
+2026/10/06 05:14:24.671 OSPF: [HGJH4-ZNTR6] ospf_spf_next: Next vertex of Network vertex 172.22.0.3
+2026/10/06 05:14:24.671 OSPF: [VE2RF-67E8G] found Router LSA 1.1.1.1
+2026/10/06 05:14:24.671 OSPF: [P4ZB3-JNNHZ] The LSA is already in SPF
+2026/10/06 05:14:24.671 OSPF: [VE2RF-67E8G] found Router LSA 3.3.3.3
+2026/10/06 05:14:24.671 OSPF: [P4ZB3-JNNHZ] The LSA is already in SPF
+2026/10/06 05:14:24.671 OSPF: [SK0YS-JEEHQ] SPF Result: 0 [R] 2.2.2.2
+2026/10/06 05:14:24.671 OSPF: [PC8JR-2QBKA] SPF Result: 1 [N] 172.20.0.2/16
+2026/10/06 05:14:24.671 OSPF: [G5AK8-66BHD]  nexthop 0x7598715cf230 0.0.0.0 1
+2026/10/06 05:14:24.671 OSPF: [SK0YS-JEEHQ] SPF Result: 2 [R] 3.3.3.3
+2026/10/06 05:14:24.671 OSPF: [G5AK8-66BHD]  nexthop 0x7598715cf260 172.20.0.2 1
+2026/10/06 05:14:24.671 OSPF: [PC8JR-2QBKA] SPF Result: 3 [N] 172.22.0.3/16
+2026/10/06 05:14:24.671 OSPF: [G5AK8-66BHD]  nexthop 0x7598715cf2d0 172.20.0.2 1
+2026/10/06 05:14:24.671 OSPF: [G5AK8-66BHD]  nexthop 0x7598715cf2b0 172.23.0.3 0
+2026/10/06 05:14:24.671 OSPF: [PC8JR-2QBKA] SPF Result: 1 [N] 172.23.0.2/16
+2026/10/06 05:14:24.671 OSPF: [G5AK8-66BHD]  nexthop 0x7598715cf210 0.0.0.0 0
+2026/10/06 05:14:24.671 OSPF: [SK0YS-JEEHQ] SPF Result: 2 [R] 1.1.1.1
+2026/10/06 05:14:24.671 OSPF: [G5AK8-66BHD]  nexthop 0x7598715cf280 172.23.0.3 0
+2026/10/06 05:14:24.671 OSPF: [PC8JR-2QBKA] SPF Result: 3 [N] 172.22.0.3/16
+2026/10/06 05:14:24.671 OSPF: [G5AK8-66BHD]  nexthop 0x7598715cf2d0 172.20.0.2 1
+2026/10/06 05:14:24.671 OSPF: [G5AK8-66BHD]  nexthop 0x7598715cf2b0 172.23.0.3 0
+2026/10/06 05:14:24.671 OSPF: [WS1E3-63QTY] ========== OSPF routing table ==========
+2026/10/06 05:14:24.671 OSPF: [PKAC5-9QWWG] N 172.20.0.0/16      0.0.0.0         intra-area 10
+2026/10/06 05:14:24.671 OSPF: [RT8AF-HXCSD]   -> 0.0.0.0
+2026/10/06 05:14:24.671 OSPF: [PKAC5-9QWWG] N 172.22.0.0/16      0.0.0.0         intra-area 20
+2026/10/06 05:14:24.671 OSPF: [RT8AF-HXCSD]   -> 172.20.0.2
+2026/10/06 05:14:24.671 OSPF: [RT8AF-HXCSD]   -> 172.23.0.3
+2026/10/06 05:14:24.671 OSPF: [PKAC5-9QWWG] N 172.23.0.0/16      0.0.0.0         intra-area 10
+2026/10/06 05:14:24.671 OSPF: [RT8AF-HXCSD]   -> 0.0.0.0
+2026/10/06 05:14:24.671 OSPF: [X9F7Y-T5KZ8] ========================================
+2026/10/06 05:14:24.671 OSPF: [XQ13G-RT96P] ospf_spf_process_stubs: processing stubs for area 0.0.0.0
+2026/10/06 05:14:24.671 OSPF: [YD6EH-5241W] ospf_spf_process_stubs: processing router LSA, id: 2.2.2.2
+2026/10/06 05:14:24.671 OSPF: [WSZ0V-4F6P1] ospf_spf_process_stubs: we have 2 links to process
+2026/10/06 05:14:24.671 OSPF: [N0B64-84ZHN] ospf_process_stubs(): after examining links:  Router vertex 2.2.2.2  distance 0 flags 0
+2026/10/06 05:14:24.671 OSPF: [N0B64-84ZHN]  child: Network vertex 172.20.0.2  distance 10 flags 0
+2026/10/06 05:14:24.671 OSPF: [N0B64-84ZHN]  child: Network vertex 172.23.0.2  distance 10 flags 0
+2026/10/06 05:14:24.671 OSPF: [XQ13G-RT96P] ospf_spf_process_stubs: processing stubs for area 0.0.0.0
+2026/10/06 05:14:24.671 OSPF: [N0B64-84ZHN] ospf_process_stubs(): after examining links:  Network vertex 172.20.0.2  distance 10 flags 0
+2026/10/06 05:14:24.671 OSPF: [NVPG7-N50C8] parent 2.2.2.2 backlink 1 nexthop 0.0.0.0 lsa pos 1
+2026/10/06 05:14:24.671 OSPF: [N0B64-84ZHN]  child: Router vertex 3.3.3.3  distance 10 flags 0
+2026/10/06 05:14:24.671 OSPF: [XQ13G-RT96P] ospf_spf_process_stubs: processing stubs for area 0.0.0.0
+2026/10/06 05:14:24.671 OSPF: [YD6EH-5241W] ospf_spf_process_stubs: processing router LSA, id: 3.3.3.3
+2026/10/06 05:14:24.671 OSPF: [WSZ0V-4F6P1] ospf_spf_process_stubs: we have 2 links to process
+2026/10/06 05:14:24.671 OSPF: [N0B64-84ZHN] ospf_process_stubs(): after examining links:  Router vertex 3.3.3.3  distance 10 flags 0
+2026/10/06 05:14:24.671 OSPF: [NVPG7-N50C8] parent 172.20.0.2 backlink 0 nexthop 172.20.0.2 lsa pos 1
+2026/10/06 05:14:24.671 OSPF: [N0B64-84ZHN]  child: Network vertex 172.22.0.3  distance 20 flags 0
+2026/10/06 05:14:24.671 OSPF: [XQ13G-RT96P] ospf_spf_process_stubs: processing stubs for area 0.0.0.0
+2026/10/06 05:14:24.671 OSPF: [N0B64-84ZHN] ospf_process_stubs(): after examining links:  Network vertex 172.22.0.3  distance 20 flags 0
+2026/10/06 05:14:24.671 OSPF: [NVPG7-N50C8] parent 3.3.3.3 backlink 1 nexthop 172.20.0.2 lsa pos 1
+2026/10/06 05:14:24.671 OSPF: [NVPG7-N50C8] parent 1.1.1.1 backlink 0 nexthop 172.23.0.3 lsa pos 0
+2026/10/06 05:14:24.671 OSPF: [XQ13G-RT96P] ospf_spf_process_stubs: processing stubs for area 0.0.0.0
+2026/10/06 05:14:24.671 OSPF: [N0B64-84ZHN] ospf_process_stubs(): after examining links:  Network vertex 172.23.0.2  distance 10 flags 0
+2026/10/06 05:14:24.671 OSPF: [NVPG7-N50C8] parent 2.2.2.2 backlink 0 nexthop 0.0.0.0 lsa pos 0
+2026/10/06 05:14:24.671 OSPF: [N0B64-84ZHN]  child: Router vertex 1.1.1.1  distance 10 flags 0
+2026/10/06 05:14:24.671 OSPF: [XQ13G-RT96P] ospf_spf_process_stubs: processing stubs for area 0.0.0.0
+2026/10/06 05:14:24.671 OSPF: [YD6EH-5241W] ospf_spf_process_stubs: processing router LSA, id: 1.1.1.1
+2026/10/06 05:14:24.671 OSPF: [WSZ0V-4F6P1] ospf_spf_process_stubs: we have 2 links to process
+2026/10/06 05:14:24.671 OSPF: [N0B64-84ZHN] ospf_process_stubs(): after examining links:  Router vertex 1.1.1.1  distance 10 flags 0
+2026/10/06 05:14:24.671 OSPF: [NVPG7-N50C8] parent 172.23.0.2 backlink 1 nexthop 172.23.0.3 lsa pos 0
+2026/10/06 05:14:24.671 OSPF: [N0B64-84ZHN]  child: Network vertex 172.22.0.3  distance 20 flags 1
+2026/10/06 05:14:24.671 OSPF: [N0B64-84ZHN] ospf_spf_calculate Router vertex 2.2.2.2  distance 0 flags 0
+2026/10/06 05:14:24.671 OSPF: [N0B64-84ZHN]  child: Network vertex 172.20.0.2  distance 10 flags 1
+2026/10/06 05:14:24.671 OSPF: [N0B64-84ZHN]  child: Network vertex 172.23.0.2  distance 10 flags 1
+2026/10/06 05:14:24.671 OSPF: [MM90D-TJ7JR] ospf_spf_calculate: Stop. 6 vertices
+2026/10/06 05:14:24.671 OSPF: [SQ30N-DRDS1] ospf_vertex_free: Free Router vertex 2.2.2.2
+2026/10/06 05:14:24.671 OSPF: [SQ30N-DRDS1] ospf_vertex_free: Free Network vertex 172.23.0.2
+2026/10/06 05:14:24.671 OSPF: [SQ30N-DRDS1] ospf_vertex_free: Free Network vertex 172.20.0.2
+2026/10/06 05:14:24.671 OSPF: [SQ30N-DRDS1] ospf_vertex_free: Free Router vertex 3.3.3.3
+2026/10/06 05:14:24.671 OSPF: [SQ30N-DRDS1] ospf_vertex_free: Free Router vertex 1.1.1.1
+2026/10/06 05:14:24.671 OSPF: [SQ30N-DRDS1] ospf_vertex_free: Free Network vertex 172.22.0.3
+2026/10/06 05:14:24.671 OSPF: [JAPQ7-AWTY4] ospf_ia_routing:start
+2026/10/06 05:14:24.671 OSPF: [WYB8H-5T9YS] ospf_ia_routing:not ABR, considering all areas
+2026/10/06 05:14:24.671 OSPF: [JC7WM-A8RFR] Pruning unreachable networks
+2026/10/06 05:14:24.671 OSPF: [Q5QBP-7T7ZK] Pruning unreachable routers
+2026/10/06 05:14:24.671 OSPF: [QT6FN-QCD74] ospf_spf_calculate_schedule_worker: ospf install new route, vrf default id 0 new_table count 5
+2026/10/06 05:14:24.671 OSPF: [V4QH8-NMP5P] Route: Router Routing Table free
+2026/10/06 05:14:24.671 OSPF: [HRX11-4AW3M] SPF Processing Time(usecs): 330
+2026/10/06 05:14:24.671 OSPF: [PTGD1-YB1H9]             SPF Time: 303
+2026/10/06 05:14:24.671 OSPF: [J4YGV-BR16C]            InterArea: 1
+2026/10/06 05:14:24.671 OSPF: [HK5RG-M3KT0]                Prune: 1
+2026/10/06 05:14:24.671 OSPF: [ZQD66-8SF2N]         RouteInstall: 23
+2026/10/06 05:14:24.671 OSPF: [GWR1S-5R9KH] Reason(s) for SPF: R
+2026/10/06 05:14:24.671 OSPF: [K41K4-M4HP2] ospf_write to 224.0.0.5, id 32985, off 0, len 96, interface eth1, mtu 1500:
+2026/10/06 05:14:24.671 OSPF: [K41K4-M4HP2] ospf_write to 172.23.0.3, id 32986, off 0, len 64, interface eth0, mtu 1500:
+2026/10/06 05:14:24.793 OSPF: [K41K4-M4HP2] ospf_write to 224.0.0.5, id 32987, off 0, len 64, interface eth0, mtu 1500:
+2026/10/06 05:14:24.821 OSPF: [QPT3G-B8GVC] RXmtL(1)--, NBR(3.3.3.3(default)), LSA[Type1,id(1.1.1.1),ar(1.1.1.1)]
+2026/10/06 05:14:24.821 OSPF: [TVDQM-4KENF] Do not generate LSA with initial seqence number.
+2026/10/06 05:14:24.821 OSPF: [XM6NG-0FZTQ] LSA: freed 0x7598715ce880
+2026/10/06 05:14:25.672 OSPF: [RHDX2-GZB1C] SPF Processing Time(usecs): External Routes: 3
+2026/10/06 05:14:29.667 OSPF: [SSJDW-NANMS] Packet 3.3.3.3 [Hello:RECV]: Options on eth1:172.20.0.3 *|-|-|-|-|-|E|- vrf default
+2026/10/06 05:14:29.667 OSPF: [JM0T4-6WPRP] ospf_make_hello: options: 2, int: eth0:172.23.0.2
+2026/10/06 05:14:29.667 OSPF: [K41K4-M4HP2] ospf_write to 224.0.0.5, id 32988, off 0, len 68, interface eth0, mtu 1500:
+2026/10/06 05:14:29.667 OSPF: [JM0T4-6WPRP] ospf_make_hello: options: 2, int: eth1:172.20.0.3
+2026/10/06 05:14:29.667 OSPF: [K41K4-M4HP2] ospf_write to 224.0.0.5, id 32989, off 0, len 68, interface eth1, mtu 1500:
+2026/10/06 05:14:34.199 OSPF: [SSJDW-NANMS] Packet 1.1.1.1 [Hello:RECV]: Options on eth0:172.23.0.2 *|-|-|-|-|-|E|- vrf default
+2026/10/06 05:14:39.668 OSPF: [JM0T4-6WPRP] ospf_make_hello: options: 2, int: eth0:172.23.0.2
+2026/10/06 05:14:39.668 OSPF: [JM0T4-6WPRP] ospf_make_hello: options: 2, int: eth1:172.20.0.3
+2026/10/06 05:14:39.669 OSPF: [K41K4-M4HP2] ospf_write to 224.0.0.5, id 32990, off 0, len 68, interface eth0, mtu 1500:
+2026/10/06 05:14:39.669 OSPF: [K41K4-M4HP2] ospf_write to 224.0.0.5, id 32991, off 0, len 68, interface eth1, mtu 1500:
+2026/10/06 05:14:39.672 OSPF: [SSJDW-NANMS] Packet 3.3.3.3 [Hello:RECV]: Options on eth1:172.20.0.3 *|-|-|-|-|-|E|- vrf default
+2026/10/06 05:14:44.201 OSPF: [SSJDW-NANMS] Packet 1.1.1.1 [Hello:RECV]: Options on eth0:172.23.0.2 *|-|-|-|-|-|E|- vrf default
+2026/10/06 05:14:49.668 OSPF: [JM0T4-6WPRP] ospf_make_hello: options: 2, int: eth0:172.23.0.2
+2026/10/06 05:14:49.668 OSPF: [JM0T4-6WPRP] ospf_make_hello: options: 2, int: eth1:172.20.0.3
+2026/10/06 05:14:49.668 OSPF: [SSJDW-NANMS] Packet 3.3.3.3 [Hello:RECV]: Options on eth1:172.20.0.3 *|-|-|-|-|-|E|- vrf default
+2026/10/06 05:14:49.668 OSPF: [K41K4-M4HP2] ospf_write to 224.0.0.5, id 32992, off 0, len 68, interface eth0, mtu 1500:
+2026/10/06 05:14:49.668 OSPF: [K41K4-M4HP2] ospf_write to 224.0.0.5, id 32993, off 0, len 68, interface eth1, mtu 1500:
+2026/10/06 05:14:54.200 OSPF: [SSJDW-NANMS] Packet 1.1.1.1 [Hello:RECV]: Options on eth0:172.23.0.2 *|-|-|-|-|-|E|- vrf default
+2026/10/06 05:14:59.665 OSPF: [SSJDW-NANMS] Packet 3.3.3.3 [Hello:RECV]: Options on eth1:172.20.0.3 *|-|-|-|-|-|E|- vrf default
+2026/10/06 05:14:59.665 OSPF: [JM0T4-6WPRP] ospf_make_hello: options: 2, int: eth0:172.23.0.2
+2026/10/06 05:14:59.665 OSPF: [K41K4-M4HP2] ospf_write to 224.0.0.5, id 32994, off 0, len 68, interface eth0, mtu 1500:
+2026/10/06 05:14:59.665 OSPF: [JM0T4-6WPRP] ospf_make_hello: options: 2, int: eth1:172.20.0.3
+2026/10/06 05:14:59.665 OSPF: [K41K4-M4HP2] ospf_write to 224.0.0.5, id 32995, off 0, len 68, interface eth1, mtu 1500:
+2026/10/06 05:15:04.196 OSPF: [SSJDW-NANMS] Packet 1.1.1.1 [Hello:RECV]: Options on eth0:172.23.0.2 *|-|-|-|-|-|E|- vrf default

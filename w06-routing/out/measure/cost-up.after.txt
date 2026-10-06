@@ -1,0 +1,13 @@
+===== r1
+O>* 172.20.0.0/16 [110/20] via 172.23.0.2, eth1, weight 1
+O   172.22.0.0/16 [110/30] via 172.23.0.2, eth1, weight 1
+O   172.23.0.0/16 [110/10] is directly connected, eth1, weight 1
+===== r2
+O   172.20.0.0/16 [110/10] is directly connected, eth1, weight 1
+O>* 172.22.0.0/16 [110/20] via 172.20.0.2, eth1, weight 1
+O   172.23.0.0/16 [110/10] is directly connected, eth0, weight 1
+===== r3
+O   172.20.0.0/16 [110/10] is directly connected, eth0, weight 1
+O   172.22.0.0/16 [110/10] is directly connected, eth1, weight 1
+O>* 172.23.0.0/16 [110/20] via 172.20.0.3, eth0, weight 1
+  *                        via 172.22.0.2, eth1, weight 1

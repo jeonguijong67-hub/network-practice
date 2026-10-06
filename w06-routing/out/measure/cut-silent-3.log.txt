@@ -1,0 +1,7 @@
+r1 [2026-10-06T05:09:53.997315] blackhole 192.0.2.61 
+r1 [2026-10-06T05:10:28.622623] 172.20.0.0/16 nhid 19 via 172.22.0.3 dev eth0 proto ospf metric 20 
+r2 [2026-10-06T05:10:28.622377] 172.22.0.0/16 nhid 12 via 172.20.0.2 dev eth1 proto ospf metric 20 
+r3 [2026-10-06T05:10:28.622530] 172.23.0.0/16 nhid 17 via 172.20.0.3 dev eth0 proto ospf metric 20 
+r3 [2026-10-06T05:10:29.683400] 172.23.0.0/16 nhid 16 proto ospf metric 20 
+r3 	nexthop via 172.22.0.2 dev eth1 weight 1 
+r3 	nexthop via 172.20.0.3 dev eth0 weight 1 

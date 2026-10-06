@@ -1,0 +1,63 @@
+# B3 - all three tables after the cut (r1: ip link set eth1 down, net_b r1-r2), taken 45 s after it so r2's dead timer for r1 has also run out. The FIB had already been right since +0.012 s - see reconverge.txt
+# captured 2026-10-06 14:16:38 KST · FRR 9.1 (quay.io/frrouting/frr:9.1.0) · docker compose --profile routing
+# net_a 172.22.0.0/16 = r1-r3 · net_b 172.23.0.0/16 = r1-r2 · net_c 172.20.0.0/16 = r2-r3 · every link cost 10
+
+===================== r1
+$ show ip ospf neighbor
+Neighbor ID     Pri State           Up Time         Dead Time Address         Interface                        RXmtL RqstL DBsmL
+3.3.3.3           1 Full/DR         19m59s            30.773s 172.22.0.3      eth0:172.22.0.2                      0     0     0
+
+$ show ip route
+Codes: K - kernel route, C - connected, S - static, R - RIP,
+       O - OSPF, I - IS-IS, B - BGP, E - EIGRP, N - NHRP,
+       T - Table, v - VNC, V - VNC-Direct, A - Babel, F - PBR,
+       f - OpenFabric,
+       > - selected route, * - FIB route, q - queued, r - rejected, b - backup
+       t - trapped, o - offload failure
+
+K>* 0.0.0.0/0 [0/0] via 172.22.0.1, eth0, 00:20:40
+O>* 172.20.0.0/16 [110/20] via 172.22.0.3, eth0, weight 1, 00:00:46
+O   172.22.0.0/16 [110/10] is directly connected, eth0, weight 1, 00:10:57
+C>* 172.22.0.0/16 is directly connected, eth0, 00:20:40
+O>* 172.23.0.0/16 [110/30] via 172.22.0.3, eth0, weight 1, 00:00:46
+
+===================== r2
+$ show ip ospf neighbor
+Neighbor ID     Pri State           Up Time         Dead Time Address         Interface                        RXmtL RqstL DBsmL
+3.3.3.3           1 Full/DR         19m59s            30.236s 172.20.0.2      eth1:172.20.0.3                      0     0     0
+
+$ show ip route
+Codes: K - kernel route, C - connected, S - static, R - RIP,
+       O - OSPF, I - IS-IS, B - BGP, E - EIGRP, N - NHRP,
+       T - Table, v - VNC, V - VNC-Direct, A - Babel, F - PBR,
+       f - OpenFabric,
+       > - selected route, * - FIB route, q - queued, r - rejected, b - backup
+       t - trapped, o - offload failure
+
+K>* 0.0.0.0/0 [0/0] via 172.23.0.1, eth0, 00:20:40
+O   172.20.0.0/16 [110/10] is directly connected, eth1, weight 1, 00:20:40
+C>* 172.20.0.0/16 is directly connected, eth1, 00:20:40
+O>* 172.22.0.0/16 [110/20] via 172.20.0.2, eth1, weight 1, 00:00:46
+O   172.23.0.0/16 [110/10] is directly connected, eth0, weight 1, 00:20:40
+C>* 172.23.0.0/16 is directly connected, eth0, 00:20:40
+
+===================== r3
+$ show ip ospf neighbor
+Neighbor ID     Pri State           Up Time         Dead Time Address         Interface                        RXmtL RqstL DBsmL
+2.2.2.2           1 Full/Backup     20m00s            39.717s 172.20.0.3      eth0:172.20.0.2                      0     0     0
+1.1.1.1           1 Full/Backup     19m55s            39.718s 172.22.0.2      eth1:172.22.0.3                      0     0     0
+
+$ show ip route
+Codes: K - kernel route, C - connected, S - static, R - RIP,
+       O - OSPF, I - IS-IS, B - BGP, E - EIGRP, N - NHRP,
+       T - Table, v - VNC, V - VNC-Direct, A - Babel, F - PBR,
+       f - OpenFabric,
+       > - selected route, * - FIB route, q - queued, r - rejected, b - backup
+       t - trapped, o - offload failure
+
+K>* 0.0.0.0/0 [0/0] via 172.22.0.1, eth1, 00:20:41
+O   172.20.0.0/16 [110/10] is directly connected, eth0, weight 1, 00:20:41
+C>* 172.20.0.0/16 is directly connected, eth0, 00:20:41
+O   172.22.0.0/16 [110/10] is directly connected, eth1, weight 1, 00:20:41
+C>* 172.22.0.0/16 is directly connected, eth1, 00:20:41
+O>* 172.23.0.0/16 [110/20] via 172.20.0.3, eth0, weight 1, 00:00:47

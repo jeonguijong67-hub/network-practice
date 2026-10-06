@@ -1,6 +1,6 @@
-# 실습 노트 (3주차 · 4주차 · 5주차)
+# 실습 노트 (3주차 · 4주차 · 5주차 · 6주차)
 
-세 주차 모두 제출 가능한 상태입니다. 남은 작업 없음.
+네 주차 모두 제출 가능한 상태입니다. 6주차 Part A는 아래 "6주차" 항목의 한계가 있습니다.
 
 ## 상태
 
@@ -9,14 +9,16 @@
 | w03 DNS | resolver 5/5 | 캡처 6패킷 · steering report | upstream 275 · stale 0 → good |
 | w04 TCP | 10개 seed 전부 IDENTICAL | 2개 라벨 × 5회 · handshake 캡처 | goodput 98.7% · 큐 0.7 → **strong** |
 | w05 IP/NAT | 10/10 | 2개 라벨(캠퍼스 유선 · KT Wi-Fi) · DORA 캡처 | 오답 0 · 약 3000배 → **strong** |
+| w06 Routing | verify all ok | traceroute 5개 목적지 · OSPF 3대 장애·복구 각 3회, 비용 변경 왕복 | 오답 0 · SPF 79% 회피 → **strong** |
 
-`test_tasks.py`: w04 · w05는 8 pass / 0 fail. w03은 아래 "알려진 환경 차이" 항목 하나만 FAIL로 뜹니다.
+`test_tasks.py`: w04 · w05는 8 pass / 0 fail, w06은 9 pass / 0 fail / 1 skip(R5는 사람 채점). w03은 아래 "알려진 환경 차이" 항목 하나만 FAIL로 뜹니다.
 
 ## 제출 URL (주차별)
 
 - 3주차 <https://github.com/jeonguijong67-hub/network-practice/tree/main/w03-dns>
 - 4주차 <https://github.com/jeonguijong67-hub/network-practice/tree/main/w04-tcp>
 - 5주차 <https://github.com/jeonguijong67-hub/network-practice/tree/main/w05-ip-nat>
+- 6주차 <https://github.com/jeonguijong67-hub/network-practice/tree/main/w06-routing>
 
 ## 알려진 환경 차이
 
@@ -80,3 +82,29 @@ path (B)를 썼습니다. 폰 테더링이 가능해지면 두 주차 모두 한
 **w04** — 평일(화 13:18)과 주말(토 16:38) 두 시점. 추가하려면:
 `python task2_measure.py --label "tethering"`.
 
+## 6주차
+
+**FRR 이미지.** `compose.yml`이 지정한 `frrouting/frr:v9.1.0`은 Docker Hub에 없습니다
+(FRR 공식 이미지는 quay.io에 있음). 강의 파일은 그대로 두고 로컬에서 이름만 맞췄습니다.
+
+```bash
+docker pull quay.io/frrouting/frr:9.1.0
+docker tag quay.io/frrouting/frr:9.1.0 frrouting/frr:v9.1.0
+```
+
+**줄바꿈.** Windows(`core.autocrlf=true`)에서 체크아웃하면 `topology/r*/daemons`가 CRLF가
+되어 `-A 127.0.0.1`로 읽히고 ospfd가 `getaddrinfo failed`로 뜨지 않습니다.
+`.gitattributes`로 `*.sh`와 `w06-routing/topology/**`를 LF로 고정했습니다. 이미 받아 둔
+작업본은 `git rm --cached -r w06-routing/topology && git checkout -- w06-routing/topology`
+또는 `sed -i 's/$//'`로 한 번 바꿔야 합니다.
+
+**재수렴 측정.** `scenario.sh cut`의 "N 초"는 정수 초 · 1초 폴링 · uptime 열 비교라서
+측정이 아닙니다. `w06-routing/measure.sh`가 세 라우터의 `ip -ts monitor route`로 커널 FIB
+변경 시각을 µs 단위로 받습니다. 원자료는 `w06-routing/out/measure/`.
+
+**Part A 한계.** 데스크톱의 캠퍼스 유선은 경계(4홉 `163.152.205.254`) 너머 ICMP를 걸러서
+tracert가 5홉부터 거의 비고, 해저 구간 홉의 이름(A3의 케이블)을 볼 수 없습니다. 홉 수는
+`w06-routing/ttl_probe.py`(TCP 443 TTL 스윕)로 보완했습니다. 노트북에서 KUWIFI로 잰
+traceroute(서울→홍콩→도쿄→시애틀→팰로앨토가 보였던 것)는 노트북에서 push되지 않아
+여기 없습니다. 노트북의 `out/traceroute.txt`를 `traceroute-kuwifi.txt`로 추가하면 A2·A3를
+호스트 이름으로 답할 수 있습니다.

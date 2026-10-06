@@ -1,0 +1,4 @@
+# FRR reads these inside Linux containers; a CRLF checkout leaves "\r" on the
+# end of daemons options ("-A 127.0.0.1\r") and ospfd fails to start.
+*.sh                     text eol=lf
+w06-routing/topology/**  text eol=lf
