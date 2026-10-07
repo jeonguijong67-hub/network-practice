@@ -93,18 +93,20 @@ docker tag quay.io/frrouting/frr:9.1.0 frrouting/frr:v9.1.0
 ```
 
 **줄바꿈.** Windows(`core.autocrlf=true`)에서 체크아웃하면 `topology/r*/daemons`가 CRLF가
-되어 `-A 127.0.0.1`로 읽히고 ospfd가 `getaddrinfo failed`로 뜨지 않습니다.
+되어 `-A 127.0.0.1
+`로 읽히고 ospfd가 `getaddrinfo failed`로 뜨지 않습니다.
 `.gitattributes`로 `*.sh`와 `w06-routing/topology/**`를 LF로 고정했습니다. 이미 받아 둔
 작업본은 `git rm --cached -r w06-routing/topology && git checkout -- w06-routing/topology`
-또는 `sed -i 's/$//'`로 한 번 바꿔야 합니다.
+또는 `sed -i 's/
+$//'`로 한 번 바꿔야 합니다.
 
 **재수렴 측정.** `scenario.sh cut`의 "N 초"는 정수 초 · 1초 폴링 · uptime 열 비교라서
 측정이 아닙니다. `w06-routing/measure.sh`가 세 라우터의 `ip -ts monitor route`로 커널 FIB
 변경 시각을 µs 단위로 받습니다. 원자료는 `w06-routing/out/measure/`.
 
-**Part A 한계.** 데스크톱의 캠퍼스 유선은 경계(4홉 `163.152.205.254`) 너머 ICMP를 걸러서
-tracert가 5홉부터 거의 비고, 해저 구간 홉의 이름(A3의 케이블)을 볼 수 없습니다. 홉 수는
-`w06-routing/ttl_probe.py`(TCP 443 TTL 스윕)로 보완했습니다. 노트북에서 KUWIFI로 잰
-traceroute(서울→홍콩→도쿄→시애틀→팰로앨토가 보였던 것)는 노트북에서 push되지 않아
-여기 없습니다. 노트북의 `out/traceroute.txt`를 `traceroute-kuwifi.txt`로 추가하면 A2·A3를
-호스트 이름으로 답할 수 있습니다.
+**Part A - ICMP 대신 TCP.** 데스크톱의 캠퍼스 유선에서는 tracert(ICMP echo)가 경계(4홉
+`163.152.205.254`) 뒤로 비지만, 같은 홉들이 TCP 443 SYN에는 time-exceeded로 답합니다.
+`w06-routing/tcp_traceroute.py`(Paris 방식 TCP traceroute, tshark로 ICMP 수신, 관리자 권한
+불필요)로 해저 구간까지 홉 이름을 얻었습니다: 서울 → 도쿄 IX(BBIX/JPNAP) → 시애틀 또는 LA,
+흐름에 따라 홍콩 경유. 실행에는 Wireshark(tshark)와 Npcap이 필요하고, 인터페이스 이름은
+`--iface`(기본 `이더넷`)로 지정합니다.

@@ -13,8 +13,9 @@
 #
 # The campus border drops ICMP: `ping 1.1.1.1` and `ping 163.152.6.10` get 0 replies
 # from here, and time-exceeded from the hops just past the border never comes back.
-# So the ICMP traces go dark after hop 4. The TCP TTL sweep at the bottom gives the
-# hop count to every target anyway (see its header).
+# So the ICMP traces go dark after hop 4. The TCP TTL sweep below gives the hop
+# count to every target; the Paris-style TCP traceroute at the bottom (added
+# 2026-10-07) names the hops themselves.
 
 ######## tracert www.korea.ac.kr
 최대 30홉 이상의 
@@ -244,3 +245,359 @@ Trace complete.
 #   1.1.1.1           1.1.1.1            14         3.3 ms            4.6 /   5.4 ms
 #
 # Single connects are noisy (korea.ac.kr 32.9 vs 6.6 min); read the min column.
+
+
+######################################################################################
+######## TCP traceroute, Paris-style (tcp_traceroute.py) · 2026-10-07 12:3x-12:47 KST
+######## same desktop, same campus ethernet
+######################################################################################
+# The hops that stay silent for tracert's ICMP echo probes DO answer TCP SYNs to
+# port 443. tcp_traceroute.py sends one SYN per TTL from one fixed source port per
+# round - same 5-tuple, so the same ECMP path for every TTL, as in Paris
+# traceroute - and reads the ICMP time-exceeded replies with tshark. Each reply is
+# matched to the SYN it quotes by IP ID; RTT = reply - send, both from the capture.
+# A new round is a new source port, i.e. a new flow, so rounds can follow different
+# equal-cost paths: that is ECMP, not noise.
+#
+# stanford.edu never answers the SYN within a Paris round: every TTL reuses one
+# 4-tuple, and after the first unanswered SYN its border apparently drops further
+# SYNs on that tuple. A fresh connection reaches it at TTL 20 (connect_ex = 0,
+# 150 ms), TTL 16-19 time out.
+#
+# Who owns the hops (RDAP, rdap.org) and reverse-DNS names:
+#   163.152.x                            Korea University (KUCCNET)
+#   175.121.235.141 39.120.x 211.108.22.106
+#     and 10.103.x 10.222.x (private)    SK Broadband
+#   101.203.88.74                        BBIX (JP) - Tokyo internet exchange
+#   210.173.184.70                       INTERNET MULTIFEED (JP) - JPNAP, Tokyo IX
+#   36.255.56.8                          Equinix Hong Kong IX, HE's port
+#                                        (as6939.equinix-hong-kong.core2.hkg2.he.net)
+#   *.he.net                             Hurricane Electric AS6939 - tyo1 Tokyo,
+#                                        sea1 Seattle, pdx1 Portland, lax1 Los Angeles,
+#                                        sjc2 San Jose, pao1 Palo Alto
+#   *.SUNet, 171.64.x 171.66.x           Stanford
+#   211.45.68.x 211.56.189.x             DREAMLINE (KR)
+#   141.101.82.x                         Cloudflare (registered CLOUDFLARE-EU)
+#   147.46.x 147.47.x                    Seoul National University
+#   1.1.1.1 answered from colo=ICN, loc=KR  (curl https://1.1.1.1/cdn-cgi/trace)
+
+######## run A - stanford.edu, 12:3x KST
+tcp traceroute to stanford.edu (171.67.215.200) port 443 · Paris-style, one source port per round · 3 rounds · * = no reply within 1.0 s
+
+  round 1 (source port 56800)
+    1      0.1 ms  163.152.219.1    
+    2      0.1 ms  163.152.205.45   
+    3      0.2 ms  163.152.205.212  
+    4      0.3 ms  163.152.205.254  
+    5      1.3 ms  175.121.235.141  
+    6      1.0 ms  10.103.1.142     
+    7      5.2 ms  10.222.25.130    
+    8      4.8 ms  10.222.11.175    
+    9     35.0 ms  10.222.2.21      
+   10     36.4 ms  101.203.88.74    
+   11        *
+   12    141.5 ms  184.105.213.117  be1.core1.sea1.he.net
+   13    144.2 ms  184.104.196.36   be9.core3.pdx1.he.net
+   14    138.0 ms  184.104.189.142  be7.core1.pao1.he.net
+   15    139.7 ms  184.105.177.238  stanford-university.e0-62.core2.pao1.he.net
+   16    141.7 ms  171.66.255.196   campus-ial-nets-b-vl1102.SUNet
+       (target not reached by TTL 25)
+
+  round 2 (source port 56801)
+    1      0.4 ms  163.152.219.1    
+    2      0.3 ms  163.152.205.45   
+    3      0.8 ms  163.152.205.212  
+    4      1.2 ms  163.152.205.254  
+    5      1.3 ms  175.121.235.141  
+    6      1.3 ms  10.103.0.142     
+    7      6.5 ms  10.222.25.128    
+    8      4.1 ms  10.222.11.173    
+    9     35.2 ms  10.222.1.59      
+   10     37.1 ms  101.203.88.74    
+   11        *
+   12    142.8 ms  184.105.213.117  be1.core1.sea1.he.net
+   13    139.3 ms  184.105.64.138   be5.core3.pdx1.he.net
+   14    139.5 ms  184.104.189.142  be7.core1.pao1.he.net
+   15    143.5 ms  184.105.177.238  stanford-university.e0-62.core2.pao1.he.net
+   16    136.6 ms  171.64.255.228   campus-east-rtr-vl1018.SUNet
+       (target not reached by TTL 25)
+
+  round 3 (source port 56802)
+    1      0.2 ms  163.152.219.1    
+    2      0.2 ms  163.152.205.9    
+    3      0.3 ms  163.152.205.212  
+    4      0.4 ms  163.152.205.254  
+    5      1.2 ms  175.121.235.141  
+    6      3.4 ms  10.103.0.142     
+    7      3.5 ms  10.222.25.120    
+    8      3.0 ms  10.222.10.171    
+    9        *
+   10     61.1 ms  36.255.56.8      as6939.equinix-hong-kong.core2.hkg2.he.net
+   11        *
+   12        *
+   13        *
+   14        *
+   15    164.9 ms  184.105.213.117  be1.core1.sea1.he.net
+   16    167.0 ms  184.104.196.36   be9.core3.pdx1.he.net
+   17    162.0 ms  184.104.189.142  be7.core1.pao1.he.net
+   18    162.6 ms  184.105.177.238  stanford-university.e0-62.core2.pao1.he.net
+   19    159.5 ms  171.64.255.228   campus-east-rtr-vl1018.SUNet
+       (target not reached by TTL 25)
+
+######## run B - all five targets, ended 12:47:05 KST
+tcp traceroute to www.korea.ac.kr (163.152.6.10) port 443 · Paris-style, one source port per round · 3 rounds · * = no reply within 1.0 s
+
+  round 1 (source port 56800)
+    1        *
+    2      0.2 ms  163.152.205.9    
+    3      0.5 ms  163.152.205.212  
+    4      0.3 ms  163.152.205.254  
+    5      6.6 ms  163.152.205.206  
+    6        *
+    7      5.6 ms  163.152.4.140    
+    8      8.0 ms  163.152.6.10     SYN-ACK - target reached
+
+  round 2 (source port 56801)
+    1      0.2 ms  163.152.219.1    
+    2      0.2 ms  163.152.205.9    
+    3      0.6 ms  163.152.205.212  
+    4      0.4 ms  163.152.205.254  
+    5      8.0 ms  163.152.205.206  
+    6        *
+    7      5.2 ms  163.152.4.140    
+    8      7.4 ms  163.152.6.10     SYN-ACK - target reached
+
+  round 3 (source port 56802)
+    1      0.3 ms  163.152.219.1    
+    2      0.3 ms  163.152.205.45   
+    3      0.7 ms  163.152.205.212  
+    4      0.6 ms  163.152.205.254  
+    5      7.4 ms  163.152.205.206  
+    6        *
+    7      5.2 ms  163.152.4.140    
+    8      6.9 ms  163.152.6.10     SYN-ACK - target reached
+
+tcp traceroute to www.snu.ac.kr (147.46.10.129) port 443 · Paris-style, one source port per round · 3 rounds · * = no reply within 1.0 s
+
+  round 1 (source port 56810)
+    1        *
+    2      0.1 ms  163.152.205.45   
+    3      0.2 ms  163.152.205.212  
+    4      0.4 ms  163.152.205.254  
+    5      1.6 ms  175.121.235.141  
+    6      1.1 ms  10.103.0.142     
+    7      5.4 ms  10.222.25.124    
+    8      5.1 ms  10.222.19.148    
+    9      8.6 ms  10.222.23.61     
+   10        *
+   11      5.0 ms  211.108.22.106   
+   12      7.1 ms  147.46.254.187   
+   13      7.4 ms  147.47.20.203    
+   14      7.8 ms  147.46.10.129    www.seoul.ac.kr
+   15      7.7 ms  147.46.10.129    SYN-ACK - target reached
+
+  round 2 (source port 56811)
+    1      0.3 ms  163.152.219.1    
+    2      0.2 ms  163.152.205.9    
+    3      0.3 ms  163.152.205.212  
+    4      0.4 ms  163.152.205.254  
+    5      1.0 ms  175.121.235.141  
+    6      2.1 ms  10.103.0.142     
+    7      5.2 ms  10.222.25.128    
+    8      5.0 ms  10.222.19.150    
+    9      4.9 ms  10.222.18.131    
+   10        *
+   11      5.7 ms  211.108.22.106   
+   12      8.3 ms  147.47.20.203    
+   13      6.7 ms  147.47.20.203    
+   14      8.4 ms  147.46.10.129    www.seoul.ac.kr
+   15      8.5 ms  147.46.10.129    SYN-ACK - target reached
+
+  round 3 (source port 56812)
+    1      0.5 ms  163.152.219.1    
+    2      0.3 ms  163.152.205.45   
+    3      0.5 ms  163.152.205.212  
+    4      0.5 ms  163.152.205.254  
+    5      1.3 ms  175.121.235.141  
+    6      1.3 ms  10.103.0.142     
+    7      3.7 ms  10.222.25.120    
+    8      4.4 ms  10.222.19.169    
+    9      4.2 ms  10.222.18.137    
+   10        *
+   11      5.5 ms  211.108.22.106   
+   12      6.7 ms  147.46.254.217   
+   13      6.7 ms  147.47.20.203    
+   14      6.7 ms  147.46.10.129    www.seoul.ac.kr
+   15      7.4 ms  147.46.10.129    SYN-ACK - target reached
+
+tcp traceroute to stanford.edu (171.67.215.200) port 443 · Paris-style, one source port per round · 3 rounds · * = no reply within 1.0 s
+
+  round 1 (source port 56820)
+    1      0.4 ms  163.152.219.1    
+    2      0.1 ms  163.152.205.45   
+    3      0.6 ms  163.152.205.212  
+    4      0.4 ms  163.152.205.254  
+    5      1.0 ms  175.121.235.141  
+    6      1.4 ms  10.103.1.142     
+    7      5.7 ms  10.222.25.122    
+    8      4.1 ms  10.222.10.163    
+    9        *
+   10     86.2 ms  36.255.56.8      as6939.equinix-hong-kong.core2.hkg2.he.net
+   11        *
+   12        *
+   13    190.7 ms  184.105.64.130   be2.core1.tyo1.he.net
+   14        *
+   15    191.4 ms  184.105.213.117  be1.core1.sea1.he.net
+   16    196.9 ms  184.104.196.36   be9.core3.pdx1.he.net
+   17    193.7 ms  184.104.189.142  be7.core1.pao1.he.net
+   18    188.9 ms  184.105.177.238  stanford-university.e0-62.core2.pao1.he.net
+   19    190.7 ms  171.66.255.196   campus-ial-nets-b-vl1102.SUNet
+       (target not reached by TTL 25)
+
+  round 2 (source port 56821)
+    1      0.2 ms  163.152.219.1    
+    2      0.1 ms  163.152.205.45   
+    3      0.3 ms  163.152.205.212  
+    4      0.3 ms  163.152.205.254  
+    5      1.1 ms  175.121.235.141  
+    6      1.4 ms  10.103.0.142     
+    7      4.4 ms  10.222.25.124    
+    8      4.4 ms  10.222.11.179    
+    9     32.0 ms  10.222.6.181     
+   10     40.6 ms  210.173.184.70   
+   11        *
+   12        *
+   13        *
+   14    145.0 ms  184.104.197.109  be41.core3.lax1.he.net
+   15    146.6 ms  72.52.92.160     be1.core1.sjc2.he.net
+   16    148.2 ms  184.104.196.249  be12.core1.pao1.he.net
+   17    144.5 ms  184.105.177.238  stanford-university.e0-62.core2.pao1.he.net
+   18    143.9 ms  171.66.255.228   campus-ial-nets-b-vl1118.SUNet
+       (target not reached by TTL 25)
+
+  round 3 (source port 56822)
+    1      0.4 ms  163.152.219.1    
+    2      0.2 ms  163.152.205.9    
+    3      0.5 ms  163.152.205.212  
+    4      0.5 ms  163.152.205.254  
+    5      1.2 ms  175.121.235.141  
+    6      1.2 ms  10.103.0.142     
+    7      3.7 ms  10.222.25.116    
+    8     11.4 ms  10.222.10.167    
+    9        *
+   10     62.0 ms  36.255.56.8      as6939.equinix-hong-kong.core2.hkg2.he.net
+   11        *
+   12        *
+   13    170.5 ms  184.105.64.130   be2.core1.tyo1.he.net
+   14        *
+   15    165.7 ms  184.105.213.117  be1.core1.sea1.he.net
+   16    171.0 ms  184.104.196.36   be9.core3.pdx1.he.net
+   17    161.4 ms  184.104.189.142  be7.core1.pao1.he.net
+   18    167.7 ms  184.105.177.238  stanford-university.e0-62.core2.pao1.he.net
+   19    159.5 ms  171.64.255.228   campus-east-rtr-vl1018.SUNet
+       (target not reached by TTL 25)
+
+tcp traceroute to www.stanford.edu (3.33.186.135) port 443 · Paris-style, one source port per round · 3 rounds · * = no reply within 1.0 s
+
+  round 1 (source port 56830)
+    1      0.2 ms  163.152.219.1    
+    2      0.2 ms  163.152.205.45   
+    3      0.3 ms  163.152.205.212  
+    4      0.3 ms  163.152.205.254  
+    5      1.1 ms  175.121.235.141  
+    6      5.3 ms  10.103.0.142     
+    7      2.9 ms  10.222.25.120    
+    8      4.1 ms  10.222.15.205    
+    9        *
+   10        *
+   11        *
+   12        *
+   13        *
+   14        *
+   15      3.3 ms  3.33.186.135     SYN-ACK - target reached
+
+  round 2 (source port 56831)
+    1      0.2 ms  163.152.219.1    
+    2      0.5 ms  163.152.205.45   
+    3      0.4 ms  163.152.205.212  
+    4      0.4 ms  163.152.205.254  
+    5      1.1 ms  175.121.235.141  
+    6      1.3 ms  10.103.1.142     
+    7      4.4 ms  10.222.25.118    
+    8      2.8 ms  10.222.10.141    
+    9        *
+   10        *
+   11        *
+   12        *
+   13        *
+   14        *
+   15        *
+   16      4.5 ms  3.33.186.135     SYN-ACK - target reached
+
+  round 3 (source port 56832)
+    1      0.2 ms  163.152.219.1    
+    2      0.4 ms  163.152.205.45   
+    3      0.4 ms  163.152.205.212  
+    4      0.6 ms  163.152.205.254  
+    5      1.2 ms  175.121.235.141  
+    6      1.5 ms  10.103.0.142     
+    7      5.5 ms  10.222.25.124    
+    8      3.5 ms  10.222.11.153    
+    9        *
+   10        *
+   11        *
+   12        *
+   13        *
+   14        *
+   15        *
+   16      4.0 ms  3.33.186.135     SYN-ACK - target reached
+
+tcp traceroute to 1.1.1.1 (1.1.1.1) port 443 · Paris-style, one source port per round · 3 rounds · * = no reply within 1.0 s
+
+  round 1 (source port 56840)
+    1      0.2 ms  163.152.219.1    
+    2      0.2 ms  163.152.205.9    
+    3      0.2 ms  163.152.205.212  
+    4      0.5 ms  163.152.205.254  
+    5      1.5 ms  175.121.235.141  
+    6      1.5 ms  10.103.0.142     
+    7      7.7 ms  10.222.25.128    
+    8      6.0 ms  10.222.11.135    
+    9      4.9 ms  39.120.253.62    
+   10      4.2 ms  211.45.68.9      
+   11      4.2 ms  211.45.68.10     
+   12        *
+   13      5.7 ms  141.101.82.14    
+   14      5.3 ms  1.1.1.1          SYN-ACK - target reached
+
+  round 2 (source port 56841)
+    1      0.3 ms  163.152.219.1    
+    2      0.2 ms  163.152.205.45   
+    3      0.2 ms  163.152.205.212  
+    4      0.4 ms  163.152.205.254  
+    5      1.4 ms  175.121.235.141  
+    6      1.5 ms  10.103.0.142     
+    7      5.1 ms  10.222.25.116    
+    8      5.0 ms  10.222.10.125    
+    9      4.4 ms  39.120.4.162     
+   10      4.4 ms  211.45.68.29     
+   11      4.3 ms  211.45.68.30     
+   12        *
+   13      4.2 ms  141.101.82.27    
+   14      4.8 ms  1.1.1.1          SYN-ACK - target reached
+
+  round 3 (source port 56842)
+    1      0.3 ms  163.152.219.1    
+    2      0.3 ms  163.152.205.9    
+    3      0.6 ms  163.152.205.212  
+    4      0.5 ms  163.152.205.254  
+    5      1.6 ms  175.121.235.141  
+    6      1.7 ms  10.103.0.142     
+    7      5.9 ms  10.222.25.128    
+    8      5.8 ms  10.222.11.141    
+    9      5.0 ms  39.120.253.94    
+   10      4.5 ms  211.45.68.85     
+   11      4.0 ms  211.45.68.86     
+   12     18.7 ms  211.56.189.126   
+   13      5.3 ms  141.101.82.9     
+   14      5.0 ms  1.1.1.1          SYN-ACK - target reached
