@@ -8,11 +8,13 @@ __pycache__/
 *.pcapng
 
 
-# Exceptions: these three captures are committed on purpose. All were taken with
+# Exceptions: these four captures are committed on purpose. All were taken with
 # a narrow capture filter and audited before committing - see NOTES.md.
 #   dns.pcapng  6 packets, one name, four DNS servers
 #   tcp.pcapng  one TCP stream, headers only (editcap -s 96), no payload
 #   dhcp.pcapng 5 packets, all chaddr = this laptop's MAC, no other host
+#   arp.pcapng  2 frames: this desktop's request for the gateway and its reply
 !w03-dns/out/dns.pcapng
 !w04-tcp/out/tcp.pcapng
 !w05-ip-nat/out/dhcp.pcapng
+!w07-ethernet-arp/out/arp.pcapng

@@ -1,0 +1,53 @@
+# Week 7 Task 2 - what happened, and one minute of ARP on this segment
+# Desktop on Korea Univ. (Sejong) campus wired ethernet, 2026-10-14 KST
+#   this machine 163.152.219.214/24  a8:a1:59:f2:3e:8f (ASRock)
+#   gateway      163.152.219.1       c4:ca:2b:7d:5a:63 (Arista)
+# Capture: tshark -i 이더넷 -f arp, 90 s, 2,528 frames. Only the two frames below
+# are committed (out/arp.pcapng); the full capture holds 51 other machines' MACs,
+# so only counts from it are kept here.
+
+== timeline ==============================================================
+17:09:10.633  capture started
+17:09:10.649  arp -a -> arp-before.txt     (이더넷 인터페이스: 24 dynamic, 14 static)
+17:09:10.649  `netsh interface ip delete arpcache` asked for elevation (UAC)
+17:09:17.374  frame 203  me -> ff:ff:ff:ff:ff:ff  who has 163.152.219.1? tell 163.152.219.214
+17:09:17.374  frame 204  gateway -> me (unicast)  163.152.219.1 is at c4:ca:2b:7d:5a:63
+              (0.13 ms after the request)
+17:09:18.007  netsh returned 0
+17:09:18.009  arp -a                        (이더넷 인터페이스: 1 dynamic - the gateway, already back)
+17:09:18.177  me -> broadcast  who has 163.152.219.188? -> answered (a LAN peer this
+              machine talks to in the background)
+17:09:18.275  163.152.223.4 -> broadcast  who has 163.152.219.214? -> I reply
+              (Windows also learns the asker, so it enters my table though it
+              is outside my /24)
+17:09:20.055  ping -n 3 163.152.219.1 done  (no ARP needed - already cached)
+17:09:20.351  curl https://www.korea.ac.kr done  (no ARP at all - see A4)
+17:09:20.354  arp -a -> arp-after.txt      (이더넷 인터페이스: 3 dynamic, 1 static)
+17:10:40.524  capture finished
+
+The ping and the curl caused no ARP. By the time they ran, the gateway's entry
+was already there, and nothing else they did needed a local MAC.
+
+== the request / reply pair (out/arp.pcapng) =============================
+               Ethernet dst        ARP target MAC      size on wire
+  request      ff:ff:ff:ff:ff:ff   00:00:00:00:00:00   42 B (captured before
+                                                        the NIC pads it to 60)
+  reply        a8:a1:59:f2:3e:8f   a8:a1:59:f2:3e:8f   60 B
+
+== one minute: t = 25-85 s of the capture (after the clearing burst) =======
+  ARP frames seen by this NIC          1,675   (27.9 / s; per second 13 / 30 / 50
+                                                 min / median / max)
+    requests                           1,674   - 1,673 broadcast
+    replies                                1   - the only replies we see are ours
+  distinct senders                        43
+  gratuitous ARP                           3
+  requests from the gateway               76   (resolving hosts for inbound traffic)
+  senders by /24       163.152.219.0  888 · 163.152.207.0  417
+                       163.152.223.0  268 · 163.152.225.0   99
+  targets outside 163.152/16: 192.168.0.x 66 · 169.254.x 15 · 172.20.x 9
+                       (misconfigured or roaming hosts asking for addresses that
+                        cannot exist on this segment - still broadcast to all)
+  whole 90 s capture: 2,528 frames, 51 distinct senders
+
+One broadcast domain carries at least four /24s: the gateway's MAC also answers as
+163.152.223.1, and machines in .207/.223/.225 ARP for addresses in .219.

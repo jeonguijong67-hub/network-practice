@@ -1,0 +1,14 @@
+# arp -a, 2026-10-14 17:09:20 KST, after clearing, `ping -n 3 163.152.219.1` and `curl https://www.korea.ac.kr`.
+# Neighbours' MACs keep their vendor half (OUI); the last three bytes are masked
+# for this public repo. The gateway's and this machine's are left whole.
+
+Interface: 163.152.219.214 --- 0xb
+  Internet Address      Physical Address      Type
+  163.152.219.1         c4-ca-2b-7d-5a-63     dynamic   
+  163.152.219.188       3c-7c-3f-xx-xx-xx     dynamic   
+  163.152.223.4         00-1a-f4-xx-xx-xx     dynamic   
+  224.0.0.5             01-00-5e-00-00-05     static    
+
+Interface: 172.17.112.1 --- 0x1f
+  Internet Address      Physical Address      Type
+  224.0.0.5             01-00-5e-00-00-05     static    

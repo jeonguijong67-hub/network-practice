@@ -1,6 +1,6 @@
-# 실습 노트 (3주차 · 4주차 · 5주차 · 6주차)
+# 실습 노트 (3주차 – 7주차)
 
-네 주차 모두 제출 가능한 상태입니다. 6주차 Part A는 아래 "6주차" 항목의 한계가 있습니다.
+다섯 주차 모두 제출 가능한 상태입니다.
 
 ## 상태
 
@@ -10,8 +10,9 @@
 | w04 TCP | 10개 seed 전부 IDENTICAL | 2개 라벨 × 5회 · handshake 캡처 | goodput 98.7% · 큐 0.7 → **strong** |
 | w05 IP/NAT | 10/10 | 2개 라벨(캠퍼스 유선 · KT Wi-Fi) · DORA 캡처 | 오답 0 · 약 3000배 → **strong** |
 | w06 Routing | verify all ok | traceroute 5개 목적지 · OSPF 3대 장애·복구 각 3회, 비용 변경 왕복 | 오답 0 · SPF 79% 회피 → **strong** |
+| w07 Ethernet/ARP | 7/7 | ARP 표 비우기·재학습 · 요청/응답 캡처 · 1분 통계 | 놓친 전달 0 · 낭비 51% 감소 → **strong** |
 
-`test_tasks.py`: w04 · w05는 8 pass / 0 fail, w06은 9 pass / 0 fail / 1 skip(R5는 사람 채점). w03은 아래 "알려진 환경 차이" 항목 하나만 FAIL로 뜹니다.
+`test_tasks.py`: w04 · w05는 8 pass / 0 fail, w06은 9 pass / 0 fail / 1 skip(R5는 사람 채점), w07은 7 pass / 0 fail / 1 skip(R6는 사람 채점). w03은 아래 "알려진 환경 차이" 항목 하나만 FAIL로 뜹니다.
 
 ## 제출 URL (주차별)
 
@@ -19,6 +20,7 @@
 - 4주차 <https://github.com/jeonguijong67-hub/network-practice/tree/main/w04-tcp>
 - 5주차 <https://github.com/jeonguijong67-hub/network-practice/tree/main/w05-ip-nat>
 - 6주차 <https://github.com/jeonguijong67-hub/network-practice/tree/main/w06-routing>
+- 7주차 <https://github.com/jeonguijong67-hub/network-practice/tree/main/w07-ethernet-arp>
 
 ## 알려진 환경 차이
 
@@ -36,7 +38,7 @@ w03 Task 1의 "resolver vs dig"는 호스트에 `dig`가 없어 skip됩니다. �
 
 ## 캡처 파일
 
-`.gitignore`는 `*.pcapng`를 기본으로 제외하지만, 아래 세 개는 **예외로 커밋**했습니다.
+`.gitignore`는 `*.pcapng`를 기본으로 제외하지만, 아래 네 개는 **예외로 커밋**했습니다.
 모두 캡처 필터를 좁혀서 잡았고, 커밋 전에 내용을 확인했습니다.
 
 **`w03-dns/out/dns.pcapng`** (1.6 KB, 6패킷)
@@ -110,3 +112,13 @@ $//'`로 한 번 바꿔야 합니다.
 불필요)로 해저 구간까지 홉 이름을 얻었습니다: 서울 → 도쿄 IX(BBIX/JPNAP) → 시애틀 또는 LA,
 흐름에 따라 홍콩 경유. 실행에는 Wireshark(tshark)와 Npcap이 필요하고, 인터페이스 이름은
 `--iface`(기본 `이더넷`)로 지정합니다.
+
+## 7주차
+
+**ARP 표 비우기.** 이 계정은 관리자 그룹이지만 세션은 일반 권한이라, `netsh interface ip
+delete arpcache` 한 줄만 `Start-Process -Verb RunAs`로 실행하고 UAC에서 승인했습니다.
+
+**공개 저장소라서 가린 것.** `arp-before/after.txt`의 이웃 기기 MAC은 제조사 절반(OUI)만
+남기고 뒤 3바이트를 `xx`로 가렸습니다(게이트웨이와 이 기기는 그대로). `arp.pcapng`에는 이
+기기의 요청과 게이트웨이 응답 2프레임만 넣었고, 이웃 51대가 들어 있는 90초 전체 캡처는
+커밋하지 않고 집계 수치만 `out/arp-minute.txt`에 남겼습니다.
